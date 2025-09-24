@@ -1,17 +1,16 @@
-using UnityEngine;
 using VContainer.Unity;
 
-public class GameEntryPoint : IStartable
+public class MenuEntryPoint : IStartable
 {
     private readonly ISceneLoader _sceneLoader;
 
-    public GameEntryPoint(ISceneLoader sceneLoader)
+    public MenuEntryPoint(ISceneLoader sceneLoader)
     {
         _sceneLoader = sceneLoader;
     }
 
     void IStartable.Start()
     {
-        _sceneLoader.LoadSceneAsync("1_Menu");
+        //_sceneLoader.LoadSceneAsync("3_Gameplay");
     }
 }

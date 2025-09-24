@@ -9,5 +9,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
 
         builder.RegisterEntryPoint<GameEntryPoint>();
+
+        DontDestroyOnLoad(this.gameObject);
     }
 }
