@@ -1,4 +1,4 @@
-using UnityEngine;
+using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
 public class GameEntryPoint : IStartable
@@ -12,6 +12,9 @@ public class GameEntryPoint : IStartable
 
     void IStartable.Start()
     {
-        _sceneLoader.LoadSceneAsync("1_Menu");
+        if (SceneManager.GetActiveScene().name == "0_Bootstrap")
+        {
+            _sceneLoader.LoadSceneAsync("1_Menu");
+        }
     }
 }
