@@ -11,6 +11,6 @@ public class MenuEntryPoint : IStartable
 
     void IStartable.Start()
     {
-        //_sceneLoader.LoadSceneAsync("3_Gameplay");
+
     }
 }
