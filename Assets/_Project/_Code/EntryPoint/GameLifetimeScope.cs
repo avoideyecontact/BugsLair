@@ -1,3 +1,4 @@
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -7,6 +8,12 @@ public class GameLifetimeScope : LifetimeScope
     {
         builder.Register<IEventBus, EventBus>(Lifetime.Singleton);
         builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
+
+        var screenFade = Instantiate(Resources.Load("ScreenFade"));
+        screenFade.name = "ScreenFade";
+        DontDestroyOnLoad(screenFade);
+
+        builder.RegisterComponentInHierarchy<ScreenFade>();
 
         builder.RegisterEntryPoint<GameEntryPoint>();
 

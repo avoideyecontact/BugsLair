@@ -1,40 +1,50 @@
 using Cysharp.Threading.Tasks;
-using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public interface ISceneLoader
 {
-    Task LoadSceneAsync(string sceneName);
+    UniTask LoadSceneAsync(string sceneName, bool useFade = false);
     string CurrentScene { get; }
 }
 
 public class SceneLoader : ISceneLoader
 {
     private readonly IEventBus _eventBus;
+    private readonly ScreenFade _screenFade;
 
     private string _currentScene = "0_Bootstrap";
     public string CurrentScene => _currentScene;
 
-    public SceneLoader(IEventBus eventBus)
+    public SceneLoader(IEventBus eventBus, ScreenFade screenFade)
     {
         _eventBus = eventBus;
+        _screenFade = screenFade;
     }
 
-    public async Task LoadSceneAsync(string sceneName)
+    public async UniTask LoadSceneAsync(string sceneName, bool useFade = false)
     {
         _eventBus.Publish(new SceneLoadStartedEvent(sceneName));
+
+        if (useFade)
+        {
+            await _screenFade.FadeInAsync();
+        }
 
         var asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 
         while (!asyncOperation.isDone)
         {
-            await Task.Yield();
+            await UniTask.Yield();
         }
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
         _currentScene = sceneName;
 
         _eventBus.Publish(new SceneLoadedEvent(sceneName));
+
+        if (useFade)
+        {
+            await _screenFade.FadeOutAsync();
+        }
     }
 }
