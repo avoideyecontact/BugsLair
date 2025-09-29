@@ -18,3 +18,6 @@ public struct SceneLoadedEvent
         SceneName = sceneName;
     }
 }
+
+public struct GamePaused { }
+public struct GameResumed { }

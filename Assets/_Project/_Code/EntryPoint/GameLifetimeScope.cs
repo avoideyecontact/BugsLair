@@ -8,6 +8,7 @@ public class GameLifetimeScope : LifetimeScope
     {
         builder.Register<IEventBus, EventBus>(Lifetime.Singleton);
         builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
+        builder.Register<IPauseService, PauseService>(Lifetime.Singleton);
 
         var screenFade = Instantiate(Resources.Load("ScreenFade"));
         screenFade.name = "ScreenFade";
