@@ -4,22 +4,20 @@ using VContainer;
 
 public class MainMenuController : MonoBehaviour
 {
+
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _quitButton;
+
+    [SerializeField] private Canvas _mainCanvas;
+    [SerializeField] private Canvas _settingsCanvas;
 
     private ISceneLoader _sceneLoader;
 
     private void Start()
     {
-        if (_playButton == null)
-            _playButton = GameObject.Find("PlayButton").GetComponent<Button>();
-
-        if (_settingsButton == null)
-            _settingsButton = GameObject.Find("SettingsButton").GetComponent<Button>();
-
-        if (_quitButton == null)
-            _quitButton = GameObject.Find("QuitButton").GetComponent<Button>();
+        _mainCanvas.enabled = true;
+        _settingsCanvas.enabled = false;
 
         _playButton.onClick.AddListener(OnPlayButtonClicked);
         _settingsButton.onClick.AddListener(OnSettingsButtonClicked);
@@ -39,7 +37,8 @@ public class MainMenuController : MonoBehaviour
 
     private void OnSettingsButtonClicked()
     {
-
+        _mainCanvas.enabled = false;
+        _settingsCanvas.enabled = true;
     }
 
     private void OnQuitButtonClicked()
