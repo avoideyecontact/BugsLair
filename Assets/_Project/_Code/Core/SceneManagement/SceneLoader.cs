@@ -1,12 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-public interface ISceneLoader
-{
-    UniTask LoadSceneAsync(string sceneName, bool useFade = false);
-    string CurrentScene { get; }
-}
-
 public class SceneLoader : ISceneLoader
 {
     private readonly IEventBus _eventBus;

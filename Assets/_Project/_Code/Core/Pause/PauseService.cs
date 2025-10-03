@@ -1,12 +1,5 @@
 using UnityEngine;
 
-public interface IPauseService
-{
-    void PauseGame();
-    void ResumeGame();
-    bool isPaused { get; }
-}
-
 public class PauseService : IPauseService
 {
     private readonly IEventBus _eventBus;
