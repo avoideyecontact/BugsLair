@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 695863440331363299}
-  - component: {fileID: 5921449046744817365}
-  - component: {fileID: 2453370276495846957}
   - component: {fileID: 2498251987160517124}
+  - component: {fileID: 3813734320143860000}
+  - component: {fileID: 1118863754352723265}
+  - component: {fileID: 3096971845090180999}
   - component: {fileID: 7829796834871833858}
   - component: {fileID: 4666112060903191492}
   m_Layer: 0
@@ -38,7 +39,19 @@ Transform:
   - {fileID: 2760107334104996490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5921449046744817365
+--- !u!114 &2498251987160517124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787462357776638883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245a0890b2aa3d044a5b43515bed919c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3813734320143860000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _sprintSpeed: 10
---- !u!114 &2453370276495846957
+--- !u!114 &1118863754352723265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,9 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abad7cb35a2d08548b1fd3ffc41990e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraTransform: {fileID: 2760107334104996490}
   mouseSens: 2.5
---- !u!114 &2498251987160517124
+--- !u!114 &3096971845090180999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,12 +87,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 787462357776638883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245a0890b2aa3d044a5b43515bed919c, type: 3}
+  m_Script: {fileID: 11500000, guid: 718a1037d4d22f14882c6c2e1640a1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {x: 0, y: 0}
-  look: {x: 0, y: 0}
-  sprint: 0
+  _health: 10
 --- !u!143 &7829796834871833858
 CharacterController:
   m_ObjectHideFlags: 0

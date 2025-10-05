@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private Transform _cameraTransform;
+    private Transform _cameraTransform;
+    private PlayerInputReader _input;
 
-    public float mouseSens = 1f;
+    public float mouseSens = 2.5f;
 
     private float _xRotation;
     private float _yRotation;
-    private PlayerInputReader _input;
 
     void Start()
     {
         _input = GetComponent<PlayerInputReader>();
+        _cameraTransform = transform.Find("CameraPos");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -23,7 +24,7 @@ public class PlayerCamera : MonoBehaviour
         Look();
     }
 
-    public void Look()
+    private void Look()
     {
         _yRotation += _input.look.x * mouseSens * Time.deltaTime;
         _xRotation -= _input.look.y * mouseSens * Time.deltaTime;

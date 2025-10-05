@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
-    void Move()
+    private void Move()
     {
         Vector3 moveDirection = transform.forward * _input.move.y + transform.right * _input.move.x;
 
