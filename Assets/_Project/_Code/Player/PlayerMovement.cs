@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private PlayerInputReader _input;
-    private CharacterController _controller;
-
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _sprintSpeed = 10f;
+
+    private PlayerInputReader _input;
+    private CharacterController _controller;
 
     void Start()
     {

@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    private Transform _cameraTransform;
-    private PlayerInputReader _input;
-
     public float mouseSens = 2.5f;
 
+    private PlayerInputReader _input;
+    private Transform _cameraTransform;
     private float _xRotation;
     private float _yRotation;
 
@@ -26,12 +25,10 @@ public class PlayerCamera : MonoBehaviour
 
     private void Look()
     {
-        _yRotation += _input.look.x * mouseSens * Time.deltaTime;
-        _xRotation -= _input.look.y * mouseSens * Time.deltaTime;
+        _yRotation += _input.look.x * mouseSens;
+        _xRotation -= _input.look.y * mouseSens;
         _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
-
         _cameraTransform.transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
-
         transform.rotation = Quaternion.Euler(0, _yRotation, 0);
     }
 }
