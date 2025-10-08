@@ -8,12 +8,14 @@ public class PlayerInputReader : MonoBehaviour
     public Vector2 move;
     public Vector2 look;
     public float sprint;
+    public float attack;
 
     private InputAction _moveAction;
     private InputAction _lookAction;
     private InputAction _sprintAction;
     private InputAction _nextAction;
     private InputAction _previousAction;
+    private InputAction _attackAction;
 
     public event System.Action<float> NextStarted;
     public event System.Action<float> PreviousStarted;
@@ -28,6 +30,7 @@ public class PlayerInputReader : MonoBehaviour
         _sprintAction = _actionsAsset.FindAction("Player/Sprint", true);
         _nextAction = _actionsAsset.FindAction("Player/Next", true);
         _previousAction = _actionsAsset.FindAction("Player/Previous", true);
+        _attackAction = _actionsAsset.FindAction("Player/Attack", true);
 
         if (_moveAction == null)
             Debug.LogError("InputAction is missing", this);
@@ -38,6 +41,8 @@ public class PlayerInputReader : MonoBehaviour
         if (_nextAction == null)
             Debug.LogError("InputAction is missing", this);
         if (_previousAction == null)
+            Debug.LogError("InputAction is missing", this);
+        if (_attackAction == null)
             Debug.LogError("InputAction is missing", this);
     }
 
@@ -60,6 +65,10 @@ public class PlayerInputReader : MonoBehaviour
 
         _previousAction.Enable();
         _previousAction.started += OnPrevious;
+
+        _attackAction.Enable();
+        _attackAction.performed += OnAttack;
+        _attackAction.canceled += OnAttack;
     }
 
     private void OnDisable()
@@ -81,6 +90,10 @@ public class PlayerInputReader : MonoBehaviour
 
         _previousAction.started -= OnPrevious;
         _previousAction.Disable();
+
+        _attackAction.performed -= OnAttack;
+        _attackAction.canceled -= OnAttack;
+        _attackAction.Disable();
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -106,5 +119,10 @@ public class PlayerInputReader : MonoBehaviour
     private void OnPrevious(InputAction.CallbackContext context)
     {
         PreviousStarted?.Invoke(context.ReadValue<float>());
+    }
+
+    private void OnAttack(InputAction.CallbackContext context)
+    {
+        attack = context.ReadValue<float>();
     }
 }

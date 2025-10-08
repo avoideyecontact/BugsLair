@@ -1,4 +1,3 @@
-using UnityEngine;
 using VContainer.Unity;
 
 public class GameplayEntryPoint : IStartable

@@ -57,6 +57,7 @@ public class PlayerWeaponary : MonoBehaviour
 
     private void Update()
     {
-        weapons[_currentGunID].Use();
+        if (_input.attack == 1)
+            weapons[_currentGunID].Use();
     }
 }
