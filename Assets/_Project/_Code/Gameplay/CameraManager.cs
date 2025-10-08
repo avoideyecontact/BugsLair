@@ -1,6 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
+// Used in gameplay scene for CinemachineStateDrivenCamera
 public class CameraManager : MonoBehaviour
 {
     private CinemachineCamera _playerCamera;

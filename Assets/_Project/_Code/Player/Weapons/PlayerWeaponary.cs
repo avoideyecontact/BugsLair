@@ -53,8 +53,6 @@ public class PlayerWeaponary : MonoBehaviour
 
         _currentGunID = (_currentGunID >= weapons.Count) ? 0 : _currentGunID;
         _currentGunID = (_currentGunID < 0) ? weapons.Count - 1 : _currentGunID;
-
-        Debug.Log(_currentGunID);
     }
 
     private void Update()
