@@ -1,14 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWeaponary : MonoBehaviour
 {
     private PlayerInputReader _input;
 
-    private bool hasLasergun = false;
-    private bool hasShotgun = false;
-    private bool hasMinigun = false;
-
     private int _currentGunID = 0;
+    private List<IWeapon> weapons;
 
     private void Start()
     {
@@ -26,18 +24,41 @@ public class PlayerWeaponary : MonoBehaviour
 
     public void Initialize(PlayerData playerData)
     {
-        hasLasergun = playerData.hasLaserGun;
-        hasShotgun = playerData.hasShotgun;
-        hasMinigun = playerData.hasMinigun;
+        weapons = new List<IWeapon>();
+
+        if (playerData.hasSaw)
+        {
+            var saw = GetComponent<WeaponSaw>();
+            weapons.Add(saw);
+        }
+
+        if (playerData.hasLaserGun)
+        {
+            var lasergun = GetComponent<WeaponLasergun>();
+            weapons.Add(lasergun);
+        }
+
+        if (playerData.hasShotgun)
+        {
+        }
+
+        if (playerData.hasMinigun)
+        {
+        }
     }
 
     public void SwitchGun(float value)
     {
         _currentGunID += (int)value;
 
-        _currentGunID = (_currentGunID > 3) ? 0 : _currentGunID;
-        _currentGunID = (_currentGunID < 0) ? 3 : _currentGunID;
+        _currentGunID = (_currentGunID >= weapons.Count) ? 0 : _currentGunID;
+        _currentGunID = (_currentGunID < 0) ? weapons.Count - 1 : _currentGunID;
 
         Debug.Log(_currentGunID);
+    }
+
+    private void Update()
+    {
+        weapons[_currentGunID].Use();
     }
 }
