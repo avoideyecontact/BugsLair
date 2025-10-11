@@ -18,7 +18,7 @@ public class PlayerAnimationManager : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         _animator.SetFloat("Move", _input.move.magnitude);
 

@@ -12,14 +12,14 @@ public class PlayerWeaponary : MonoBehaviour
     {
         _input = GetComponent<PlayerInputReader>();
 
-        _input.NextStarted += SwitchGun;
-        _input.PreviousStarted += SwitchGun;
+        _input.NextStarted += NextGun;
+        _input.PreviousStarted += PreviousGun;
     }
 
     private void OnDestroy()
     {
-        _input.NextStarted -= SwitchGun;
-        _input.PreviousStarted -= SwitchGun;
+        _input.NextStarted -= NextGun;
+        _input.PreviousStarted -= PreviousGun;
     }
 
     public void Initialize(PlayerData playerData)
@@ -47,9 +47,17 @@ public class PlayerWeaponary : MonoBehaviour
         }
     }
 
-    public void SwitchGun(float value)
+    public void NextGun()
     {
-        _currentGunID += (int)value;
+        _currentGunID += 1;
+
+        _currentGunID = (_currentGunID >= weapons.Count) ? 0 : _currentGunID;
+        _currentGunID = (_currentGunID < 0) ? weapons.Count - 1 : _currentGunID;
+    }
+
+    public void PreviousGun()
+    {
+        _currentGunID -= 1;
 
         _currentGunID = (_currentGunID >= weapons.Count) ? 0 : _currentGunID;
         _currentGunID = (_currentGunID < 0) ? weapons.Count - 1 : _currentGunID;

@@ -16,9 +16,11 @@ public class PlayerInputReader : MonoBehaviour
     private InputAction _nextAction;
     private InputAction _previousAction;
     private InputAction _attackAction;
+    private InputAction _cameraSwitchAction;
 
-    public event System.Action<float> NextStarted;
-    public event System.Action<float> PreviousStarted;
+    public event System.Action NextStarted;
+    public event System.Action PreviousStarted;
+    public event System.Action CameraSwitchStarted;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class PlayerInputReader : MonoBehaviour
         _nextAction = _actionsAsset.FindAction("Player/Next", true);
         _previousAction = _actionsAsset.FindAction("Player/Previous", true);
         _attackAction = _actionsAsset.FindAction("Player/Attack", true);
+        _cameraSwitchAction = _actionsAsset.FindAction("Player/CameraSwitch", true);
 
         if (_moveAction == null)
             Debug.LogError("InputAction is missing", this);
@@ -43,6 +46,8 @@ public class PlayerInputReader : MonoBehaviour
         if (_previousAction == null)
             Debug.LogError("InputAction is missing", this);
         if (_attackAction == null)
+            Debug.LogError("InputAction is missing", this);
+        if (_cameraSwitchAction == null)
             Debug.LogError("InputAction is missing", this);
     }
 
@@ -69,6 +74,9 @@ public class PlayerInputReader : MonoBehaviour
         _attackAction.Enable();
         _attackAction.performed += OnAttack;
         _attackAction.canceled += OnAttack;
+
+        _cameraSwitchAction.Enable();
+        _cameraSwitchAction.started += OnCameraSwitch;
     }
 
     private void OnDisable()
@@ -94,6 +102,9 @@ public class PlayerInputReader : MonoBehaviour
         _attackAction.performed -= OnAttack;
         _attackAction.canceled -= OnAttack;
         _attackAction.Disable();
+
+        _cameraSwitchAction.started -= OnCameraSwitch;
+        _cameraSwitchAction.Disable();
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -113,16 +124,21 @@ public class PlayerInputReader : MonoBehaviour
 
     private void OnNext(InputAction.CallbackContext context)
     {
-        NextStarted?.Invoke(context.ReadValue<float>());
+        NextStarted?.Invoke();
     }
 
     private void OnPrevious(InputAction.CallbackContext context)
     {
-        PreviousStarted?.Invoke(context.ReadValue<float>());
+        PreviousStarted?.Invoke();
     }
 
     private void OnAttack(InputAction.CallbackContext context)
     {
         attack = context.ReadValue<float>();
+    }
+
+    private void OnCameraSwitch(InputAction.CallbackContext context)
+    {
+        CameraSwitchStarted?.Invoke();
     }
 }

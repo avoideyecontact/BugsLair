@@ -19,7 +19,7 @@ public class PlayerFactory : MonoBehaviour
     {
         var player = Instantiate(_playerGameObject);
         InitializePlayerComponents(player, _playerDataLoader.PlayerData);
-        _cameraManager.SetupPlayerCamera(player.transform.Find("CameraPos"));
+        _cameraManager.SetupPlayer(player.transform);
     }
 
     private void InitializePlayerComponents(GameObject player, PlayerData playerData)
