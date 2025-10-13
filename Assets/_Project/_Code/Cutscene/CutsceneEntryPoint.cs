@@ -12,7 +12,7 @@ public class CutsceneEntryPoint : IStartable
 
     void IStartable.Start()
     {
-        Debug.Log("Sending to gameplay");
-        _sceneLoader.LoadSceneAsync("3_Gameplay");
+        //Debug.Log("Sending to gameplay");
+        //_sceneLoader.LoadSceneAsync("3_Gameplay");
     }
 }
