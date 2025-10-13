@@ -178,8 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215dc87d5524ab54499fcc8a62f3edd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 0.2
-  torque: 0
+  force: 0
+  torque: 0.1
+  interval: 1.5
 --- !u!1 &5663855833431486601 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 635547659545568360, guid: 5c18b3e884d999e4f8269b076b095ccb, type: 3}
