@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class WeaponLasergun : MonoBehaviour, IWeapon
 {
+    [SerializeField] private string _name = "Lasergun";
     [SerializeField] protected float _damage = 1f;
     [SerializeField] protected float _damageRate = 0.1f;
 
+    public string Name => _name;
     public float Damage => _damage;
     public float DamageRate => _damageRate;
 
@@ -17,8 +19,6 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
     {
         if (_isCooldown)
             return;
-
-        Debug.Log("Using laser");
 
         _cts = new CancellationTokenSource();
         WeaponCooldownTimer(_cts.Token).Forget();

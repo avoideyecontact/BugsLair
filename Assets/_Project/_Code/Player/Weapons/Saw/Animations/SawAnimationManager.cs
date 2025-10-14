@@ -18,6 +18,9 @@ public class SawAnimationManager : MonoBehaviour
         _bladeAnimator1 = GameObject.Find("Blade1").GetComponent<Animator>();
         _bladeAnimator2 = GameObject.Find("Blade2").GetComponent<Animator>();
 
+        if (_input == null)
+            Debug.LogError("Saw cant find PlayerInputReader");
+
         if (_animator1 == null || _animator2 == null)
         {
             Debug.LogError("Saw animator is missing");

@@ -2,11 +2,11 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
 
-public class WeaponSaw : MonoBehaviour, IWeapon
+public class WeaponMinigun : MonoBehaviour, IWeapon
 {
-    [SerializeField] private string _name = "Saw";
+    [SerializeField] private string _name = "Minigun";
     [SerializeField] protected float _damage = 1f;
-    [SerializeField] protected float _damageRate = 0.5f;
+    [SerializeField] protected float _damageRate = 0.1f;
 
     public string Name => _name;
     public float Damage => _damage;
