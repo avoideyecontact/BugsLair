@@ -3,6 +3,7 @@ using UnityEngine;
 public class SawAnimationManager : MonoBehaviour
 {
     private PlayerInputReader _input;
+    private Transform _cameraTransform;
     private Animator _animator1;
     private Animator _animator2;
     private Animator _bladeAnimator1;
@@ -11,6 +12,7 @@ public class SawAnimationManager : MonoBehaviour
     private void Start()
     {
         _input = transform.root.GetComponent<PlayerInputReader>();
+        _cameraTransform = transform.root.Find("CameraPos");
         _animator1 = GameObject.Find("Saw1").GetComponent<Animator>();
         _animator2 = GameObject.Find("Saw2").GetComponent<Animator>();
         _bladeAnimator1 = GameObject.Find("Blade1").GetComponent<Animator>();
@@ -20,6 +22,10 @@ public class SawAnimationManager : MonoBehaviour
         {
             Debug.LogError("Saw animator is missing");
         }
+
+        if (_cameraTransform == null)
+            Debug.LogError("CameraPos is missing");
+
         if (_bladeAnimator1 == null || _bladeAnimator2 == null)
         {
             Debug.LogError("Saw Blade animator is missing");
@@ -42,5 +48,10 @@ public class SawAnimationManager : MonoBehaviour
 
         _animator1.SetFloat("SpeedMultiplier", speedMultiplier);
         _animator2.SetFloat("SpeedMultiplier", speedMultiplier);
+    }
+
+    private void Update()
+    {
+        transform.rotation = _cameraTransform.rotation;
     }
 }

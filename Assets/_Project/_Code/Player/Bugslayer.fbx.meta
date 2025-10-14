@@ -3,7 +3,12 @@ guid: 3a3228d3bb093e84a973e227284e841d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BugslayerGlass
+    second: {fileID: 2100000, guid: 8592480996849a045b85395aefc96fd4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
