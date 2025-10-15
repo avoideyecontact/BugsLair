@@ -4,6 +4,12 @@ using UnityEngine;
 // Used in gameplay scene for CinemachineStateDrivenCamera
 public class CameraManager : MonoBehaviour
 {
+    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private Camera _clippingCamera;
+
+    [SerializeField] private LayerMask _layersForFirstPerson;
+    [SerializeField] private LayerMask _layersForThirdPerson;
+
     private CinemachineCamera _playerCamera;
     private CinemachineCamera _testCamera;
     private CinemachineCamera _thirdPersonCamera;
@@ -37,6 +43,7 @@ public class CameraManager : MonoBehaviour
         {
             _currentCamera = "ThirdPerson";
             _cameraAnimator.Play("ThirdPerson");
+            EnableWeaponClipping();
             return;
         }
         
@@ -44,7 +51,22 @@ public class CameraManager : MonoBehaviour
         {
             _currentCamera = "Player";
             _cameraAnimator.Play("Player");
+            DisableWeaponClipping();
             return;
         }
+    }
+
+    // for third person
+    private void EnableWeaponClipping()
+    {
+        _mainCamera.cullingMask = _layersForThirdPerson;
+        _clippingCamera.enabled = false;
+    }
+
+    // for first person
+    private void DisableWeaponClipping()
+    {
+        _mainCamera.cullingMask = _layersForFirstPerson;
+        _clippingCamera.enabled = true;
     }
 }
