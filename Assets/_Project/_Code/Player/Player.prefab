@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2498251987160517124}
   - component: {fileID: 3813734320143860000}
   - component: {fileID: 1118863754352723265}
-  - component: {fileID: 3096971845090180999}
-  - component: {fileID: 7829796834871833858}
+  - component: {fileID: 4250130837344724860}
   - component: {fileID: 5959502983828063863}
+  - component: {fileID: 7829796834871833858}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSens: 0.05
   _cameraTransform: {fileID: 2760107334104996490}
---- !u!114 &3096971845090180999
+--- !u!114 &4250130837344724860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 787462357776638883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718a1037d4d22f14882c6c2e1640a1c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b5a88c748735e44cbebc1ab47724be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
+  _health: 5
+--- !u!114 &5959502983828063863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787462357776638883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fae409a350584f43866e6c6b87a2b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sprintMultiplier: 2
 --- !u!143 &7829796834871833858
 CharacterController:
   m_ObjectHideFlags: 0
@@ -123,19 +136,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.1, z: 0}
---- !u!114 &5959502983828063863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 787462357776638883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fae409a350584f43866e6c6b87a2b89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sprintMultiplier: 2
 --- !u!1 &3323265168328070212
 GameObject:
   m_ObjectHideFlags: 0

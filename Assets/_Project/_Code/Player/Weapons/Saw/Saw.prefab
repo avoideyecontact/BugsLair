@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2664909973518685419}
   - component: {fileID: 159025583208017047}
   - component: {fileID: 2787978939112956413}
+  - component: {fileID: 8835555368670363244}
   m_Layer: 7
   m_Name: Saw
   m_TagString: Untagged
@@ -62,6 +63,30 @@ MonoBehaviour:
   _name: Saw
   _damage: 1
   _damageRate: 0.5
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &8835555368670363244
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741870555762205758}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.25, z: 2}
 --- !u!1001 &3527959425827783160
 PrefabInstance:
   m_ObjectHideFlags: 0

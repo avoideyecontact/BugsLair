@@ -24,7 +24,7 @@ public class PlayerFactory : MonoBehaviour
 
     private void InitializePlayerComponents(GameObject player, PlayerData playerData)
     {
-        var health = player.GetComponent<PlayerHealth>();
+        var health = player.GetComponent<HealthComponent>();
         health.Initialize(playerData.health);
         var weaponary = player.GetComponentInChildren<PlayerWeaponary>();
         weaponary.Initialize(playerData);
