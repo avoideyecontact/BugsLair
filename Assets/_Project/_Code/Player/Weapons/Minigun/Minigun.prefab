@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7865153989571565593}
   - component: {fileID: 8026777995649300279}
+  - component: {fileID: 782874906218601090}
   m_Layer: 7
-  m_Name: Miniguns
+  m_Name: Minigun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +47,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2488a33f706985419708b46810f0314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &782874906218601090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41330428644653290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e887881c977ee224498c265723920239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: Minigun
+  _damage: 1
+  _damageRate: 0.1
 --- !u!1001 &1036259048143158459
 PrefabInstance:
   m_ObjectHideFlags: 0

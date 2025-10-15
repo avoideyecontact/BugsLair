@@ -10,7 +10,7 @@ public class CameraManager : MonoBehaviour
     private string _currentCamera = "Player";
 
     private PlayerInputReader _input;
-    private Transform _playerCameraPosition;
+    private Transform _playerCameraTransform;
     private Animator _cameraAnimator;
 
     private void Awake()    
@@ -26,9 +26,9 @@ public class CameraManager : MonoBehaviour
         _input = player.GetComponent<PlayerInputReader>();
         _input.CameraSwitchStarted += OnCameraSwitch;
 
-        _playerCameraPosition = player.Find("CameraPos");
-        _playerCamera.Follow = _playerCameraPosition;
-        _thirdPersonCamera.Follow = _playerCameraPosition;
+        _playerCameraTransform = player.GetComponent<PlayerCamera>().CameraTransform;
+        _playerCamera.Follow = _playerCameraTransform;
+        _thirdPersonCamera.Follow = _playerCameraTransform;
     }
 
     private void OnCameraSwitch()

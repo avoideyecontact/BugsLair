@@ -10,7 +10,7 @@ public class LasergunAnimationManager : MonoBehaviour
     private void Start()
     {
         _input = transform.root.GetComponent<PlayerInputReader>();
-        _cameraTransform = transform.root.Find("CameraPos");
+        _cameraTransform = transform.root.GetComponent<PlayerCamera>().CameraTransform;
         _animator1 = GameObject.Find("Lasergun1").GetComponent<Animator>();
         _animator2 = GameObject.Find("Lasergun2").GetComponent<Animator>();
 

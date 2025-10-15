@@ -8,20 +8,19 @@ public class PlayerWeaponary : MonoBehaviour
     private int _currentGunID = 0;
     private List<IWeapon> _weapons;
 
-    private GameObject _saw;
-    private GameObject _lasergun;
-    private GameObject _miniguns;
+    [SerializeField] private GameObject _saw;
+    [SerializeField] private GameObject _lasergun;
+    [SerializeField] private GameObject _minigun;
 
     private void Start()
     {
-        _input = GetComponent<PlayerInputReader>();
+        _input = transform.root.GetComponent<PlayerInputReader>();
+
+        if (_input == null)
+            Debug.LogError("PlayerWeaponary: PlayerInput is missing");
 
         _input.NextStarted += NextGun;
         _input.PreviousStarted += PreviousGun;
-
-        _saw = GameObject.Find("Saw");
-        _lasergun = GameObject.Find("Laserguns");
-        _miniguns = GameObject.Find("Miniguns");
 
         ShowGun();
     }
@@ -38,13 +37,13 @@ public class PlayerWeaponary : MonoBehaviour
 
         if (playerData.hasSaw)
         {
-            var saw = GetComponent<WeaponSaw>();
+            var saw = _saw.GetComponent<WeaponSaw>();
             _weapons.Add(saw);
         }
 
         if (playerData.hasLaserGun)
         {
-            var lasergun = GetComponent<WeaponLasergun>();
+            var lasergun = _lasergun.GetComponent<WeaponLasergun>();
             _weapons.Add(lasergun);
         }
 
@@ -54,7 +53,7 @@ public class PlayerWeaponary : MonoBehaviour
 
         if (playerData.hasMinigun)
         {
-            var minigun = GetComponent<WeaponMinigun>();
+            var minigun = _minigun.GetComponent<WeaponMinigun>();
             _weapons.Add(minigun);
         }
     }
@@ -87,19 +86,19 @@ public class PlayerWeaponary : MonoBehaviour
         {
             _saw.SetActive(true);
             _lasergun.SetActive(false);
-            _miniguns.SetActive(false);
+            _minigun.SetActive(false);
         }
         if (name == "Lasergun")
         {
             _saw.SetActive(false);
             _lasergun.SetActive(true);
-            _miniguns.SetActive(false);
+            _minigun.SetActive(false);
         }
         if (name == "Minigun")
         {
             _saw.SetActive(false);
             _lasergun.SetActive(false);
-            _miniguns.SetActive(true);
+            _minigun.SetActive(true);
         }
     }
 

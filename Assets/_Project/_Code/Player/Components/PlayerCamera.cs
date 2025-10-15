@@ -5,14 +5,15 @@ public class PlayerCamera : MonoBehaviour
     public float mouseSens = 2.5f;
 
     private PlayerInputReader _input;
-    private Transform _cameraTransform;
+    [SerializeField] private Transform _cameraTransform;
     private float _xRotation;
     private float _yRotation;
+
+    public Transform CameraTransform => _cameraTransform;
 
     void Start()
     {
         _input = GetComponent<PlayerInputReader>();
-        _cameraTransform = transform.Find("CameraPos");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

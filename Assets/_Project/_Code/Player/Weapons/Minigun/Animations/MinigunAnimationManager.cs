@@ -10,7 +10,7 @@ public class MinigunAnimationManager : MonoBehaviour
     void Start()
     {
         _input = transform.root.GetComponent<PlayerInputReader>();
-        _cameraTransform = transform.root.Find("CameraPos");
+        _cameraTransform = transform.root.GetComponent<PlayerCamera>().CameraTransform;
         _animator1 = GameObject.Find("Minigun1").GetComponent<Animator>();
         _animator2 = GameObject.Find("Minigun2").GetComponent<Animator>();
 
