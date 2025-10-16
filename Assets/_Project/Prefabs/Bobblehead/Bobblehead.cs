@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 
 public class Bobblehead : MonoBehaviour
@@ -7,44 +8,51 @@ public class Bobblehead : MonoBehaviour
     [SerializeField] private float torque = 0.15f;
     [SerializeField] private float interval = 1.5f;
 
-    private Rigidbody rb;
+    private Rigidbody _rb;
+    private CancellationTokenSource _cts;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
-        ApplyForceContinuous().Forget();
-        ApplyTorqueContinuous().Forget();
+        _rb = GetComponent<Rigidbody>();
+        _cts = new CancellationTokenSource();
+        ApplyForceContinuous(_cts.Token).Forget();
+        ApplyTorqueContinuous(_cts.Token).Forget();
     }
 
     private void ApplyForce()
     {
         Vector3 randomDirection = Random.insideUnitSphere.normalized;
-        rb.AddForce(randomDirection * force, ForceMode.Impulse);
+        _rb.AddForce(randomDirection * force, ForceMode.Impulse);
     }
 
     private void ApplyTorque()
     {
         //Vector3 randomRotationAxis = Random.insideUnitSphere.normalized;
         Vector3 rotationAxis = new Vector3(0, 0, 1);
-        rb.AddTorque(rotationAxis * torque, ForceMode.Impulse);
+        _rb.AddTorque(rotationAxis * torque, ForceMode.Impulse);
     }
 
-    public async UniTask ApplyForceContinuous()
+    public async UniTask ApplyForceContinuous(CancellationToken cancellationToken)
     {
-        while (true)
+        while (!cancellationToken.IsCancellationRequested)
         {
             ApplyForce();
             await UniTask.WaitForSeconds(interval);
         }
     }
 
-    public async UniTask ApplyTorqueContinuous()
+    public async UniTask ApplyTorqueContinuous(CancellationToken cancellationToken)
     {
-        while (true)
+        while (!cancellationToken.IsCancellationRequested)
         {
             ApplyTorque();
             await UniTask.WaitForSeconds(interval);
         }
+    }
+
+    private void OnDestroy()
+    {
+        _cts?.Cancel();
+        _cts?.Dispose();
     }
 }
