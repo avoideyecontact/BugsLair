@@ -241,6 +241,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 765389030356046746, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1081992939192548198, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -296,6 +300,10 @@ PrefabInstance:
     - target: {fileID: 4794910709522209945, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5121092496329192549, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 5201718721643630512, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
       propertyPath: m_Layer
@@ -602,6 +610,14 @@ PrefabInstance:
     - target: {fileID: 41330428644653290, guid: 35bd3e19b96ebb8468d639344cc6329e, type: 3}
       propertyPath: m_Name
       value: Minigun
+      objectReference: {fileID: 0}
+    - target: {fileID: 714719255687732048, guid: 35bd3e19b96ebb8468d639344cc6329e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226963969594141453, guid: 35bd3e19b96ebb8468d639344cc6329e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 7865153989571565593, guid: 35bd3e19b96ebb8468d639344cc6329e, type: 3}
       propertyPath: m_LocalPosition.x
