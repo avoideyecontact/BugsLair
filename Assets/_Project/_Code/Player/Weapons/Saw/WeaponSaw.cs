@@ -35,10 +35,10 @@ public class WeaponSaw : MonoBehaviour, IWeapon
 
     private void DealDamage()
     {
-        var enemies = Physics.OverlapBox(transform.position + _damageCollider.center, _damageCollider.size, Quaternion.identity, _enemyLayer);
-        foreach (var enemy in enemies)
+        var hits = Physics.OverlapBox(transform.position + _damageCollider.center, _damageCollider.size, Quaternion.identity, _enemyLayer);
+        foreach (var hit in hits)
         {
-            enemy.GetComponent<HealthComponent>()?.DealDamage(_damage);
+            hit.GetComponent<HealthComponent>()?.DealDamage(_damage);
         }
     }
 

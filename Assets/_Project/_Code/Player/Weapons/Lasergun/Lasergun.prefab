@@ -62,6 +62,9 @@ MonoBehaviour:
   _name: Lasergun
   _damage: 1
   _damageRate: 0.1
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1001 &942813877402809457
 PrefabInstance:
   m_ObjectHideFlags: 0

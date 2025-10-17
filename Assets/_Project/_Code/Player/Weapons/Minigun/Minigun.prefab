@@ -62,6 +62,10 @@ MonoBehaviour:
   _name: Minigun
   _damage: 1
   _damageRate: 0.1
+  _hitDistance: 50
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1001 &1036259048143158459
 PrefabInstance:
   m_ObjectHideFlags: 0
