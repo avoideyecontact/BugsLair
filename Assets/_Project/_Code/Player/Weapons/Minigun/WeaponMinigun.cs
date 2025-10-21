@@ -52,13 +52,4 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
         _cts?.Cancel();
         _cts?.Dispose();
     }
-
-    private void OnDrawGizmos()
-    {
-        Camera camera = Camera.main;
-        Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-        var test = camera.ScreenToWorldPoint(screenCenter);
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(test, transform.forward * _hitDistance);
-    }
 }

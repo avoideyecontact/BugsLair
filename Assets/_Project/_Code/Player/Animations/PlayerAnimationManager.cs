@@ -1,33 +1,27 @@
 using UnityEngine;
+using VContainer;
 
 public class PlayerAnimationManager : MonoBehaviour
 {
     [SerializeField] private float _sprintMultiplier = 2;
+    [SerializeField] private Animator _animator;
 
-    private PlayerInputReader _input;
-    private Animator _animator;
+    private PlayerContext _playerContext;
 
-    void Start()
+    [Inject]
+    public void Construct(PlayerContext playerContext)
     {
-        _input = GetComponent<PlayerInputReader>();
-        _animator = GameObject.Find("Bugslayer").GetComponent<Animator>();
-
-        if ( _animator == null )
-        {
-            Debug.LogError("Bugslayer animator is missing");
-        }
+        _playerContext = playerContext;
     }
 
     void FixedUpdate()
     {
-        _animator.SetFloat("Move", _input.move.magnitude);
+        _animator.SetFloat("Move", _playerContext.Input.move.magnitude);
 
-        var speedMultiplier = _input.move.magnitude * Mathf.Sign(_input.move.y);
+        var speedMultiplier = _playerContext.Input.move.magnitude * Mathf.Sign(_playerContext.Input.move.y);
 
-        if (_input.sprint > 0)
-        {
+        if (_playerContext.Input.sprint > 0)
             speedMultiplier *= _sprintMultiplier;
-        }
 
         _animator.SetFloat("SpeedMultiplier", speedMultiplier);
     }

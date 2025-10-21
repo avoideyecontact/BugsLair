@@ -6,8 +6,7 @@ public class GameplayLifetimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.Register<IPlayerDataLoader, PlayerDataLoader>(Lifetime.Singleton).As<IInitializable>();
-        builder.RegisterComponentInHierarchy<CameraManager>();
-        builder.RegisterComponentInHierarchy<PlayerFactory>();
+        builder.RegisterComponentInHierarchy<PlayerContext>();
 
         builder.RegisterEntryPoint<GameplayEntryPoint>();
     }

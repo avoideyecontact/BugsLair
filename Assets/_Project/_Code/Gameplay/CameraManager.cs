@@ -1,40 +1,36 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using VContainer;
 
 // Used in gameplay scene for CinemachineStateDrivenCamera
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Camera _clippingCamera;
-
     [SerializeField] private LayerMask _layersForFirstPerson;
     [SerializeField] private LayerMask _layersForThirdPerson;
+    [SerializeField] private CinemachineCamera _playerCamera;
+    [SerializeField] private CinemachineCamera _testCamera;
+    [SerializeField] private CinemachineCamera _thirdPersonCamera;
 
-    private CinemachineCamera _playerCamera;
-    private CinemachineCamera _testCamera;
-    private CinemachineCamera _thirdPersonCamera;
+    private PlayerContext _playerContext;
+    private Animator _cameraAnimator;
     private string _currentCamera = "Player";
 
-    private PlayerInputReader _input;
-    private Transform _playerCameraTransform;
-    private Animator _cameraAnimator;
-
-    private void Awake()    
+    [Inject]
+    public void Construct(PlayerContext playerContext)
     {
-        _cameraAnimator = GetComponent<Animator>();
-        _playerCamera = transform.Find("PlayerCamera").GetComponent<CinemachineCamera>();
-        _testCamera = transform.Find("TestCamera").GetComponent<CinemachineCamera>();
-        _thirdPersonCamera = transform.Find("ThirdPersonCamera").GetComponent<CinemachineCamera>();
+        _playerContext = playerContext;
     }
 
-    public void SetupPlayer(Transform player)
+    private void Start()
     {
-        _input = player.GetComponent<PlayerInputReader>();
-        _input.CameraSwitchStarted += OnCameraSwitch;
+        _cameraAnimator = GetComponent<Animator>();
 
-        _playerCameraTransform = player.GetComponent<PlayerCamera>().CameraTransform;
-        _playerCamera.Follow = _playerCameraTransform;
-        _thirdPersonCamera.Follow = _playerCameraTransform;
+        _playerContext.Input.CameraSwitchStarted += OnCameraSwitch;
+
+        _playerCamera.Follow = _playerContext.PlayerCameraTransform;
+        _thirdPersonCamera.Follow = _playerContext.PlayerCameraTransform;
     }
 
     private void OnCameraSwitch()

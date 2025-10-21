@@ -77,13 +77,4 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
         _cts2?.Cancel();
         _cts2?.Dispose();
     }
-
-    private void OnDrawGizmos()
-    {
-        Camera camera = Camera.main;
-        Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-        var test = camera.ScreenToWorldPoint(screenCenter);
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(test, transform.forward * _hitDistance);
-    }
 }

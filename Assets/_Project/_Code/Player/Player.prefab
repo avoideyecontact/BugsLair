@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 695863440331363299}
+  - component: {fileID: 3601188501896109687}
   - component: {fileID: 2498251987160517124}
   - component: {fileID: 3813734320143860000}
   - component: {fileID: 1118863754352723265}
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 787462357776638883}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -63.24, y: -12.31, z: 73.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -40,6 +41,23 @@ Transform:
   - {fileID: 1218329101233684178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3601188501896109687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787462357776638883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8212d95f9fe1cc40bc614e2b1b4cf18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 0}
+  _playerCameraTransform: {fileID: 2760107334104996490}
+  _playerTransform: {fileID: 695863440331363299}
+  _input: {fileID: 2498251987160517124}
+  _weaponary: {fileID: 4999232235969490795}
 --- !u!114 &2498251987160517124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprintMultiplier: 2
+  _animator: {fileID: 467855561285237717}
 --- !u!143 &7829796834871833858
 CharacterController:
   m_ObjectHideFlags: 0
@@ -392,6 +411,10 @@ PrefabInstance:
     - target: {fileID: 5941819085801649389, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
       propertyPath: m_Name
       value: Lasergun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941819085801649389, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5946579444607807974, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
       propertyPath: m_Layer
@@ -696,6 +719,10 @@ PrefabInstance:
     - target: {fileID: 41330428644653290, guid: 35bd3e19b96ebb8468d639344cc6329e, type: 3}
       propertyPath: m_Name
       value: Minigun
+      objectReference: {fileID: 0}
+    - target: {fileID: 41330428644653290, guid: 35bd3e19b96ebb8468d639344cc6329e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 714719255687732048, guid: 35bd3e19b96ebb8468d639344cc6329e, type: 3}
       propertyPath: m_LocalPosition.z

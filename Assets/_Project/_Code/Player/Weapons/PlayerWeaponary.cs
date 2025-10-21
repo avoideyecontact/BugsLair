@@ -1,61 +1,44 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class PlayerWeaponary : MonoBehaviour
 {
-    private PlayerInputReader _input;
-
-    private int _currentGunID = 0;
-    private List<IWeapon> _weapons;
-
     [SerializeField] private GameObject _saw;
     [SerializeField] private GameObject _lasergun;
     [SerializeField] private GameObject _minigun;
 
+    private PlayerContext _playerContext;
+    private List<IWeapon> _weapons;
+    private int _currentGunID = 0;
+
+    [Inject]
+    public void Construct(PlayerContext playerContext)
+    {
+        _playerContext = playerContext;
+    }
+
     private void Start()
     {
-        _input = transform.root.GetComponent<PlayerInputReader>();
+        _playerContext.Input.NextStarted += NextGun;
+        _playerContext.Input.PreviousStarted += PreviousGun;
 
-        if (_input == null)
-            Debug.LogError("PlayerWeaponary: PlayerInput is missing");
-
-        _input.NextStarted += NextGun;
-        _input.PreviousStarted += PreviousGun;
+        // rewrite
+        _weapons = new List<IWeapon>();
+        var saw = _saw.GetComponent<WeaponSaw>();
+        var lasergun = _lasergun.GetComponent<WeaponLasergun>();
+        var minigun = _minigun.GetComponent<WeaponMinigun>();
+        _weapons.Add(saw);
+        _weapons.Add(lasergun);
+        _weapons.Add(minigun);
 
         ShowGun();
     }
 
     private void OnDestroy()
     {
-        _input.NextStarted -= NextGun;
-        _input.PreviousStarted -= PreviousGun;
-    }
-
-    public void Initialize(PlayerData playerData)
-    {
-        _weapons = new List<IWeapon>();
-
-        if (playerData.hasSaw)
-        {
-            var saw = _saw.GetComponent<WeaponSaw>();
-            _weapons.Add(saw);
-        }
-
-        if (playerData.hasLaserGun)
-        {
-            var lasergun = _lasergun.GetComponent<WeaponLasergun>();
-            _weapons.Add(lasergun);
-        }
-
-        if (playerData.hasShotgun)
-        {
-        }
-
-        if (playerData.hasMinigun)
-        {
-            var minigun = _minigun.GetComponent<WeaponMinigun>();
-            _weapons.Add(minigun);
-        }
+        _playerContext.Input.NextStarted -= NextGun;
+        _playerContext.Input.PreviousStarted -= PreviousGun;
     }
 
     public void NextGun()
@@ -104,7 +87,7 @@ public class PlayerWeaponary : MonoBehaviour
 
     private void Update()
     {
-        if (_input.attack == 1)
+        if (_playerContext.Input.attack == 1)
             _weapons[_currentGunID].Use();
     }
 }
