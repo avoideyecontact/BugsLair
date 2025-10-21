@@ -4,6 +4,7 @@ using VContainer;
 public class PlayerFactory : MonoBehaviour
 {
     [SerializeField] private GameObject _playerGameObject;
+    [SerializeField] private Transform _playerSpawnPoint;
 
     private CameraManager _cameraManager;
     private IPlayerDataLoader _playerDataLoader;
@@ -17,7 +18,7 @@ public class PlayerFactory : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        var player = Instantiate(_playerGameObject);
+        var player = Instantiate(_playerGameObject, _playerSpawnPoint.position, Quaternion.identity);
         InitializePlayerComponents(player, _playerDataLoader.PlayerData);
         _cameraManager.SetupPlayer(player.transform);
     }
