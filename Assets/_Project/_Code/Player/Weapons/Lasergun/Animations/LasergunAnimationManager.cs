@@ -1,7 +1,7 @@
 using UnityEngine;
 using VContainer;
 
-public class MinigunAnimationManager : MonoBehaviour
+public class LasergunAnimationManager : MonoBehaviour
 {
     [SerializeField] private Animator _animator1;
     [SerializeField] private Animator _animator2;
@@ -20,7 +20,7 @@ public class MinigunAnimationManager : MonoBehaviour
         _animator2.SetFloat("Attack", _playerContext.Input.attack);
     }
 
-    void Update()
+    private void Update()
     {
         transform.rotation = _playerContext.PlayerCameraTransform.rotation;
     }

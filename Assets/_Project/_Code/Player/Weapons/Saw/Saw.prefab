@@ -48,6 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0210171c6bd5e49b3dfaf0aab336e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator1: {fileID: 7636997451827516625}
+  _animator2: {fileID: 1057368182342039051}
+  _bladeAnimator1: {fileID: 4197566559452226608}
+  _bladeAnimator2: {fileID: 6423422296402165492}
 --- !u!114 &2787978939112956413
 MonoBehaviour:
   m_ObjectHideFlags: 0
