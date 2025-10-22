@@ -11,22 +11,25 @@ public class PlayerWeaponary : MonoBehaviour
     private IWeapon _currentWeapon;
 
     [Inject]
-    public void Construct(PlayerContext playerContext)
-    {
-        _playerContext = playerContext;
-    }
+    public void Construct(PlayerContext playerContext) => _playerContext = playerContext;
 
     private void Start()
     {
-        _playerContext.Input.NextStarted += SelectNextWeapon;
-        _playerContext.Input.PreviousStarted += SelectPreviousWeapon;
-
-        //DeselectAllWeapons();
+        SubscribeToInput();
+        DeselectAllWeapons();
         MakeWeaponAvailable(WeaponType.Saw);
         SelectFirstWeapon();
     }
 
-    private void OnDestroy()
+    private void OnDestroy() => UnsubscribeFromInput();
+
+    private void SubscribeToInput()
+    {
+        _playerContext.Input.NextStarted += SelectNextWeapon;
+        _playerContext.Input.PreviousStarted += SelectPreviousWeapon;
+    }
+
+    private void UnsubscribeFromInput()
     {
         _playerContext.Input.NextStarted -= SelectNextWeapon;
         _playerContext.Input.PreviousStarted -= SelectPreviousWeapon;
@@ -37,21 +40,20 @@ public class PlayerWeaponary : MonoBehaviour
         foreach (var weaponGameObject in _weaponsGameObjects)
         {
             weaponGameObject.SetActive(false);
-            var weapon = weaponGameObject.GetComponent<IWeapon>();
-            weapon.Selected = false;
-            _currentWeapon = null;
+            weaponGameObject.GetComponent<IWeapon>().Selected = false;
         }
+        _currentWeapon = null;
     }
 
     private void SelectWeapon(WeaponType weaponType)
     {
-        DeselectAllWeapons();
         foreach (var weaponGameObject in _weaponsGameObjects)
         {
             var weapon = weaponGameObject.GetComponent<IWeapon>();
 
             if (weaponType == weapon.WeaponType && weapon.Available)
             {
+                DeselectAllWeapons();
                 weaponGameObject.SetActive(true);
                 weapon.Selected = true;
                 _currentWeapon = weapon;
