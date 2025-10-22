@@ -21,7 +21,8 @@ public class PlayerWeaponary : MonoBehaviour
         _playerContext.Input.NextStarted += SelectNextWeapon;
         _playerContext.Input.PreviousStarted += SelectPreviousWeapon;
 
-        DeselectAllWeapons();
+        //DeselectAllWeapons();
+        MakeWeaponAvailable(WeaponType.Saw);
         SelectFirstWeapon();
     }
 
@@ -116,6 +117,18 @@ public class PlayerWeaponary : MonoBehaviour
         SelectFirstWeapon();
     }
 
+    private void MakeWeaponAvailable(WeaponType weaponType)
+    {
+        foreach (var weaponGameObject in _weaponsGameObjects)
+        {
+            var weapon = weaponGameObject.GetComponent<IWeapon>();
+            if (weapon.WeaponType == weaponType)
+            {
+                weapon.Available = true;
+            }
+        }
+    }
+
     private void PickupWeapon()
     {
         WeaponType? weaponType = null;
@@ -130,15 +143,8 @@ public class PlayerWeaponary : MonoBehaviour
         if (weaponType == null)
             return;
 
-        foreach (var weaponGameObject in _weaponsGameObjects)
-        {
-            var weapon = weaponGameObject.GetComponent<IWeapon>();
-            if (weapon.WeaponType == weaponType)
-            {
-                weapon.Available = true;
-                SelectWeapon(weapon.WeaponType);
-            }
-        }
+        MakeWeaponAvailable((WeaponType)weaponType);
+        SelectWeapon((WeaponType)weaponType);
     }
 
     private void Update()

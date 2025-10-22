@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using VContainer;
 
 public class WeaponLasergun : MonoBehaviour, IWeapon
 {
@@ -18,9 +19,16 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
     public bool Available { get; set; }
     public bool Selected { get; set; }
 
+    private PlayerContext _playerContext;
     private bool _isCooldown;
     private CancellationTokenSource _cts1;
     private CancellationTokenSource _cts2;
+
+    [Inject]
+    public void Construct(PlayerContext playerContext)
+    {
+        _playerContext = playerContext;
+    }
 
     private void Start()
     {
@@ -45,9 +53,8 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
 
     private void DealDamage()
     {
-        Camera camera = Camera.main;
         Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-        var start = camera.ScreenToWorldPoint(screenCenter);
+        var start = _playerContext.MainCamera.ScreenToWorldPoint(screenCenter);
         var hits = Physics.RaycastAll(start, transform.forward, _hitDistance, _enemyLayer);
         foreach (var hit in hits)
         {

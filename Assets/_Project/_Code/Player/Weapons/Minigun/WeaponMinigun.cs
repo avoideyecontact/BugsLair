@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using VContainer;
 
 public class WeaponMinigun : MonoBehaviour, IWeapon
 {
@@ -16,8 +17,15 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
     public bool Available { get; set; }
     public bool Selected { get; set; }
 
+    private PlayerContext _playerContext;
     private bool _isCooldown;
     private CancellationTokenSource _cts;
+
+    [Inject]
+    public void Construct(PlayerContext playerContext)
+    {
+        _playerContext = playerContext;
+    }
 
     public void Use()
     {
@@ -33,9 +41,8 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
     // change
     private void DealDamage()
     {
-        Camera camera = Camera.main;
         Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
-        Ray ray = camera.ScreenPointToRay(screenCenter);
+        Ray ray = _playerContext.MainCamera.ScreenPointToRay(screenCenter);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _hitDistance, _enemyLayer))
         {
