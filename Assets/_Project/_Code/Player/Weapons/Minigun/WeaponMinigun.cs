@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class WeaponMinigun : MonoBehaviour, IWeapon
 {
-    [SerializeField] private string _name = "Minigun";
+    [SerializeField] private WeaponType _weaponType = WeaponType.Minigun;
     [SerializeField] protected float _damage = 1f;
     [SerializeField] protected float _damageRate = 0.1f;
     [SerializeField] private float _hitDistance = 50f;
     [SerializeField] private LayerMask _enemyLayer;
 
-    public string Name => _name;
+    public WeaponType WeaponType => _weaponType;
     public float Damage => _damage;
     public float DamageRate => _damageRate;
+    public bool Available { get; set; }
+    public bool Selected { get; set; }
 
     private bool _isCooldown;
     private CancellationTokenSource _cts;
@@ -28,6 +30,7 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
         WeaponCooldownTimer(_cts.Token).Forget();
     }
 
+    // change
     private void DealDamage()
     {
         Camera camera = Camera.main;

@@ -58,6 +58,7 @@ MonoBehaviour:
   _playerTransform: {fileID: 695863440331363299}
   _input: {fileID: 2498251987160517124}
   _weaponary: {fileID: 4999232235969490795}
+  _interactionDistance: 4
 --- !u!114 &2498251987160517124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,9 +203,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfeab5f361cfde641840f985ac15956d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _saw: {fileID: 4124346357788641244}
-  _lasergun: {fileID: 4989981742732444323}
-  _minigun: {fileID: 3685243111662821487}
+  _weaponsGameObjects:
+  - {fileID: 4124346357788641244}
+  - {fileID: 3685243111662821487}
+  - {fileID: 4989981742732444323}
+  _dropLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &8148433078597947630
 GameObject:
   m_ObjectHideFlags: 0

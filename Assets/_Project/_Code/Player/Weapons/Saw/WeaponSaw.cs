@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class WeaponSaw : MonoBehaviour, IWeapon
 {
-    [SerializeField] private string _name = "Saw";
+    [SerializeField] private WeaponType _weaponType = WeaponType.Saw;
     [SerializeField] protected float _damage = 1f;
     [SerializeField] protected float _damageRate = 0.5f;
     [SerializeField] protected LayerMask _enemyLayer;
-    private BoxCollider _damageCollider;    
+    private BoxCollider _damageCollider;
 
-    public string Name => _name;
+    public WeaponType WeaponType => _weaponType;
     public float Damage => _damage;
     public float DamageRate => _damageRate;
+    public bool Available { get; set; }
+    public bool Selected { get; set; }
 
     private bool _isCooldown;
     private CancellationTokenSource _cts;

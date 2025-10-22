@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponLasergun : MonoBehaviour, IWeapon
 {
-    [SerializeField] private string _name = "Lasergun";
+    [SerializeField] private WeaponType _weaponType = WeaponType.Laser;
     [SerializeField] private float _damage = 1f;
     [SerializeField] private float _damageRate = 0.1f;
     [SerializeField] private float _hitDistance = 100f;
@@ -12,9 +12,11 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
     [SerializeField] private LaserBeam _laserBeam1;
     [SerializeField] private LaserBeam _laserBeam2;
 
-    public string Name => _name;
+    public WeaponType WeaponType => _weaponType;
     public float Damage => _damage;
     public float DamageRate => _damageRate;
+    public bool Available { get; set; }
+    public bool Selected { get; set; }
 
     private bool _isCooldown;
     private CancellationTokenSource _cts1;
