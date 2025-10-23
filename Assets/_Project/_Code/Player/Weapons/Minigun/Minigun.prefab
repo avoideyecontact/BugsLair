@@ -69,7 +69,7 @@ MonoBehaviour:
     enemyLayer:
       serializedVersion: 2
       m_Bits: 1024
-    maxAmmo: 50
+    maxAmmo: 100
 --- !u!1001 &1036259048143158459
 PrefabInstance:
   m_ObjectHideFlags: 0

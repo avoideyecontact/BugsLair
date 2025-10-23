@@ -8,5 +8,5 @@ public class WeaponConfig
     public float damageRate = 0.1f;
     public float hitDistance = 100f;
     public LayerMask enemyLayer;
-    public int maxAmmo = 50;
+    public int maxAmmo = 100;
 }

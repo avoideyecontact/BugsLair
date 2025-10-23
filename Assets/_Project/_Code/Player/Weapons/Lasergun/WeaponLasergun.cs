@@ -17,14 +17,16 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
     public bool Selected { get; set; }
 
     private PlayerContext _playerContext;
+    private AmmoSystem _ammoSystem;
     private bool _isCooldown;
-    private CancellationTokenSource _cts1;
-    private CancellationTokenSource _cts2;
+    private CancellationTokenSource _cooldownCts;
+    private CancellationTokenSource _lasersCts;
 
     [Inject]
     public void Construct(PlayerContext playerContext)
     {
         _playerContext = playerContext;
+        _ammoSystem = new AmmoSystem(_config.maxAmmo);
     }
 
     private void Start()
@@ -34,17 +36,24 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
 
     public void Use()
     {
-        _cts2?.Cancel();
-        _cts2 = new CancellationTokenSource();
-        LasersFire(_cts2.Token).Forget();
+        Debug.Log($"{WeaponType}: {_ammoSystem.CurrentAmmo}");
+
+        if (!_ammoSystem.HasAmmo)
+            return;
+
+        _lasersCts?.Cancel();
+        _lasersCts = new CancellationTokenSource();
+        ActivateLaserEffects(_lasersCts.Token).Forget();
 
         if (_isCooldown)
             return;
 
+        _ammoSystem.SpendAmmo();
         DealDamage();
 
-        _cts1 = new CancellationTokenSource();
-        WeaponCooldownTimer(_cts1.Token).Forget();
+        _cooldownCts?.Cancel();
+        _cooldownCts = new CancellationTokenSource();
+        StartWeaponCooldown(_cooldownCts.Token).Forget();
     }
 
     private void DealDamage()
@@ -59,7 +68,7 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
         }
     }
 
-    private async UniTask LasersFire(CancellationToken cts)
+    private async UniTask ActivateLaserEffects(CancellationToken cts)
     {
         SetLasersActive(true);
         await UniTask.WaitForSeconds(0.1f, cancellationToken: cts);
@@ -72,7 +81,7 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
         _laserBeam2?.SetActive(active);
     }
 
-    private async UniTask WeaponCooldownTimer(CancellationToken cts)
+    private async UniTask StartWeaponCooldown(CancellationToken cts)
     {
         _isCooldown = true;
         await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: cts);
@@ -81,9 +90,9 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
 
     private void OnDestroy()
     {
-        _cts1?.Cancel();
-        _cts1?.Dispose();
-        _cts2?.Cancel();
-        _cts2?.Dispose();
+        _cooldownCts?.Cancel();
+        _cooldownCts?.Dispose();
+        _lasersCts?.Cancel();
+        _lasersCts?.Dispose();
     }
 }

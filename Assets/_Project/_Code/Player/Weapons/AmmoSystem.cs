@@ -1,4 +1,3 @@
-using UnityEngine;
 
 public class AmmoSystem
 {
@@ -14,17 +13,13 @@ public class AmmoSystem
         _currentAmmo = maxAmmo;
     }
 
-    public bool TrySpendAmmo()
+    public void SpendAmmo()
     {
-        if (_currentAmmo <= 0)
-            return false;
-
         _currentAmmo--;
-        return true;
     }
 
-    public void Reload(int amount = -1)
+    public void Reload()
     {
-        _currentAmmo = amount == -1 ? _maxAmmo : Mathf.Min(_currentAmmo + amount, _maxAmmo);
+        _currentAmmo = _maxAmmo;
     }
 }

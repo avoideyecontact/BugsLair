@@ -14,27 +14,34 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
     public bool Selected { get; set; }
 
     private PlayerContext _playerContext;
+    private AmmoSystem _ammoSystem;
     private bool _isCooldown;
-    private CancellationTokenSource _cts;
+    private CancellationTokenSource _cooldownCts;
 
     [Inject]
     public void Construct(PlayerContext playerContext)
     {
         _playerContext = playerContext;
+        _ammoSystem = new AmmoSystem(_config.maxAmmo);
     }
 
     public void Use()
     {
+        Debug.Log($"{WeaponType}: {_ammoSystem.CurrentAmmo}");
+
+        if (!_ammoSystem.HasAmmo)
+            return;
+
         if (_isCooldown)
             return;
 
+        _ammoSystem.SpendAmmo();
         DealDamage();
 
-        _cts = new CancellationTokenSource();
-        WeaponCooldownTimer(_cts.Token).Forget();
+        _cooldownCts = new CancellationTokenSource();
+        WeaponCooldownTimer(_cooldownCts.Token).Forget();
     }
 
-    // change
     private void DealDamage()
     {
         Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -55,7 +62,7 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
 
     private void OnDestroy()
     {
-        _cts?.Cancel();
-        _cts?.Dispose();
+        _cooldownCts?.Cancel();
+        _cooldownCts?.Dispose();
     }
 }
