@@ -61,13 +61,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895850833d983f7458b09d70e76cd06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Lasergun
-  _damage: 1
-  _damageRate: 0.1
-  _hitDistance: 100
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  _config:
+    weaponType: 2
+    damage: 1
+    damageRate: 0.1
+    hitDistance: 100
+    enemyLayer:
+      serializedVersion: 2
+      m_Bits: 1024
+    maxAmmo: 100
   _laserBeam1: {fileID: 309717718953479539}
   _laserBeam2: {fileID: 3176619292374515898}
 --- !u!1001 &942813877402809457

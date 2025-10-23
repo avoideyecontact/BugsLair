@@ -5,17 +5,14 @@ using VContainer;
 
 public class WeaponLasergun : MonoBehaviour, IWeapon
 {
-    [SerializeField] private WeaponType _weaponType = WeaponType.Laser;
-    [SerializeField] private float _damage = 1f;
-    [SerializeField] private float _damageRate = 0.1f;
-    [SerializeField] private float _hitDistance = 100f;
-    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private WeaponConfig _config;
+
     [SerializeField] private LaserBeam _laserBeam1;
     [SerializeField] private LaserBeam _laserBeam2;
 
-    public WeaponType WeaponType => _weaponType;
-    public float Damage => _damage;
-    public float DamageRate => _damageRate;
+    public WeaponType WeaponType => _config.weaponType;
+    public float Damage => _config.damage;
+    public float DamageRate => _config.damageRate;
     public bool Available { get; set; }
     public bool Selected { get; set; }
 
@@ -32,8 +29,7 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
 
     private void Start()
     {
-        _laserBeam1.gameObject.SetActive(false);
-        _laserBeam2.gameObject.SetActive(false);
+        SetLasersActive(false);
     }
 
     public void Use()
@@ -55,27 +51,31 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
     {
         Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
         var start = _playerContext.MainCamera.ScreenToWorldPoint(screenCenter);
-        var hits = Physics.RaycastAll(start, transform.forward, _hitDistance, _enemyLayer);
+        var hits = Physics.RaycastAll(start, transform.forward, _config.hitDistance, _config.enemyLayer);
         foreach (var hit in hits)
         {
-            var damage = _damage * (hit.distance / _hitDistance);
-            hit.transform.GetComponent<HealthComponent>()?.DealDamage(_damage);
+            var damage = _config.damage * (hit.distance / _config.hitDistance);
+            hit.transform.GetComponent<HealthComponent>()?.DealDamage(_config.damage);
         }
     }
 
     private async UniTask LasersFire(CancellationToken cts)
     {
-        _laserBeam1.gameObject.SetActive(true);
-        _laserBeam2.gameObject.SetActive(true);
+        SetLasersActive(true);
         await UniTask.WaitForSeconds(0.1f, cancellationToken: cts);
-        _laserBeam1.gameObject.SetActive(false);
-        _laserBeam2.gameObject.SetActive(false);
+        SetLasersActive(false);
+    }
+
+    private void SetLasersActive(bool active)
+    {
+        _laserBeam1?.SetActive(active);
+        _laserBeam2?.SetActive(active);
     }
 
     private async UniTask WeaponCooldownTimer(CancellationToken cts)
     {
         _isCooldown = true;
-        await UniTask.WaitForSeconds(_damageRate, cancellationToken: cts);
+        await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: cts);
         _isCooldown = false;
     }
 

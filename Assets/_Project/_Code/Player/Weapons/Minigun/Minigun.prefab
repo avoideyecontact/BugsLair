@@ -61,13 +61,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e887881c977ee224498c265723920239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Minigun
-  _damage: 1
-  _damageRate: 0.1
-  _hitDistance: 50
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  _config:
+    weaponType: 1
+    damage: 1
+    damageRate: 0.1
+    hitDistance: 100
+    enemyLayer:
+      serializedVersion: 2
+      m_Bits: 1024
+    maxAmmo: 50
 --- !u!1001 &1036259048143158459
 PrefabInstance:
   m_ObjectHideFlags: 0

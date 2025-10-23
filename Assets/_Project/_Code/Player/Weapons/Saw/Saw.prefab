@@ -64,12 +64,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f714fd180632674c92b2a862d92c77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Saw
-  _damage: 1
-  _damageRate: 0.5
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  _config:
+    weaponType: 0
+    damage: 1
+    damageRate: 0.1
+    hitDistance: 100
+    enemyLayer:
+      serializedVersion: 2
+      m_Bits: 1024
+    maxAmmo: 50
 --- !u!65 &8835555368670363244
 BoxCollider:
   m_ObjectHideFlags: 0

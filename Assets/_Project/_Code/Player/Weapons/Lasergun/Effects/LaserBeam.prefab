@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 926790635159032022}
   - component: {fileID: 4935170412782396528}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: BeamSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lineRenderer: {fileID: 4619391806129024656}
+  _beamRenderer: {fileID: 926790635159032022}
   _distance: 100
 --- !u!1 &5570060570898818280
 GameObject:

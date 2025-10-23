@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class WeaponSaw : MonoBehaviour, IWeapon
 {
-    [SerializeField] private WeaponType _weaponType = WeaponType.Saw;
-    [SerializeField] protected float _damage = 1f;
-    [SerializeField] protected float _damageRate = 0.5f;
-    [SerializeField] protected LayerMask _enemyLayer;
-    private BoxCollider _damageCollider;
+    [SerializeField] private WeaponConfig _config;
 
-    public WeaponType WeaponType => _weaponType;
-    public float Damage => _damage;
-    public float DamageRate => _damageRate;
+    public WeaponType WeaponType => _config.weaponType;
+    public float Damage => _config.damage;
+    public float DamageRate => _config.damageRate;
     public bool Available { get; set; }
     public bool Selected { get; set; }
 
+    private BoxCollider _damageCollider;
     private bool _isCooldown;
     private CancellationTokenSource _cts;
 
@@ -37,17 +34,22 @@ public class WeaponSaw : MonoBehaviour, IWeapon
 
     private void DealDamage()
     {
-        var hits = Physics.OverlapBox(transform.position + _damageCollider.center, _damageCollider.size, Quaternion.identity, _enemyLayer);
+        var hits = Physics.OverlapBox(
+            transform.position + _damageCollider.center,
+            _damageCollider.size,
+            Quaternion.identity,
+            _config.enemyLayer);
+
         foreach (var hit in hits)
         {
-            hit.GetComponent<HealthComponent>()?.DealDamage(_damage);
+            hit.GetComponent<HealthComponent>()?.DealDamage(_config.damage);
         }
     }
 
     private async UniTask WeaponCooldownTimer(CancellationToken cts)
     {
         _isCooldown = true;
-        await UniTask.WaitForSeconds(_damageRate, cancellationToken: cts);
+        await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: cts);
         _isCooldown = false;
     }
 

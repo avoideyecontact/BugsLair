@@ -5,15 +5,11 @@ using VContainer;
 
 public class WeaponMinigun : MonoBehaviour, IWeapon
 {
-    [SerializeField] private WeaponType _weaponType = WeaponType.Minigun;
-    [SerializeField] protected float _damage = 1f;
-    [SerializeField] protected float _damageRate = 0.1f;
-    [SerializeField] private float _hitDistance = 50f;
-    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private WeaponConfig _config;
 
-    public WeaponType WeaponType => _weaponType;
-    public float Damage => _damage;
-    public float DamageRate => _damageRate;
+    public WeaponType WeaponType => _config.weaponType;
+    public float Damage => _config.damage;
+    public float DamageRate => _config.damageRate;
     public bool Available { get; set; }
     public bool Selected { get; set; }
 
@@ -44,16 +40,16 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
         Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
         Ray ray = _playerContext.MainCamera.ScreenPointToRay(screenCenter);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, _hitDistance, _enemyLayer))
+        if (Physics.Raycast(ray, out hit, _config.hitDistance, _config.enemyLayer))
         {
-            hit.transform.GetComponent<HealthComponent>()?.DealDamage(_damage);
+            hit.transform.GetComponent<HealthComponent>()?.DealDamage(_config.damage);
         }
     }
 
     private async UniTask WeaponCooldownTimer(CancellationToken cts)
     {
         _isCooldown = true;
-        await UniTask.WaitForSeconds(_damageRate, cancellationToken: cts);
+        await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: cts);
         _isCooldown = false;
     }
 
