@@ -21,3 +21,21 @@ public struct SceneLoadedEvent
 
 public struct GamePaused { }
 public struct GameResumed { }
+
+public struct WeaponChanged
+{
+    public WeaponType WeaponType;
+    public int Ammo;
+
+    public WeaponChanged(WeaponType weaponType, int ammo)
+    {
+        WeaponType = weaponType;
+        Ammo = ammo;
+    }
+}
+
+public struct AmmoChanged
+{
+    public int Ammo;
+    public AmmoChanged(int ammo) => Ammo = ammo;
+}

@@ -15,17 +15,20 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
     public float DamageRate => _config.damageRate;
     public bool Available { get; set; }
     public bool Selected { get; set; }
+    public int Ammo => _ammoSystem.CurrentAmmo;
 
     private PlayerContext _playerContext;
+    private IEventBus _eventBus;
     private AmmoSystem _ammoSystem;
     private bool _isCooldown;
     private CancellationTokenSource _cooldownCts;
     private CancellationTokenSource _lasersCts;
 
     [Inject]
-    public void Construct(PlayerContext playerContext)
+    public void Construct(PlayerContext playerContext, IEventBus eventBus)
     {
         _playerContext = playerContext;
+        _eventBus = eventBus;
         _ammoSystem = new AmmoSystem(_config.maxAmmo);
     }
 
@@ -36,8 +39,6 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
 
     public void Use()
     {
-        Debug.Log($"{WeaponType}: {_ammoSystem.CurrentAmmo}");
-
         if (!_ammoSystem.HasAmmo)
             return;
 
@@ -49,6 +50,7 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
             return;
 
         _ammoSystem.SpendAmmo();
+        OnAmmoChanged();
         DealDamage();
 
         _cooldownCts?.Cancel();
@@ -86,6 +88,14 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
         _isCooldown = true;
         await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: cts);
         _isCooldown = false;
+    }
+
+    private void OnAmmoChanged()
+    {
+        _eventBus.Publish(new AmmoChanged
+        {
+            Ammo = _ammoSystem.CurrentAmmo
+        });
     }
 
     private void OnDestroy()

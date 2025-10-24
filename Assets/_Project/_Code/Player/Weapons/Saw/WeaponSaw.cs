@@ -9,6 +9,7 @@ public class WeaponSaw : MonoBehaviour, IWeapon
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
     public float DamageRate => _config.damageRate;
+    public int Ammo => -1;
     public bool Available { get; set; }
     public bool Selected { get; set; }
 

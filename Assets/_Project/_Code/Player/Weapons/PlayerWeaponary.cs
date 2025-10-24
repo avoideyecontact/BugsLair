@@ -8,10 +8,15 @@ public class PlayerWeaponary : MonoBehaviour
     [SerializeField] private LayerMask _dropLayer;
 
     private PlayerContext _playerContext;
+    private IEventBus _eventBus;
     private IWeapon _currentWeapon;
 
     [Inject]
-    public void Construct(PlayerContext playerContext) => _playerContext = playerContext;
+    public void Construct(PlayerContext playerContext, IEventBus eventBus)
+    {
+        _playerContext = playerContext;
+        _eventBus = eventBus;
+    }
 
     private void Start()
     {
@@ -59,9 +64,19 @@ public class PlayerWeaponary : MonoBehaviour
                 weaponGameObject.SetActive(true);
                 weapon.Selected = true;
                 _currentWeapon = weapon;
+                OnWeaponChanged();
                 return;
             }
         }
+    }
+
+    private void OnWeaponChanged()
+    {
+        _eventBus.Publish(new WeaponChanged
+        {
+            WeaponType = _currentWeapon.WeaponType,
+            Ammo = _currentWeapon.Ammo
+        });
     }
 
     private void SelectFirstWeapon()
