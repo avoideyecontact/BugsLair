@@ -22,6 +22,12 @@ public class PauseService : IPauseService
         SetPause(false);
     }
 
+    public void TogglePause()
+    {
+        if (_paused) SetPause(false);
+        else SetPause(true);
+    }
+
     public void SetPause(bool value)
     {
         if (_paused == value)

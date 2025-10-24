@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VContainer;
 
 public class PlayerInputReader : MonoBehaviour
 {
     [SerializeField] private InputActionAsset _actionsAsset;
+    private IEventBus _eventBus;
 
     public Vector2 move;
     public Vector2 look;
@@ -21,6 +23,38 @@ public class PlayerInputReader : MonoBehaviour
     public event System.Action NextStarted;
     public event System.Action PreviousStarted;
     public event System.Action CameraSwitchStarted;
+
+    [Inject]
+    public void Construct(IEventBus eventBus)
+    {
+        _eventBus = eventBus;
+        _eventBus.Subscribe<GamePaused>(OnGamePaused);
+        _eventBus.Subscribe<GameResumed>(OnGameResumed);
+    }
+
+    private void OnGamePaused(GamePaused evt)
+    {
+        enabled = false;
+        ResetInputValues();
+    }
+    private void OnGameResumed(GameResumed evt)
+    {
+        enabled = true;
+    }
+
+    private void OnDestroy()
+    {
+        _eventBus.Unsubscribe<GamePaused>(OnGamePaused);
+        _eventBus.Unsubscribe<GameResumed>(OnGameResumed);
+    }
+
+    private void ResetInputValues()
+    {
+        move = Vector2.zero;
+        look = Vector2.zero;
+        sprint = 0;
+        attack = 0;
+    }
 
     private void Awake()
     {

@@ -31,8 +31,6 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
 
     public void Use()
     {
-        Debug.Log($"{WeaponType}: {_ammoSystem.CurrentAmmo}");
-
         if (!_ammoSystem.HasAmmo)
             return;
 
