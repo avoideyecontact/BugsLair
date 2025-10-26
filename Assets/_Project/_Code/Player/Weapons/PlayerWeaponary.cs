@@ -32,12 +32,14 @@ public class PlayerWeaponary : MonoBehaviour
 
     private void SubscribeToInput()
     {
+        _playerContext.Input.InteractStarted += PickupWeapon;
         _playerContext.Input.NextStarted += SelectNextWeapon;
         _playerContext.Input.PreviousStarted += SelectPreviousWeapon;
     }
 
     private void UnsubscribeFromInput()
     {
+        _playerContext.Input.InteractStarted -= PickupWeapon;
         _playerContext.Input.NextStarted -= SelectNextWeapon;
         _playerContext.Input.PreviousStarted -= SelectPreviousWeapon;
     }
@@ -168,11 +170,6 @@ public class PlayerWeaponary : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            PickupWeapon();
-        }
-
         if (_playerContext.Input.attack > 0.1 && _currentWeapon != null)
         {
             _currentWeapon.Use();

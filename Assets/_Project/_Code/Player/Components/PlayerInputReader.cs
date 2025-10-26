@@ -15,11 +15,15 @@ public class PlayerInputReader : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _lookAction;
     private InputAction _sprintAction;
+    private InputAction _jumpAction;
+    private InputAction _interactAction;
     private InputAction _nextAction;
     private InputAction _previousAction;
     private InputAction _attackAction;
     private InputAction _cameraSwitchAction;
 
+    public event System.Action JumpStarted;
+    public event System.Action InteractStarted;
     public event System.Action NextStarted;
     public event System.Action PreviousStarted;
     public event System.Action CameraSwitchStarted;
@@ -64,25 +68,12 @@ public class PlayerInputReader : MonoBehaviour
         _moveAction = _actionsAsset.FindAction("Player/Move", true);
         _lookAction = _actionsAsset.FindAction("Player/Look", true);
         _sprintAction = _actionsAsset.FindAction("Player/Sprint", true);
+        _jumpAction = _actionsAsset.FindAction("Player/Jump", true);
+        _interactAction = _actionsAsset.FindAction("Player/Interact", true);
         _nextAction = _actionsAsset.FindAction("Player/Next", true);
         _previousAction = _actionsAsset.FindAction("Player/Previous", true);
         _attackAction = _actionsAsset.FindAction("Player/Attack", true);
         _cameraSwitchAction = _actionsAsset.FindAction("Player/CameraSwitch", true);
-
-        if (_moveAction == null)
-            Debug.LogError("InputAction is missing", this);
-        if (_lookAction == null)
-            Debug.LogError("InputAction is missing", this);
-        if (_lookAction == null)
-            Debug.LogError("InputAction is missing", this);
-        if (_nextAction == null)
-            Debug.LogError("InputAction is missing", this);
-        if (_previousAction == null)
-            Debug.LogError("InputAction is missing", this);
-        if (_attackAction == null)
-            Debug.LogError("InputAction is missing", this);
-        if (_cameraSwitchAction == null)
-            Debug.LogError("InputAction is missing", this);
     }
 
     private void OnEnable()
@@ -98,6 +89,12 @@ public class PlayerInputReader : MonoBehaviour
         _sprintAction.Enable();
         _sprintAction.performed += OnSprint;
         _sprintAction.canceled += OnSprint;
+
+        _jumpAction.Enable();
+        _jumpAction.started += OnJump;
+
+        _interactAction.Enable();
+        _interactAction.started += OnInteract;
 
         _nextAction.Enable();
         _nextAction.started += OnNext;
@@ -127,6 +124,12 @@ public class PlayerInputReader : MonoBehaviour
         _sprintAction.canceled -= OnSprint;
         _sprintAction.Disable();
 
+        _jumpAction.started -= OnJump;
+        _jumpAction.Disable();
+
+        _interactAction.started -= OnInteract;
+        _interactAction.Disable();
+
         _nextAction.started -= OnNext;
         _nextAction.Disable();
 
@@ -154,6 +157,16 @@ public class PlayerInputReader : MonoBehaviour
     private void OnSprint(InputAction.CallbackContext context)
     {
         sprint = context.ReadValue<float>();
+    }
+
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        JumpStarted?.Invoke();
+    }
+
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        InteractStarted?.Invoke();
     }
 
     private void OnNext(InputAction.CallbackContext context)
