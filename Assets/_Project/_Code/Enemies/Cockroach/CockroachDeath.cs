@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
-using static UnityEngine.Rendering.ProbeAdjustmentVolume;
 
 public class CockroachDeath : MonoBehaviour
 {
@@ -26,13 +25,26 @@ public class CockroachDeath : MonoBehaviour
 
     private async UniTaskVoid DeathTask()
     {
-        _animator.SetTrigger("Death");
-        await UniTask.WaitForSeconds(1f);
+        GetComponent<Collider>().enabled = false;
+
+        _animator.SetTrigger("SwitchToRunning");
         _animator.applyRootMotion = true;
 
+        float randomRotation = Random.Range(-45, 45);
+        _ = transform.DORotate(new Vector3(0, randomRotation, 180), 1f).SetEase(Ease.InOutBack).SetRelative().ToUniTask();
+        await transform.DOLocalMoveY(1f, 0.5f).SetEase(Ease.InOutBack).SetRelative().ToUniTask();
+        await transform.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InOutBack).SetRelative().ToUniTask();
+
+        float multiplier = 1f;
+        await DOTween.To(() => multiplier, x => multiplier = x, 0f, 2f)
+            .OnUpdate(() =>
+            {
+                _animator.SetFloat("RunMultiplier", multiplier);
+            }).ToUniTask();
+
         var deathTasks = new UniTask[3];
-        deathTasks[0] = transform.DOLocalMoveY(-0.5f, 2f).SetEase(Ease.InOutSine).SetRelative().ToUniTask();
-        deathTasks[1] = transform.DOScale(0, 1.5f).SetEase(Ease.InOutSine).ToUniTask();
+        deathTasks[0] = transform.DOLocalMoveY(-0.65f, 3f).SetEase(Ease.InOutSine).SetRelative().ToUniTask();
+        deathTasks[1] = transform.DOScale(0, 3f).SetEase(Ease.InOutSine).ToUniTask();
         deathTasks[2] = transform.DOShakeRotation(2f, 10f).ToUniTask();
 
         await UniTask.WhenAll(deathTasks);
