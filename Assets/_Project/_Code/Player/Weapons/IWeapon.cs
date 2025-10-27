@@ -8,4 +8,5 @@ public interface IWeapon
     public bool Available { get; set; }
     public bool Selected { get; set; }
     public void Use();
+    public void AddAmmo(int value);
 }

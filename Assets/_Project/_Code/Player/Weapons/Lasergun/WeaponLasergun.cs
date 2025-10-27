@@ -90,11 +90,18 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
         _isCooldown = false;
     }
 
+    public void AddAmmo(int value)
+    {
+        _ammoSystem.AddAmmo(value);
+        OnAmmoChanged();
+    }
+
     private void OnAmmoChanged()
     {
         _eventBus.Publish(new AmmoChanged
         {
-            Ammo = _ammoSystem.CurrentAmmo
+            Ammo = _ammoSystem.CurrentAmmo,
+            WeaponType = WeaponType
         });
     }
 

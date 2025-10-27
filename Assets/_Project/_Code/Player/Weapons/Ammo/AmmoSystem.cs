@@ -18,6 +18,11 @@ public class AmmoSystem
         _currentAmmo--;
     }
 
+    public void AddAmmo(int value)
+    {
+        _currentAmmo += value;
+    }
+
     public void Reload()
     {
         _currentAmmo = _maxAmmo;

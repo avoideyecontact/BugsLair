@@ -54,6 +54,11 @@ public class WeaponSaw : MonoBehaviour, IWeapon
         _isCooldown = false;
     }
 
+    public void AddAmmo(int value)
+    {
+        Debug.LogWarning("Saw doesnt use ammo");
+    }
+
     private void OnDestroy()
     {
         _cts?.Cancel();

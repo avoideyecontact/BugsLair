@@ -11,6 +11,8 @@ public class PlayerWeaponary : MonoBehaviour
     private IEventBus _eventBus;
     private IWeapon _currentWeapon;
 
+    public WeaponType CurrentWeaponType => _currentWeapon.WeaponType;
+
     [Inject]
     public void Construct(PlayerContext playerContext, IEventBus eventBus)
     {
@@ -166,6 +168,18 @@ public class PlayerWeaponary : MonoBehaviour
 
         MakeWeaponAvailable((WeaponType)weaponType);
         SelectWeapon((WeaponType)weaponType);
+    }
+
+    public void AddAmmo(WeaponType weaponType, int value)
+    {
+        foreach (var weaponGameObject in _weaponsGameObjects)
+        {
+            var weapon = weaponGameObject.GetComponent<IWeapon>();
+            if (weapon.WeaponType == weaponType)
+            {
+                weapon.AddAmmo(value);
+            }
+        }
     }
 
     private void Update()

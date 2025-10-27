@@ -37,5 +37,5 @@ public struct WeaponChanged
 public struct AmmoChanged
 {
     public int Ammo;
-    public AmmoChanged(int ammo) => Ammo = ammo;
+    public WeaponType WeaponType;
 }

@@ -7,11 +7,13 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TMP_Text _ammoText;
     [SerializeField] private TMP_Text _weaponText;
 
+    private PlayerContext _playerContext;
     private IEventBus _eventBus;
 
     [Inject]
-    public void Construct(IEventBus eventBus)
+    public void Construct(PlayerContext playerContext, IEventBus eventBus)
     {
+        _playerContext = playerContext;
         _eventBus = eventBus;
         _eventBus.Subscribe<AmmoChanged>(OnAmmoChanged);
         _eventBus.Subscribe<WeaponChanged>(OnWeaponChanged);
@@ -19,6 +21,9 @@ public class PlayerHUD : MonoBehaviour
 
     private void OnAmmoChanged(AmmoChanged evt)
     {
+        if (_playerContext.Weaponary.CurrentWeaponType != evt.WeaponType)
+            return;
+
         _ammoText.text = evt.Ammo.ToString();
     }
 
