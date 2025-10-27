@@ -14,9 +14,6 @@ public class PlayerCamera : MonoBehaviour
     void Start()
     {
         _input = GetComponent<PlayerInputReader>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     void Update()

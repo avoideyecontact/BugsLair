@@ -16,6 +16,7 @@ public class ScreenFade : MonoBehaviour
         _canvasGroup.alpha = 0f;
         await _canvasGroup.DOFade(1f, duration)
             .SetEase(Ease.InOutSine)
+            .SetUpdate(true) // to play even with timeScale = 0
             .ToUniTask();
     }
 
@@ -24,6 +25,7 @@ public class ScreenFade : MonoBehaviour
         _canvasGroup.alpha = 1f;
         await _canvasGroup.DOFade(0f, duration)
             .SetEase(Ease.InOutSine)
+            .SetUpdate(true) // to play even with timeScale = 0
             .ToUniTask();
     }
 }

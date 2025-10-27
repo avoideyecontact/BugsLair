@@ -49,6 +49,7 @@ public class GlobalInputService : MonoBehaviour, IStartable
 
     private void OnDestroy()
     {
+        _pauseAction.started -= OnPause;
         _pauseAction?.Dispose();
     }
 }

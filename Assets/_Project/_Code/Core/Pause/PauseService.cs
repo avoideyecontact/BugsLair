@@ -10,6 +10,7 @@ public class PauseService : IPauseService
     public PauseService(IEventBus eventBus)
     {
         _eventBus = eventBus;
+        _eventBus.Subscribe<SceneLoadedEvent>(OnSceneLoaded);
     }
 
     public void PauseGame()
@@ -45,5 +46,10 @@ public class PauseService : IPauseService
             Time.timeScale = 1;
             _eventBus.Publish(new GameResumed());
         }
+    }
+
+    private void OnSceneLoaded(SceneLoadedEvent evt)
+    {
+        ResumeGame();
     }
 }
