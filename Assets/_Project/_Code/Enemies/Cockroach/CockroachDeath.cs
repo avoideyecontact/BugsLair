@@ -30,22 +30,24 @@ public class CockroachDeath : MonoBehaviour
         _animator.SetTrigger("SwitchToRunning");
         _animator.applyRootMotion = true;
 
+        var ct = this.GetCancellationTokenOnDestroy();
+
         float randomRotation = Random.Range(-45, 45);
-        _ = transform.DORotate(new Vector3(0, randomRotation, 180), 1f).SetEase(Ease.InOutBack).SetRelative().ToUniTask();
-        await transform.DOLocalMoveY(1f, 0.5f).SetEase(Ease.InOutBack).SetRelative().ToUniTask();
-        await transform.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InOutBack).SetRelative().ToUniTask();
+        _ = transform.DORotate(new Vector3(0, randomRotation, 180), 1f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
+        await transform.DOLocalMoveY(1f, 0.5f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
+        await transform.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
 
         float multiplier = 1f;
         await DOTween.To(() => multiplier, x => multiplier = x, 0f, 2f)
             .OnUpdate(() =>
             {
                 _animator.SetFloat("RunMultiplier", multiplier);
-            }).ToUniTask();
+            }).WithCancellation(ct);
 
         var deathTasks = new UniTask[3];
-        deathTasks[0] = transform.DOLocalMoveY(-0.65f, 3f).SetEase(Ease.InOutSine).SetRelative().ToUniTask();
-        deathTasks[1] = transform.DOScale(0, 3f).SetEase(Ease.InOutSine).ToUniTask();
-        deathTasks[2] = transform.DOShakeRotation(2f, 10f).ToUniTask();
+        deathTasks[0] = transform.DOLocalMoveY(-0.65f, 3f).SetEase(Ease.InOutSine).SetRelative().WithCancellation(ct);
+        deathTasks[1] = transform.DOScale(0, 3f).SetEase(Ease.InOutSine).WithCancellation(ct);
+        deathTasks[2] = transform.DOShakeRotation(2f, 10f).WithCancellation(ct);
 
         await UniTask.WhenAll(deathTasks);
 
