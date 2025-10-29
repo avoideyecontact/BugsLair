@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 3a3228d3bb093e84a973e227284e841d
+guid: da65fd6ed48b86b468b107b19e1192a7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bugslayer
+    second: {fileID: 2100000, guid: 05ee76c6ca68fd049b9710f8fe599ca7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
