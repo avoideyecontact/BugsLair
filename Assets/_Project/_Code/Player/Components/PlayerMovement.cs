@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 using VContainer;
 
@@ -11,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerContext _playerContext;
     private Vector3 _verticalVelocity;
     private bool _jumpRequested;
+    private CancellationTokenSource _dashCts;
 
     [Inject]
     public void Construct(PlayerContext playerContext)
@@ -52,5 +55,41 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumpRequested = true;
         _verticalVelocity.y = jumpPower;
+    }
+
+    public void Dash(float dashPower, float duration)
+    {
+        var move = _playerContext.Input.move;
+        var player = _playerContext.PlayerTransform;
+        var direction = player.forward * move.y + player.right * move.x;
+
+        CancelDash();
+        _dashCts = new CancellationTokenSource();
+        DashTask(direction, dashPower, duration).Forget();
+    }
+
+    public void CancelDash()
+    {
+        _dashCts?.Cancel();
+        _dashCts?.Dispose();
+        _dashCts = null;
+    }
+
+    private async UniTask DashTask(Vector3 direction, float dashPower, float duration)
+    {
+        float elapsed = 0f;
+        var ct = _dashCts.Token;
+
+        while (elapsed < duration)
+        {
+            _controller.Move(direction * dashPower * Time.deltaTime);
+            elapsed += Time.deltaTime;
+            await UniTask.Yield(ct);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        CancelDash();
     }
 }

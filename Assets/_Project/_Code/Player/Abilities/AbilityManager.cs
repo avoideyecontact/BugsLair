@@ -17,7 +17,8 @@ public class AbilityManager : MonoBehaviour
 
     private void Start()
     {
-        ActivateAbility(AbilityType.JumpModule);
+        //ActivateAbility(AbilityType.JumpModule);
+        ActivateAbility(AbilityType.Dash);
     }
 
     private void ActivateAbility(AbilityType abilityType)
