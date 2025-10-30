@@ -3,7 +3,12 @@ guid: f60784917eee16b48ba2fc445631d792
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lasergun
+    second: {fileID: 2100000, guid: 350ad2bddeea48042ba89634267faa03, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
