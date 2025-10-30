@@ -3,7 +3,12 @@ guid: 1cc2ac50d7fe24748a4bad9df2547674
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Saw
+    second: {fileID: 2100000, guid: 46cbc8c3b86b5744f84c0e74363ed85c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

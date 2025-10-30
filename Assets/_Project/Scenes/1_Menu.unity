@@ -2124,6 +2124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bugslayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3807387388527678932, guid: da65fd6ed48b86b468b107b19e1192a7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 560356a8675eb9d4ab185be786cc08e0, type: 2}
     - target: {fileID: 3807387388527678932, guid: 3a3228d3bb093e84a973e227284e841d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
