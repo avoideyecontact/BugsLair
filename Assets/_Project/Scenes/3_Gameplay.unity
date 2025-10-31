@@ -2399,6 +2399,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1689389001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1824125057
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -47.606255
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.665388
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 117.35624
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99575126
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.09208364
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -10.567
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285577679638717733, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3480818861573952653, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
+      propertyPath: m_Name
+      value: AlienVault
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7cff95044a3863a45ba18a6458fc706b, type: 3}
 --- !u!1 &1834444524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3023,3 +3080,4 @@ SceneRoots:
   - {fileID: 1456808531}
   - {fileID: 2884276937904265758}
   - {fileID: 2037323699225257709}
+  - {fileID: 1824125057}
