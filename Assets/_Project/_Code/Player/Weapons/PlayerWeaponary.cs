@@ -166,6 +166,8 @@ public class PlayerWeaponary : MonoBehaviour
         if (weaponType == null)
             return;
 
+        Destroy(hit.transform.gameObject);
+
         MakeWeaponAvailable((WeaponType)weaponType);
         SelectWeapon((WeaponType)weaponType);
     }
