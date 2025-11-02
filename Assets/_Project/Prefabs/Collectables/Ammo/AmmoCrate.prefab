@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7906890290546868359}
   - component: {fileID: 7620816586142673440}
   - component: {fileID: 5883647176840365924}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AmmoCrate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 4942554468025754379}
   - component: {fileID: 6127539712242147550}
   - component: {fileID: 5258518290846255401}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: AmmoCrateModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

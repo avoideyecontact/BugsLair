@@ -6,6 +6,7 @@ public class CockroachDeath : MonoBehaviour
 {
     [SerializeField] private HealthComponent _health;
     [SerializeField] private Animator _animator;
+    [SerializeField] private CockroachAI _ai;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class CockroachDeath : MonoBehaviour
 
     private async UniTaskVoid DeathTask()
     {
+        _ai.Disable();
         GetComponent<Collider>().enabled = false;
 
         _animator.SetTrigger("SwitchToRunning");

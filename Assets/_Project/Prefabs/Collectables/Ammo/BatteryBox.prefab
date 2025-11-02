@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7108747734048454044}
   - component: {fileID: 7408465699529385511}
   - component: {fileID: 1666723060561201767}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BatteryBoxModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 5667175415608691619}
   - component: {fileID: 7477540182547702693}
   - component: {fileID: 7664137619630995478}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BatteryBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
