@@ -919,6 +919,9 @@ MonoBehaviour:
   _abilitiesGameObjects:
   - {fileID: 8394889077534607788}
   - {fileID: 435853557829471943}
+  _dropLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1001 &1678273721327384142
 PrefabInstance:
   m_ObjectHideFlags: 0

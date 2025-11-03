@@ -4,6 +4,7 @@ using VContainer;
 public class AbilityManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] _abilitiesGameObjects;
+    [SerializeField] private LayerMask _dropLayer;
 
     private PlayerContext _playerContext;
     private IEventBus _eventBus;
@@ -17,8 +18,21 @@ public class AbilityManager : MonoBehaviour
 
     private void Start()
     {
+        SubscribeToInput();
         //ActivateAbility(AbilityType.JumpModule);
-        ActivateAbility(AbilityType.Dash);
+        //ActivateAbility(AbilityType.Dash);
+    }
+
+    private void OnDestroy() => UnsubscribeFromInput();
+
+    private void SubscribeToInput()
+    {
+        _playerContext.Input.InteractStarted += PickupAbility;
+    }
+
+    private void UnsubscribeFromInput()
+    {
+        _playerContext.Input.InteractStarted -= PickupAbility;
     }
 
     private void ActivateAbility(AbilityType abilityType)
@@ -43,5 +57,24 @@ public class AbilityManager : MonoBehaviour
                 ability.Deactivate();
             }
         }
+    }
+
+    public void PickupAbility()
+    {
+        AbilityType? abilityType = null;
+        Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = _playerContext.MainCamera.ScreenPointToRay(screenCenter);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, _playerContext.InteractionDistance, _dropLayer))
+        {
+            abilityType = hit.transform.GetComponent<AbilityDrop>()?.GetAbilityType;
+        }
+
+        if (abilityType == null)
+            return;
+
+        Destroy(hit.transform.gameObject);
+
+        ActivateAbility((AbilityType)abilityType);
     }
 }
