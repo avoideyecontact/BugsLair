@@ -1518,9 +1518,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0fa3aa5c110089344b0ee59350412347, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fa3aa5c110089344b0ee59350412347, type: 3}
       propertyPath: m_Name
       value: Ladybug
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0fa3aa5c110089344b0ee59350412347, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
