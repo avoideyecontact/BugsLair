@@ -57,6 +57,8 @@ public class CameraManager : MonoBehaviour
     {
         _mainCamera.cullingMask = _layersForThirdPerson;
         _clippingCamera.enabled = false;
+        EnablePostProcessingForCamera(_mainCamera, true);
+        EnablePostProcessingForCamera(_clippingCamera, false);
     }
 
     // for first person
@@ -64,5 +66,13 @@ public class CameraManager : MonoBehaviour
     {
         _mainCamera.cullingMask = _layersForFirstPerson;
         _clippingCamera.enabled = true;
+        EnablePostProcessingForCamera(_mainCamera, false);
+        EnablePostProcessingForCamera(_clippingCamera, true);
+    }
+
+    private void EnablePostProcessingForCamera(Camera camera, bool state)
+    {
+        var uac = camera.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
+        uac.renderPostProcessing = state;
     }
 }
