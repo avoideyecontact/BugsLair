@@ -7,6 +7,7 @@ public class PlayerContext : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private PlayerInputReader _input;
     [SerializeField] private PlayerWeaponary _weaponary;
+    [SerializeField] private AbilityManager _abilities;
     [SerializeField] private PlayerMovement _movement;
     [SerializeField] private float _interactionDistance = 4;
 
@@ -23,6 +24,7 @@ public class PlayerContext : MonoBehaviour
     public Transform PlayerTransform => _playerTransform;
     public PlayerInputReader Input => _input;
     public PlayerWeaponary Weaponary => _weaponary;
+    public AbilityManager AbilityManager => _abilities;
     public PlayerMovement Movement => _movement;
     public float InteractionDistance => _interactionDistance;
 }

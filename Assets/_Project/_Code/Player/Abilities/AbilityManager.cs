@@ -10,6 +10,8 @@ public class AbilityManager : MonoBehaviour
     private PlayerContext _playerContext;
     private IEventBus _eventBus;
 
+    public IAbility[] GetAbilitiesArray => _abilities;
+
     [Inject]
     public void Construct(PlayerContext playerContext, IEventBus eventBus)
     {
