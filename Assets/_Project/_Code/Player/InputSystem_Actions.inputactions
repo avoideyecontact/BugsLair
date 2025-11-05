@@ -1051,7 +1051,18 @@
                 {
                     "name": "",
                     "id": "479c8d8e-61dd-4091-a34d-19a324b9bfa3",
-                    "path": "<Keyboard>/f2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70e98fc7-d875-4e06-8d24-cb2d7e363c0b",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
