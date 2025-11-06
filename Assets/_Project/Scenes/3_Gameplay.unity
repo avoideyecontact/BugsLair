@@ -4999,10 +4999,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 543682923}
     m_Modifications:
-    - target: {fileID: 7147249603574389704, guid: d4b2a70d64179ac42b50c4dd0bf20230, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7459013321833472442, guid: d4b2a70d64179ac42b50c4dd0bf20230, type: 3}
       propertyPath: m_Name
       value: Pause

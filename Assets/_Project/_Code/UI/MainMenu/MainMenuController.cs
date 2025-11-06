@@ -11,40 +11,27 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button _quitButton;
 
     [Header("Settings")]
-
-    private GameSettings _tempSettings;
-
-    [SerializeField] private Canvas _settingsCanvas;
-    [SerializeField] private Button _backToMenuButton;
-
-    [Header("Audio Settings")]
-    [SerializeField] private Slider _masterVolumeSlider;
-    [SerializeField] private Slider _sfxVolumeSlider;
-    [SerializeField] private Slider _musicVolumeSlider;
+    [SerializeField] private SettingsUI _settingsUI;
+    [SerializeField] private Button _backFromSettings;
 
     private ISceneLoader _sceneLoader;
-    private ISettingsManager _settingsManager;
 
     private void Start()
     {
         _mainCanvas.enabled = true;
-        _settingsCanvas.enabled = false;
+        _settingsUI.Hide();
 
         _playButton.onClick.AddListener(OnPlayButtonClicked);
         _settingsButton.onClick.AddListener(OnSettingsButtonClicked);
         _quitButton.onClick.AddListener(OnQuitButtonClicked);
-        _backToMenuButton.onClick.AddListener(OnBackToMenuButtonClicked);
 
-        _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
-        _sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
-        _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        _backFromSettings.onClick.AddListener(OnBackFromSettingsButtonClicked);
     }
 
     [Inject]
-    public void Construct(ISceneLoader sceneLoader, ISettingsManager settingsManager)
+    public void Construct(ISceneLoader sceneLoader)
     {
         _sceneLoader = sceneLoader;
-        _settingsManager = settingsManager;
     }
 
     private void OnPlayButtonClicked()
@@ -55,9 +42,8 @@ public class MainMenuController : MonoBehaviour
 
     private void OnSettingsButtonClicked()
     {
-        LoadSettingsIntoUI();
         _mainCanvas.enabled = false;
-        _settingsCanvas.enabled = true;
+        _settingsUI.Show();
     }
 
     private void OnQuitButtonClicked()
@@ -69,33 +55,8 @@ public class MainMenuController : MonoBehaviour
 #endif
     }
 
-    private void LoadSettingsIntoUI()
+    private void OnBackFromSettingsButtonClicked()
     {
-        _tempSettings = _settingsManager.Settings;
-
-        _masterVolumeSlider.value = _tempSettings.masterVolume;
-        _sfxVolumeSlider.value = _tempSettings.sfxVolume;
-        _musicVolumeSlider.value = _tempSettings.musicVolume;
-    }
-
-    private void OnBackToMenuButtonClicked()
-    {
-        _settingsManager.ApplySettings(_tempSettings);
-
         _mainCanvas.enabled = true;
-        _settingsCanvas.enabled = false;
-    }
-
-    private void OnMasterVolumeChanged(float value)
-    {
-        _tempSettings.masterVolume = value;
-    }
-    private void OnSFXVolumeChanged(float value)
-    {
-        _tempSettings.sfxVolume = value;
-    }
-    private void OnMusicVolumeChanged(float value)
-    {
-        _tempSettings.musicVolume = value;
     }
 }
