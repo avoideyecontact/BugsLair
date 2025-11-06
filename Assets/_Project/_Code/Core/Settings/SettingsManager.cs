@@ -26,6 +26,15 @@ public class SettingsManager : IInitializable, ISettingsManager
         {
             if (File.Exists(_settingsPath))
             {
+                FileInfo fileInfo = new FileInfo(_settingsPath);
+                if (fileInfo.Length == 0)
+                {
+                    _currentSettings = new GameSettings();
+                    SaveSettings();
+                }
+
+                // todo: check for parse error
+
                 string json = File.ReadAllText(_settingsPath);
                 _currentSettings = JsonUtility.FromJson<GameSettings>(json);
             }
