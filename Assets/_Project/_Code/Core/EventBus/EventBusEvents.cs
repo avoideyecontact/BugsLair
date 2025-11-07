@@ -39,3 +39,8 @@ public struct AmmoChanged
     public int Ammo;
     public WeaponType WeaponType;
 }
+
+public struct PlayerHealthChanged
+{
+    public float HealthValue;
+}

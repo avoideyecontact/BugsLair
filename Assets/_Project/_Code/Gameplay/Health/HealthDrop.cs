@@ -10,8 +10,13 @@ public class HealthDrop : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponentInChildren<HealthComponent>().Heal(health);
-            Destroy(gameObject);
+            var playerHealth = other.GetComponentInChildren<PlayerHealth>();
+
+            if (playerHealth.CanHeal)
+            {
+                other.GetComponentInChildren<PlayerHealth>().Heal(health);
+                Destroy(gameObject);
+            }
         }
     }
 
