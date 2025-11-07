@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,8 +7,12 @@ public class CockroachAI : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] private float _stopDistance = 4f;
 
+    [SerializeField] private float _damage = 1f;
+    [SerializeField] private float _damageRate = 1f;
+
     private NavMeshAgent _agent;
     private bool _isChasing = true;
+    private bool _isDamageCooldown;
 
     void Start()
     {
@@ -25,6 +30,11 @@ public class CockroachAI : MonoBehaviour
         if (_target == null) return;
 
         float currentDistance = Vector3.Distance(transform.position, _target.position);
+
+        if (!_isDamageCooldown && currentDistance <= _stopDistance)
+        {
+            DealDamage();
+        }
 
         if (_isChasing)
         {
@@ -59,5 +69,19 @@ public class CockroachAI : MonoBehaviour
     {
         _agent.enabled = false;
         enabled = false;
+    }
+
+    private void DealDamage()
+    {
+        _target.GetComponent<PlayerHealth>().DealDamage(_damage);
+        DamageCooldownTimer().Forget();
+    }
+
+    private async UniTask DamageCooldownTimer()
+    {
+        var ct = this.GetCancellationTokenOnDestroy();
+        _isDamageCooldown = true;
+        await UniTask.WaitForSeconds(_damageRate, cancellationToken: ct);
+        _isDamageCooldown = false;
     }
 }
