@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 7829796834871833858}
-  _speed: 5
+  _speed: 7
   _sprintSpeed: 15
 --- !u!114 &1118863754352723265
 MonoBehaviour:
@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
+  _maxHealth: 100
 --- !u!1 &2677843526236850403
 GameObject:
   m_ObjectHideFlags: 0

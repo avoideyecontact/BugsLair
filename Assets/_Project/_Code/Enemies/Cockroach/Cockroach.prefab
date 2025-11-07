@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _stopDistance: 4
+  _damage: 2
+  _damageRate: 1
+  _animator: {fileID: 1020586894314119504}
 --- !u!195 &1530683061509118655
 NavMeshAgent:
   m_ObjectHideFlags: 0

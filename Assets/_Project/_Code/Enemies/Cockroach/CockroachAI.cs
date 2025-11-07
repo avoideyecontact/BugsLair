@@ -10,6 +10,8 @@ public class CockroachAI : MonoBehaviour
     [SerializeField] private float _damage = 1f;
     [SerializeField] private float _damageRate = 1f;
 
+    [SerializeField] private Animator _animator;
+
     private NavMeshAgent _agent;
     private bool _isChasing = true;
     private bool _isDamageCooldown;
@@ -44,6 +46,7 @@ public class CockroachAI : MonoBehaviour
             {
                 _isChasing = false;
                 _agent.isStopped = true;
+                _animator.SetTrigger("SwitchToEating");
             }
         }
         else
@@ -53,6 +56,7 @@ public class CockroachAI : MonoBehaviour
                 _isChasing = true;
                 _agent.isStopped = false;
                 _agent.SetDestination(_target.position);
+                _animator.SetTrigger("SwitchToRunning");
             }
         }
     }
@@ -63,6 +67,7 @@ public class CockroachAI : MonoBehaviour
         _isChasing = true;
         _agent.isStopped = false;
         _agent.SetDestination(_target.position);
+        _animator.SetTrigger("SwitchToRunning");
     }
 
     public void Disable()
