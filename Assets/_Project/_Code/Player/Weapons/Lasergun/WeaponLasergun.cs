@@ -10,6 +10,8 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
     [SerializeField] private LaserBeam _laserBeam1;
     [SerializeField] private LaserBeam _laserBeam2;
 
+    [SerializeField] private AudioSource _laserSound;
+
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
     public float DamageRate => _config.damageRate;
@@ -72,9 +74,14 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
 
     private async UniTask ActivateLaserEffects(CancellationToken cts)
     {
+        if (!_laserSound.isPlaying)
+            _laserSound.Play();
+
         SetLasersActive(true);
         await UniTask.WaitForSeconds(0.1f, cancellationToken: cts);
         SetLasersActive(false);
+
+        _laserSound.Stop();
     }
 
     private void SetLasersActive(bool active)
