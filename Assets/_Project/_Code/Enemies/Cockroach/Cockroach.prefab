@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5653882253639028585}
   - component: {fileID: 7346188283511206717}
   - component: {fileID: -5074371058347196063}
+  - component: {fileID: 5090387708022897806}
   - component: {fileID: 1530683061509118655}
   m_Layer: 10
   m_Name: Cockroach
@@ -29,14 +30,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7507571258923006789}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4060673012284833044}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &1109318469352248959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -86,6 +87,7 @@ MonoBehaviour:
   _health: {fileID: 5653882253639028585}
   _animator: {fileID: 1020586894314119504}
   _ai: {fileID: -5074371058347196063}
+  _aligner: {fileID: 5090387708022897806}
 --- !u!114 &-5074371058347196063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,6 +105,27 @@ MonoBehaviour:
   _damage: 2
   _damageRate: 1
   _animator: {fileID: 1020586894314119504}
+--- !u!114 &5090387708022897806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507571258923006789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da3cd29c1ea3294983f589e6bbdb022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childObject: {fileID: 4060673012284833044}
+  agent: {fileID: 1530683061509118655}
+  raycastDistance: 2
+  alignmentSpeed: 5
+  surfaceLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  raycastOffset: {x: 0, y: 0, z: 0}
+  preserveForwardDirection: 1
 --- !u!195 &1530683061509118655
 NavMeshAgent:
   m_ObjectHideFlags: 0
