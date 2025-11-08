@@ -13,12 +13,14 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider _musicVolumeSlider;
 
     private ISettingsManager _settingsManager;
+    private SoundMixerManager _soundMixerManager;
     private GameSettings _tempSettings;
 
     [Inject]
-    public void Construct(ISettingsManager settingsManager)
+    public void Construct(ISettingsManager settingsManager, SoundMixerManager soundMixerManager)
     {
         _settingsManager = settingsManager;
+        _soundMixerManager = soundMixerManager;
         LoadSettingsIntoUI();
     }
 
@@ -59,13 +61,16 @@ public class SettingsUI : MonoBehaviour
     private void OnMasterVolumeChanged(float value)
     {
         _tempSettings.masterVolume = value;
+        _soundMixerManager.SetMasterVolume(value);
     }
     private void OnSFXVolumeChanged(float value)
     {
         _tempSettings.sfxVolume = value;
+        _soundMixerManager.SetSFXVolume(value);
     }
     private void OnMusicVolumeChanged(float value)
     {
         _tempSettings.musicVolume = value;
+        _soundMixerManager.SetMusicVolume(value);
     }
 }

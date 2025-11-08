@@ -11,6 +11,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ISettingsManager, SettingsManager>(Lifetime.Singleton).As<IInitializable>();
 
         builder.RegisterComponentInHierarchy<GlobalInputService>().As<IStartable>();
+        builder.RegisterComponentInHierarchy<SoundMixerManager>();
         builder.RegisterComponentInHierarchy<ScreenFade>();
 
         builder.RegisterEntryPoint<GameEntryPoint>();
