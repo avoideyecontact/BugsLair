@@ -17,9 +17,26 @@ public class PlayerHUD : MonoBehaviour
     {
         _playerContext = playerContext;
         _eventBus = eventBus;
+        SubscribeToEventBus();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEventBus();
+    }
+
+    private void SubscribeToEventBus()
+    {
         _eventBus.Subscribe<AmmoChanged>(OnAmmoChanged);
         _eventBus.Subscribe<WeaponChanged>(OnWeaponChanged);
         _eventBus.Subscribe<PlayerHealthChanged>(OnPlayerHealthChanged);
+    }
+
+    private void UnsubscribeFromEventBus()
+    {
+        _eventBus.Unsubscribe<AmmoChanged>(OnAmmoChanged);
+        _eventBus.Unsubscribe<WeaponChanged>(OnWeaponChanged);
+        _eventBus.Unsubscribe<PlayerHealthChanged>(OnPlayerHealthChanged);
     }
 
     private void OnAmmoChanged(AmmoChanged evt)
