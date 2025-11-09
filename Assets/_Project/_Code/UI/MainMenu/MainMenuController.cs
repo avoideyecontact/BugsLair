@@ -36,8 +36,8 @@ public class MainMenuController : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        //_sceneLoader.LoadSceneAsync("2_Cutscene", useFade: true);
-        _sceneLoader.LoadSceneAsync("3_Gameplay", useFade: true);
+        _sceneLoader.LoadSceneAsync("2_Cutscene", useFade: true);
+        //_sceneLoader.LoadSceneAsync("3_Gameplay", useFade: true);
     }
 
     private void OnSettingsButtonClicked()
