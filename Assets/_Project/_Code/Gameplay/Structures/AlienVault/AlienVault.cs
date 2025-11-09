@@ -53,7 +53,7 @@ public class AlienVault : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
-            mat.SetColor("_EmissionColor", Color.Lerp(start, end, elapsed / duration));
+            mat?.SetColor("_EmissionColor", Color.Lerp(start, end, elapsed / duration));
             elapsed += Time.deltaTime;
             await UniTask.Yield();
         }

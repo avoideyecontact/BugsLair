@@ -39,11 +39,13 @@ public class PauseService : IPauseService
         if (_paused)
         {
             Time.timeScale = 0;
+            AudioListener.pause = true;
             _eventBus.Publish(new GamePaused());
         }
         else
         {
             Time.timeScale = 1;
+            AudioListener.pause = false;
             _eventBus.Publish(new GameResumed());
         }
     }
