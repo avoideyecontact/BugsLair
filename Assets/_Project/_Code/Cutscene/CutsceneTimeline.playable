@@ -1,5 +1,101 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8768754166398235220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b22792c3b570444eb18cb78c2af3a74, type: 3}
+  m_Name: Audio Track
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Version: 1
+    m_Start: 0.01666666666666572
+    m_ClipIn: 0
+    m_Asset: {fileID: -258615717335916826}
+    m_Duration: 35.63333333333333
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -8768754166398235220}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 5
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -0
+        outSlope: -0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -2
+        outSlope: -2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 1
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: Black Sabbath - Paranoid (2012 - Remaster)
+  m_Markers:
+    m_Objects: []
+  m_TrackProperties:
+    volume: 1
+    stereoPan: 0
+    spatialBlend: 0
 --- !u!114 &-8238117692607369404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -25,7 +121,7 @@ MonoBehaviour:
     m_Start: 6.5
     m_ClipIn: 0
     m_Asset: {fileID: -7619276521251100416}
-    m_Duration: 34.79797979797979
+    m_Duration: 31.23333333333334
     m_TimeScale: 0.33
     m_ParentTrack: {fileID: -8238117692607369404}
     m_EaseInDuration: 0
@@ -444,7 +540,7 @@ MonoBehaviour:
     m_Start: 28
     m_ClipIn: 0
     m_Asset: {fileID: 4929728836520828611}
-    m_Duration: 5
+    m_Duration: 4.766666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: -7621642332202105936}
     m_EaseInDuration: 0
@@ -509,6 +605,75 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: CinemachineCamera
+  - m_Version: 1
+    m_Start: 32.766666666666666
+    m_ClipIn: 0
+    m_Asset: {fileID: 8825422295032754846}
+    m_Duration: 4.966666666666676
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -7621642332202105936}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: TerrainCamera
   m_Markers:
     m_Objects: []
   TrackPriority: 0
@@ -784,8 +949,8 @@ MonoBehaviour:
     m_Start: 6.5
     m_ClipIn: 40.983333333333334
     m_Asset: {fileID: -98994199290631}
-    m_Duration: 41.64444444444445
-    m_TimeScale: 0.75
+    m_Duration: 31.23333333333334
+    m_TimeScale: 1
     m_ParentTrack: {fileID: -4163558789495849710}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
@@ -902,8 +1067,8 @@ MonoBehaviour:
     m_Start: 6.5
     m_ClipIn: 40.983333333333334
     m_Asset: {fileID: -4581737432398000714}
-    m_Duration: 41.64444444444445
-    m_TimeScale: 0.75
+    m_Duration: 31.23333333333334
+    m_TimeScale: 1
     m_ParentTrack: {fileID: -4085745333691788960}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
@@ -1704,6 +1869,23 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events: []
+--- !u!114 &-258615717335916826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
+  m_Name: AudioPlayableAsset
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 8300000, guid: 0db9b420777aa5d4ca24dbdbd30793b0, type: 3}
+  m_Loop: 0
+  m_bufferingTime: 0.1
+  m_ClipProperties:
+    volume: 1
 --- !u!114 &-220500184810368875
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1729,8 +1911,8 @@ MonoBehaviour:
     m_Start: 6.5
     m_ClipIn: 40.983333333333334
     m_Asset: {fileID: -7740462140637066812}
-    m_Duration: 41.64444444444445
-    m_TimeScale: 0.75
+    m_Duration: 31.23333333333334
+    m_TimeScale: 1
     m_ParentTrack: {fileID: -220500184810368875}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
@@ -1837,6 +2019,7 @@ MonoBehaviour:
   - {fileID: 959332297492419463}
   - {fileID: -8238117692607369404}
   - {fileID: 4111992087802259233}
+  - {fileID: -8768754166398235220}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -2292,8 +2475,8 @@ MonoBehaviour:
     m_Start: 6.5
     m_ClipIn: 40.983333333333334
     m_Asset: {fileID: 2800612582035254557}
-    m_Duration: 41.64444444444445
-    m_TimeScale: 0.75
+    m_Duration: 31.23333333333334
+    m_TimeScale: 1
     m_ParentTrack: {fileID: 3641071269576782014}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
@@ -2526,8 +2709,8 @@ MonoBehaviour:
     m_Start: 6.5
     m_ClipIn: 40.983333333333334
     m_Asset: {fileID: 5453198684235585955}
-    m_Duration: 41.64444444444445
-    m_TimeScale: 0.75
+    m_Duration: 31.23333333333334
+    m_TimeScale: 1
     m_ParentTrack: {fileID: 4910939504443739072}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
@@ -2638,8 +2821,8 @@ MonoBehaviour:
     m_Start: 6.5
     m_ClipIn: 40.983333333333334
     m_Asset: {fileID: -6066245710400045589}
-    m_Duration: 41.64444444444445
-    m_TimeScale: 0.75
+    m_Duration: 31.23333333333334
+    m_TimeScale: 1
     m_ParentTrack: {fileID: 5292947092556215557}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
@@ -2763,4 +2946,20 @@ MonoBehaviour:
   DisplayName: 
   VirtualCamera:
     exposedName: 9dd8feddf1a385241a23eb39913f7fdc
+    defaultValue: {fileID: 0}
+--- !u!114 &8825422295032754846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fb794a295e73545af71bcdb7375791, type: 3}
+  m_Name: CinemachineShot
+  m_EditorClassIdentifier: 
+  DisplayName: 
+  VirtualCamera:
+    exposedName: 3bd2aa03a3a92094b969d8802cdf7e84
     defaultValue: {fileID: 0}
