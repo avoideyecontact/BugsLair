@@ -44,3 +44,7 @@ public struct PlayerHealthChanged
 {
     public float HealthValue;
 }
+
+public struct PlayerDeath
+{ }
+

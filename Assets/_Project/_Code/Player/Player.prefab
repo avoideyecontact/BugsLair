@@ -301,8 +301,8 @@ GameObject:
   - component: {fileID: 3813734320143860000}
   - component: {fileID: 1118863754352723265}
   - component: {fileID: 5959502983828063863}
-  - component: {fileID: 7829796834871833858}
   - component: {fileID: 3573750605244870784}
+  - component: {fileID: 7829796834871833858}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -348,6 +348,7 @@ MonoBehaviour:
   _weaponary: {fileID: 4999232235969490795}
   _abilities: {fileID: 645754586255188473}
   _movement: {fileID: 3813734320143860000}
+  _health: {fileID: 3573750605244870784}
   _interactionDistance: 4
 --- !u!114 &2498251987160517124
 MonoBehaviour:
@@ -409,6 +410,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprintMultiplier: 2
   _animator: {fileID: 467855561285237717}
+--- !u!114 &3573750605244870784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787462357776638883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b804d2b6e3bf1408e935a453d74e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _maxHealth: 100
 --- !u!143 &7829796834871833858
 CharacterController:
   m_ObjectHideFlags: 0
@@ -434,20 +449,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.1, z: 0}
---- !u!114 &3573750605244870784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 787462357776638883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b804d2b6e3bf1408e935a453d74e87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
-  _maxHealth: 100
 --- !u!1 &2677843526236850403
 GameObject:
   m_ObjectHideFlags: 0

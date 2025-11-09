@@ -7,10 +7,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float _health = 100;
     [SerializeField] private float _maxHealth = 100;
 
-    public float Health => _health;
+    public float GetHealth => _health;
     public bool CanHeal => _health < _maxHealth;
     public bool IsDead => _health <= 0;
-    public event System.Action OnDeath;
 
     private IEventBus _eventBus;
 
@@ -48,6 +47,6 @@ public class PlayerHealth : MonoBehaviour
         });
 
         if (IsDead)
-            OnDeath?.Invoke();
+            _eventBus.Publish(new PlayerDeath{});
     }
 }

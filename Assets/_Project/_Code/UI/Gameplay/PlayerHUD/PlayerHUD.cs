@@ -18,6 +18,7 @@ public class PlayerHUD : MonoBehaviour
         _playerContext = playerContext;
         _eventBus = eventBus;
         SubscribeToEventBus();
+        UpdateHealthBar(_playerContext.Health.GetHealth);
     }
 
     private void OnDestroy()
@@ -59,8 +60,13 @@ public class PlayerHUD : MonoBehaviour
 
     private void OnPlayerHealthChanged(PlayerHealthChanged evt)
     {
+        UpdateHealthBar(evt.HealthValue);
+    }
+
+    private void UpdateHealthBar(float healthValue)
+    {
         Vector3 newScale = Vector3.one;
-        newScale.x = evt.HealthValue / 100;
+        newScale.x = healthValue / 100;
         _healthBar.transform.localScale = newScale;
     }
 }
