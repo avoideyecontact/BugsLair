@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 using VContainer;
@@ -12,6 +13,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineCamera _playerCamera;
     [SerializeField] private CinemachineCamera _testCamera;
     [SerializeField] private CinemachineCamera _thirdPersonCamera;
+    [SerializeField] private CinemachineStateDrivenCamera _stateDrivenCamera;
 
     private PlayerContext _playerContext;
     private Animator _cameraAnimator;
@@ -31,6 +33,9 @@ public class CameraManager : MonoBehaviour
 
         _playerCamera.Follow = _playerContext.PlayerCameraTransform;
         _thirdPersonCamera.Follow = _playerContext.PlayerCameraTransform;
+
+        // change to something better
+        TaskForCutscene().Forget();
     }
 
     private void OnCameraSwitch()
@@ -74,5 +79,14 @@ public class CameraManager : MonoBehaviour
     {
         var uac = camera.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
         uac.renderPostProcessing = state;
+    }
+
+    // change to something better
+    private async UniTask TaskForCutscene()
+    {
+        var ct = this.GetCancellationTokenOnDestroy();
+        EnableWeaponClipping();
+        await UniTask.WaitForSeconds(4f, cancellationToken: ct);
+        DisableWeaponClipping();
     }
 }
