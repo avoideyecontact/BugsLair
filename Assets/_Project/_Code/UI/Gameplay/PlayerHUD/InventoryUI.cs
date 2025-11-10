@@ -85,14 +85,14 @@ public class InventoryUI : MonoBehaviour
         if (abilities == null)
             return;
 
-        _title1.text = abilities[0] != null ? abilities[0].AbilityType.ToString() : "Пусто";
-        _info1.text = abilities[0] != null ? abilities[0].AbilityType.ToString() : "Нет данных";
+        _title1.text = abilities[0] != null ? AbilityInfo.Name(abilities[0].AbilityType) : "Пусто";
+        _info1.text = abilities[0] != null ? AbilityInfo.Info(abilities[0].AbilityType) : "Нет данных";
 
-        _title2.text = abilities[1] != null ? abilities[1].AbilityType.ToString() : "Пусто";
-        _info2.text = abilities[1] != null ? abilities[1].AbilityType.ToString() : "Нет данных";
+        _title2.text = abilities[1] != null ? AbilityInfo.Name(abilities[1].AbilityType) : "Пусто";
+        _info2.text = abilities[1] != null ? AbilityInfo.Info(abilities[1].AbilityType) : "Нет данных";
 
-        _title3.text = abilities[2] != null ? abilities[2].AbilityType.ToString() : "Пусто";
-        _info3.text = abilities[2] != null ? abilities[2].AbilityType.ToString() : "Нет данных";
+        _title3.text = abilities[2] != null ? AbilityInfo.Name(abilities[2].AbilityType) : "Пусто";
+        _info3.text = abilities[2] != null ? AbilityInfo.Info(abilities[2].AbilityType) : "Нет данных";
     }
 
     private void OnDropButton1Pressed()
