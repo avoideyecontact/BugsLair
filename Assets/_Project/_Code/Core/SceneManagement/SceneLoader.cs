@@ -6,8 +6,7 @@ public class SceneLoader : ISceneLoader
     private readonly IEventBus _eventBus;
     private readonly ScreenFade _screenFade;
 
-    private string _currentScene = "0_Bootstrap";
-    public string CurrentScene => _currentScene;
+    public string CurrentScene => SceneManager.GetActiveScene().name.ToString();
 
     public SceneLoader(IEventBus eventBus, ScreenFade screenFade)
     {
@@ -32,7 +31,6 @@ public class SceneLoader : ISceneLoader
         }
 
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
-        _currentScene = sceneName;
 
         _eventBus.Publish(new SceneLoadedEvent(sceneName));
 

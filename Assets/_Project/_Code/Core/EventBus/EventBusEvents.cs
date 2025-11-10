@@ -48,3 +48,9 @@ public struct PlayerHealthChanged
 public struct PlayerDeath
 { }
 
+public struct SettingsUIOpened
+{ }
+
+public struct SettingsUIClosed
+{ }
+

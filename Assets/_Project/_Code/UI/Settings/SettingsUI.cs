@@ -4,6 +4,7 @@ using VContainer;
 
 public class SettingsUI : MonoBehaviour
 {
+    //[SerializeField] private Transform _pauseMenu;
     [SerializeField] private Canvas _settingsCanvas;
     [SerializeField] private Button _backToMenuButton;
 
@@ -12,16 +13,34 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider _sfxVolumeSlider;
     [SerializeField] private Slider _musicVolumeSlider;
 
+    private IEventBus _eventBus;
     private ISettingsManager _settingsManager;
     private SoundMixerManager _soundMixerManager;
     private GameSettings _tempSettings;
 
     [Inject]
-    public void Construct(ISettingsManager settingsManager, SoundMixerManager soundMixerManager)
+    public void Construct(IEventBus eventBus, ISettingsManager settingsManager, SoundMixerManager soundMixerManager)
     {
+        _eventBus = eventBus;
         _settingsManager = settingsManager;
         _soundMixerManager = soundMixerManager;
+        SubscribeToEventBus();
         LoadSettingsIntoUI();
+    }
+
+    private void SubscribeToEventBus()
+    {
+        _eventBus.Subscribe<GameResumed>(OnGameResumed);
+    }
+
+    private void UnsubscribeFromEventBus()
+    {
+        _eventBus.Unsubscribe<GameResumed>(OnGameResumed);
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEventBus();
     }
 
     private void Start()
@@ -36,11 +55,18 @@ public class SettingsUI : MonoBehaviour
     {
         LoadSettingsIntoUI();
         _settingsCanvas.enabled = true;
+        _eventBus.Publish(new SettingsUIOpened());
     }
 
     public void Hide()
     {
         _settingsCanvas.enabled = false;
+
+        // Hides pause menu (everywhere except main menu)
+        //if (_pauseMenu != null)
+        //    _pauseMenu.gameObject.SetActive(true);
+
+        _eventBus.Publish(new SettingsUIClosed());
     }
 
     private void LoadSettingsIntoUI()
@@ -72,5 +98,10 @@ public class SettingsUI : MonoBehaviour
     {
         _tempSettings.musicVolume = value;
         _soundMixerManager.SetMusicVolume(value);
+    }
+
+    private void OnGameResumed(GameResumed evt)
+    {
+        Hide();
     }
 }

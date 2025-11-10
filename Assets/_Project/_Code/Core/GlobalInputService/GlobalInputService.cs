@@ -9,11 +9,13 @@ public class GlobalInputService : MonoBehaviour, IStartable
 
     private InputAction _pauseAction;
     private IPauseService _pauseService;
+    private ISceneLoader _sceneLoader;
 
     [Inject]
-    public void Construct(IPauseService pauseService)
+    public void Construct(IPauseService pauseService, ISceneLoader sceneLoader)
     {
         _pauseService = pauseService;
+        _sceneLoader = sceneLoader;
     }
 
     void IStartable.Start()
@@ -44,7 +46,8 @@ public class GlobalInputService : MonoBehaviour, IStartable
 
     private void OnPause(InputAction.CallbackContext context)
     {
-        _pauseService?.TogglePause();
+        if (_sceneLoader.CurrentScene != "1_Menu")
+            _pauseService?.TogglePause();
     }
 
     private void OnDestroy()

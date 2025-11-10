@@ -12,7 +12,7 @@ public class MainMenuController : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private SettingsUI _settingsUI;
-    [SerializeField] private Button _backFromSettings;
+    [SerializeField] private Button _backFromSettingsButton;
 
     private ISceneLoader _sceneLoader;
 
@@ -25,7 +25,7 @@ public class MainMenuController : MonoBehaviour
         _settingsButton.onClick.AddListener(OnSettingsButtonClicked);
         _quitButton.onClick.AddListener(OnQuitButtonClicked);
 
-        _backFromSettings.onClick.AddListener(OnBackFromSettingsButtonClicked);
+        _backFromSettingsButton.onClick.AddListener(OnBackFromSettingsButtonClicked);
     }
 
     [Inject]

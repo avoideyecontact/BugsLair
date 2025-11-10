@@ -45,12 +45,16 @@ public class InventoryUI : MonoBehaviour
     {
         _eventBus.Subscribe<GamePaused>(OnGamePaused);
         _eventBus.Subscribe<GameResumed>(OnGameResumed);
+        _eventBus.Subscribe<SettingsUIOpened>(OnSettingsUIOpened);
+        _eventBus.Subscribe<SettingsUIClosed>(OnSettingsUIClosed);
     }
 
     private void UnsubscribeFromEventBus()
     {
         _eventBus.Unsubscribe<GamePaused>(OnGamePaused);
         _eventBus.Unsubscribe<GameResumed>(OnGameResumed);
+        _eventBus.Unsubscribe<SettingsUIOpened>(OnSettingsUIOpened);
+        _eventBus.Unsubscribe<SettingsUIClosed>(OnSettingsUIClosed);
     }
 
     private void Start()
@@ -58,24 +62,16 @@ public class InventoryUI : MonoBehaviour
         CloseInventory();
     }
 
-    private void ToggleInventory()
-    {
-        if (_isOpen) CloseInventory();
-        else OpenInventory();
-    }
-
     private void OpenInventory()
     {
         _isOpen = true;
         _canvas.enabled = true;
-        ShowCursor();
     }
 
     private void CloseInventory()
     {
         _isOpen = false;
         _canvas.enabled = false;
-        HideCursor();
     }
 
     private void UpdateInventory()
@@ -131,18 +127,6 @@ public class InventoryUI : MonoBehaviour
         UpdateInventory();
     }
 
-    private void ShowCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-    private void HideCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void OnGamePaused(GamePaused gamePaused)
     {
         OpenInventory();
@@ -152,5 +136,15 @@ public class InventoryUI : MonoBehaviour
     private void OnGameResumed(GameResumed gameResumed)
     {
         CloseInventory();
+    }
+
+    private void OnSettingsUIOpened(SettingsUIOpened evt)
+    {
+        CloseInventory();
+    }
+
+    private void OnSettingsUIClosed(SettingsUIClosed evt)
+    {
+        OpenInventory();
     }
 }
