@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VContainer;
 
 public class InventoryUI : MonoBehaviour
@@ -8,26 +9,31 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField] private TMP_Text _title1;
     [SerializeField] private TMP_Text _info1;
+    [SerializeField] private Button _button1;
 
     [SerializeField] private TMP_Text _title2;
     [SerializeField] private TMP_Text _info2;
+    [SerializeField] private Button _button2;
 
     [SerializeField] private TMP_Text _title3;
     [SerializeField] private TMP_Text _info3;
+    [SerializeField] private Button _button3;
 
     private PlayerContext _playerContext;
     private IEventBus _eventBus;
-    private IPauseService _pauseService;
 
     private bool _isOpen;
 
     [Inject]
-    public void Construct(PlayerContext playerContext, IEventBus eventBus, IPauseService pauseService)
+    public void Construct(PlayerContext playerContext, IEventBus eventBus)
     {
         _playerContext = playerContext;
         _eventBus = eventBus;
-        _pauseService = pauseService;
         SubscribeToEventBus();
+
+        _button1.onClick.AddListener(OnDropButton1Pressed);
+        _button2.onClick.AddListener(OnDropButton2Pressed);
+        _button3.onClick.AddListener(OnDropButton3Pressed);
     }
 
     private void OnDestroy()
@@ -87,6 +93,42 @@ public class InventoryUI : MonoBehaviour
 
         _title3.text = abilities[2] != null ? abilities[2].AbilityType.ToString() : "Пусто";
         _info3.text = abilities[2] != null ? abilities[2].AbilityType.ToString() : "Нет данных";
+    }
+
+    private void OnDropButton1Pressed()
+    {
+        var abilities = _playerContext.AbilityManager.GetAbilitiesArray;
+
+        if (abilities[0] == null)
+            return;
+
+        _playerContext.AbilityManager.DeactivateAbility(abilities[0].AbilityType);
+
+        UpdateInventory();
+    }
+
+    private void OnDropButton2Pressed()
+    {
+        var abilities = _playerContext.AbilityManager.GetAbilitiesArray;
+
+        if (abilities[1] == null)
+            return;
+
+        _playerContext.AbilityManager.DeactivateAbility(abilities[1].AbilityType);
+
+        UpdateInventory();
+    }
+
+    private void OnDropButton3Pressed()
+    {
+        var abilities = _playerContext.AbilityManager.GetAbilitiesArray;
+
+        if (abilities[2] == null)
+            return;
+
+        _playerContext.AbilityManager.DeactivateAbility(abilities[2].AbilityType);
+
+        UpdateInventory();
     }
 
     private void ShowCursor()

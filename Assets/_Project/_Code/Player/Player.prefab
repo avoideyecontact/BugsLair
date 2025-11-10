@@ -1153,6 +1153,8 @@ MonoBehaviour:
   _dropLayer:
     serializedVersion: 2
     m_Bits: 8192
+  _jumpModuleAbilityDrop: {fileID: 908672780434494159, guid: d7ed3521dc7e46244b2a97f1ee111880, type: 3}
+  _dashAbilityDrop: {fileID: 393556354211484536, guid: 8d6b26f55adc9fa4691545ce50eb4e8b, type: 3}
 --- !u!1001 &1678273721327384142
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using VContainer;
 
 public class AbilityManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] _abilitiesGameObjects;
     [SerializeField] private LayerMask _dropLayer;
+
+    [SerializeField] private GameObject _jumpModuleAbilityDrop;
+    [SerializeField] private GameObject _dashAbilityDrop;
 
     private IAbility[] _abilities;
     private PlayerContext _playerContext;
@@ -23,9 +27,6 @@ public class AbilityManager : MonoBehaviour
     {
         _abilities = new IAbility[3];
         SubscribeToInput();
-        //ActivateAbility(AbilityType.JumpModule);
-        ActivateAbility(AbilityType.Dash);
-        DeactivateAbility(AbilityType.Dash);
     }
 
     private void OnDestroy() => UnsubscribeFromInput();
@@ -66,7 +67,7 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
-    private void DeactivateAbility(AbilityType abilityType)
+    public void DeactivateAbility(AbilityType abilityType)
     {
         foreach (var abilityGameObject in _abilitiesGameObjects)
         {
@@ -76,10 +77,14 @@ public class AbilityManager : MonoBehaviour
 
                 for (int i = 0; i < _abilities.Length; i++)
                 {
+                    if (_abilities[i] == null)
+                        continue;
+
                     if (_abilities[i].AbilityType == abilityType)
                     {
-                        _abilities[i] = null;
                         ability.Deactivate();
+                        _abilities[i] = null;
+                        SpawnAbility(abilityType);
                         return;
                     }
                 }
@@ -111,6 +116,29 @@ public class AbilityManager : MonoBehaviour
 
             Destroy(hit.transform.gameObject);
             ActivateAbility(abilityType);
+        }
+    }
+
+    private void SpawnAbility(AbilityType abilityType)
+    {
+        var position = transform.root.position + transform.root.forward * 2 + transform.root.up;
+
+        //RaycastHit hit;
+        //if (Physics.Raycast(position + Vector3.up * 6, Vector3.down, out hit, 12, LayerMask.NameToLayer("Default")))
+        //{
+        //    position = hit.point;
+        //}
+
+        switch (abilityType)
+        {
+            case AbilityType.JumpModule:
+                Instantiate(_jumpModuleAbilityDrop, position, Quaternion.identity);
+                break;
+            case AbilityType.Dash:
+                Instantiate(_dashAbilityDrop, position, Quaternion.identity);
+                break;
+            default:
+                break;
         }
     }
 
