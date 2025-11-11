@@ -394,8 +394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abad7cb35a2d08548b1fd3ffc41990e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSens: 0.05
   _cameraTransform: {fileID: 2760107334104996490}
+  _input: {fileID: 2498251987160517124}
 --- !u!114 &5959502983828063863
 MonoBehaviour:
   m_ObjectHideFlags: 0

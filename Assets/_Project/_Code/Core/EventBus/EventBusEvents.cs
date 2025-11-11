@@ -54,3 +54,7 @@ public struct SettingsUIOpened
 public struct SettingsUIClosed
 { }
 
+public struct CameraSensitivityChanged
+{
+    public float Sensitivity;
+}

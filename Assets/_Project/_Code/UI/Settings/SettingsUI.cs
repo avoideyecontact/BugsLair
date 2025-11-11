@@ -4,7 +4,6 @@ using VContainer;
 
 public class SettingsUI : MonoBehaviour
 {
-    //[SerializeField] private Transform _pauseMenu;
     [SerializeField] private Canvas _settingsCanvas;
     [SerializeField] private Button _backToMenuButton;
 
@@ -12,6 +11,12 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Slider _masterVolumeSlider;
     [SerializeField] private Slider _sfxVolumeSlider;
     [SerializeField] private Slider _musicVolumeSlider;
+
+    [Header("Controls Settings")]    
+    [SerializeField] private Slider _sensitivitySlider;
+
+    [Header("Graphics Settings")]
+    [SerializeField] private Toggle _vsyncToggle;
 
     private IEventBus _eventBus;
     private ISettingsManager _settingsManager;
@@ -26,6 +31,8 @@ public class SettingsUI : MonoBehaviour
         _soundMixerManager = soundMixerManager;
         SubscribeToEventBus();
         LoadSettingsIntoUI();
+
+        QualitySettings.vSyncCount = _settingsManager.Settings.vsync ? 1 : 0;
     }
 
     private void SubscribeToEventBus()
@@ -49,6 +56,8 @@ public class SettingsUI : MonoBehaviour
         _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
         _sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
         _musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        _sensitivitySlider.onValueChanged.AddListener(OnSensitivityChanged);
+        _vsyncToggle.onValueChanged.AddListener(OnVSyncChanged);
     }
 
     public void Show()
@@ -62,10 +71,6 @@ public class SettingsUI : MonoBehaviour
     {
         _settingsCanvas.enabled = false;
 
-        // Hides pause menu (everywhere except main menu)
-        //if (_pauseMenu != null)
-        //    _pauseMenu.gameObject.SetActive(true);
-
         _eventBus.Publish(new SettingsUIClosed());
     }
 
@@ -76,6 +81,8 @@ public class SettingsUI : MonoBehaviour
         _masterVolumeSlider.value = _tempSettings.masterVolume;
         _sfxVolumeSlider.value = _tempSettings.sfxVolume;
         _musicVolumeSlider.value = _tempSettings.musicVolume;
+        _sensitivitySlider.value = _tempSettings.sensitivity;
+        _vsyncToggle.isOn = _tempSettings.vsync;
     }
 
     private void OnBackToMenuButtonClicked()
@@ -98,6 +105,22 @@ public class SettingsUI : MonoBehaviour
     {
         _tempSettings.musicVolume = value;
         _soundMixerManager.SetMusicVolume(value);
+    }
+
+    private void OnSensitivityChanged(float value)
+    {
+        _tempSettings.sensitivity = value;
+        _eventBus.Publish(new CameraSensitivityChanged
+        {
+            Sensitivity = _tempSettings.sensitivity,
+        });
+    }
+
+    private void OnVSyncChanged(bool value)
+    {
+        _tempSettings.vsync = value;
+
+        QualitySettings.vSyncCount = value ? 1 : 0;
     }
 
     private void OnGameResumed(GameResumed evt)
