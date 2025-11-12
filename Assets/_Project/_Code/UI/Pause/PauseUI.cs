@@ -44,8 +44,8 @@ public class PauseUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        _eventBus.Unsubscribe<GamePaused>(OnGamePaused);
-        _eventBus.Unsubscribe<GameResumed>(OnGameResumed);
+        _eventBus?.Unsubscribe<GamePaused>(OnGamePaused);
+        _eventBus?.Unsubscribe<GameResumed>(OnGameResumed);
     }
 
     private void OnContinueButtonPressed() => _pause.ResumeGame();

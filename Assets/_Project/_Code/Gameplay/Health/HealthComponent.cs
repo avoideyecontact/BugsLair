@@ -27,6 +27,9 @@ public class HealthComponent : MonoBehaviour
     {
         _health = value;
         if (IsDead)
+        {
             OnDeath?.Invoke();
+            OnDeath = null;
+        }
     }
 }

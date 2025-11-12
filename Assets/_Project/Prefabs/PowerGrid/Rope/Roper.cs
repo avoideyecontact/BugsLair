@@ -3,31 +3,53 @@ using UnityEngine;
 public class Roper : MonoBehaviour
 {
     [SerializeField] private GameObject _ropeObject;
-    [SerializeField] private Transform pointA;
-    [SerializeField] private Transform pointB;
+    [SerializeField] private RopeConnector _ropeConnectorA;
+    [SerializeField] private RopeConnector _ropeConnectorB;
 
     private void Start()
     {
-        CreateRope();
+        if (_ropeConnectorB == null)
+            FindRopeConnector();
+
+        CreateRopeForRopeConnectors();
     }
 
-    public void CreateRope()
+    private void FindRopeConnector()
     {
-        var rope = Instantiate(_ropeObject);
+        _ropeConnectorB = GameObject.FindGameObjectWithTag("RopeConnection").GetComponent<RopeConnector>();
+    }
 
-        if (pointA == null || pointB == null)
+    private void CreateRopeForRopeConnectors()
+    {
+        if (_ropeConnectorA == null || _ropeConnectorB == null)
         {
-            Debug.LogWarning("PointA / PointB is not assigned!");
+            Debug.LogError("ropeConnector is missing");
             return;
         }
 
-        rope.transform.position = (pointA.position + pointB.position) / 2f;
+        if (_ropeConnectorA.Ropes.Length != _ropeConnectorB.Ropes.Length)
+        {
+            Debug.LogError("ropeConnectors length is not equal");
+            return;
+        }
+
+        for (int i = 0; i < _ropeConnectorA.Ropes.Length; i++)
+        {
+            CreateRope(_ropeConnectorA.Ropes[i], _ropeConnectorB.Ropes[i]);
+        }
+    }
+
+    public void CreateRope(Transform ropeStart, Transform ropeEnd)
+    {
+        var rope = Instantiate(_ropeObject);
+
+        rope.transform.position = (ropeStart.position + ropeEnd.position) / 2f;
 
         Vector3 scale = rope.transform.localScale;
-        scale.z = Vector3.Distance(pointA.position, pointB.position) / 30; // because length of the rope is 30
+        scale.z = Vector3.Distance(ropeStart.position, ropeEnd.position) / 30; // because length of the rope is 30
         rope.transform.localScale = scale;
 
-        Vector3 direction = pointB.position - pointA.position;
+        Vector3 direction = ropeEnd.position - ropeStart.position;
         if (direction != Vector3.zero)
         {
             rope.transform.rotation = Quaternion.LookRotation(direction);
