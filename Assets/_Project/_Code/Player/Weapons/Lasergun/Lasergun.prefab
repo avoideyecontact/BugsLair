@@ -66,7 +66,7 @@ MonoBehaviour:
     weaponType: 2
     damage: 1
     damageRate: 0.1
-    hitDistance: 100
+    hitDistance: 1000
     enemyLayer:
       serializedVersion: 2
       m_Bits: 1024

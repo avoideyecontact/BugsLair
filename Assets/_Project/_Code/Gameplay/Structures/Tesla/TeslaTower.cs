@@ -62,7 +62,7 @@ public class TeslaTower : MonoBehaviour
 
             bool powerPlantsActive = false;
             var plants = GameObject.FindGameObjectsWithTag("PowerPlant");
-            Debug.Log(plants.Length);
+
             foreach (var p in plants)
             {
                 if (p.GetComponent<PowerPlant>().IsRunning)

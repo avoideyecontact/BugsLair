@@ -6,6 +6,7 @@ public class HealthComponent : MonoBehaviour
 
     public float Health => _health;
     public bool IsDead => _health <= 0;
+    public event System.Action OnHealthChange;
     public event System.Action OnDeath;
 
     public void Initialize(float health)
@@ -26,6 +27,9 @@ public class HealthComponent : MonoBehaviour
     public void SetHealth(float value)
     {
         _health = value;
+
+        OnHealthChange?.Invoke();
+
         if (IsDead)
         {
             OnDeath?.Invoke();
