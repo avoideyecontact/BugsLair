@@ -12,13 +12,13 @@ public class AlienVault : MonoBehaviour
     [SerializeField] private TMP_Text _panelText;
     [SerializeField] private Transform _keyCardTransform;
 
-    private void Start()
-    {
-        OpenVaultDoor();
-    }
+    private bool _isOpened;
 
     public void OpenVaultDoor()
     {
+        if (_isOpened) return;
+
+        _isOpened = true;
         OpenDoorTask().Forget();
     }
 
@@ -46,6 +46,8 @@ public class AlienVault : MonoBehaviour
         _doorRigidbody.isKinematic = false;
         var impulsePosition = _doorTransform.position + _doorTransform.up * 2;
         _doorRigidbody.AddForceAtPosition(-50000 * _doorTransform.forward, impulsePosition);
+
+        Destroy(this);
     }
 
     async UniTask LerpEmissionColor(Color start, Color end, float duration, Material mat)
