@@ -124,10 +124,34 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28776f7a6ba300c42bb739539dba7b5f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3180640606361640851}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 28776f7a6ba300c42bb739539dba7b5f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 563994275565994491}
   m_SourcePrefab: {fileID: 100100000, guid: 28776f7a6ba300c42bb739539dba7b5f, type: 3}
 --- !u!4 &7069987710046007008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 28776f7a6ba300c42bb739539dba7b5f, type: 3}
   m_PrefabInstance: {fileID: 7320351744084805899}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7590382803588166746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 28776f7a6ba300c42bb739539dba7b5f, type: 3}
+  m_PrefabInstance: {fileID: 7320351744084805899}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &563994275565994491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7590382803588166746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d63c7dc0aaf77e46b203a119a1b3687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teslaCenter: {fileID: 3180640606361640851}
+  _radius: 150
+  _damage: 1
+  _cooldown: 0.05

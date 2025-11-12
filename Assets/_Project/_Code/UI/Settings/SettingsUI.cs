@@ -65,6 +65,12 @@ public class SettingsUI : MonoBehaviour
         LoadSettingsIntoUI();
         _settingsCanvas.enabled = true;
         _eventBus.Publish(new SettingsUIOpened());
+
+        // fix for a bug when canvas sets to zero size
+        if (_settingsCanvas.transform.localScale == Vector3.zero)
+        {
+            _settingsCanvas.transform.localScale = Vector3.one;
+        }
     }
 
     public void Hide()
@@ -77,6 +83,9 @@ public class SettingsUI : MonoBehaviour
     private void LoadSettingsIntoUI()
     {
         _tempSettings = _settingsManager.Settings;
+
+        if (_tempSettings == null)
+            Debug.LogError("Настройки не были загружены");
 
         _masterVolumeSlider.value = _tempSettings.masterVolume;
         _sfxVolumeSlider.value = _tempSettings.sfxVolume;

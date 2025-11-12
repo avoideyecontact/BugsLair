@@ -37,6 +37,7 @@ public class SettingsManager : IInitializable, ISettingsManager
 
                 string json = File.ReadAllText(_settingsPath);
                 _currentSettings = JsonUtility.FromJson<GameSettings>(json);
+                Debug.Log("Настройки загружены");
             }
             else
             {
@@ -68,5 +69,6 @@ public class SettingsManager : IInitializable, ISettingsManager
     {
         _currentSettings = newSettings;
         SaveSettings();
+        Debug.Log("Настройки сохранены");
     }
 }
