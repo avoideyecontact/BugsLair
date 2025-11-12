@@ -35,7 +35,7 @@ public class CameraManager : MonoBehaviour
         _thirdPersonCamera.Follow = _playerContext.PlayerCameraTransform;
 
         // change to something better
-        TaskForCutscene().Forget();
+        //TaskForCutscene().Forget();
     }
 
     private void OnCameraSwitch()
@@ -82,11 +82,11 @@ public class CameraManager : MonoBehaviour
     }
 
     // change to something better
-    private async UniTask TaskForCutscene()
-    {
-        var ct = this.GetCancellationTokenOnDestroy();
-        EnableWeaponClipping();
-        await UniTask.WaitForSeconds(4f, cancellationToken: ct);
-        DisableWeaponClipping();
-    }
+    //private async UniTask TaskForCutscene()
+    //{
+    //    var ct = this.GetCancellationTokenOnDestroy();
+    //    EnableWeaponClipping();
+    //    await UniTask.WaitForSeconds(4f, cancellationToken: ct);
+    //    DisableWeaponClipping();
+    //}
 }
