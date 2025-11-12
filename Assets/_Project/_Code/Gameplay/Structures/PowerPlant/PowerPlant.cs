@@ -6,6 +6,8 @@ public class PowerPlant : MonoBehaviour
 {
     [SerializeField] private HealthComponent _fuseBoxHealth;
 
+    public bool IsRunning => !_fuseBoxHealth.IsDead;
+
     [Header("Objects for animation")]
     [SerializeField] private Transform _cylinder1;
     [SerializeField] private Transform _cylinder2;

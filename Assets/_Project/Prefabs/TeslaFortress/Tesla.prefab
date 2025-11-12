@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teslaCenter: {fileID: 3180640606361640851}
+  _teslaField: {fileID: 3180640606361640851}
   _radius: 150
   _damage: 1
   _cooldown: 0.05
