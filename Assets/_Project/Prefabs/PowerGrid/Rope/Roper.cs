@@ -16,7 +16,28 @@ public class Roper : MonoBehaviour
 
     private void FindRopeConnector()
     {
-        _ropeConnectorB = GameObject.FindGameObjectWithTag("RopeConnection").GetComponent<RopeConnector>();
+        var ropeConnectors = GameObject.FindGameObjectsWithTag("RopeConnection");
+
+        if (ropeConnectors.Length == 0)
+        {
+            Debug.LogError("ropeConnector is missing");
+            return;
+        }
+
+        var desiredConnector = ropeConnectors[0];
+
+        float min = Mathf.Infinity;
+        foreach (var connector in ropeConnectors)
+        {
+            var distance = Vector3.Distance(transform.position, connector.transform.position);
+            if (distance < min)
+            {
+                min = distance;
+                desiredConnector = connector;
+            }
+        }
+
+        _ropeConnectorB = desiredConnector.GetComponent<RopeConnector>();
     }
 
     private void CreateRopeForRopeConnectors()
