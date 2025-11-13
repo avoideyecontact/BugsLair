@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using VContainer;
 
@@ -80,6 +81,7 @@ public class PauseUI : MonoBehaviour
     {
         _pauseCanvas.enabled = false;
         HideCursor();
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void ShowCursor()
