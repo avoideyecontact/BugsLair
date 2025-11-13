@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7865153989571565593
 Transform:
   m_ObjectHideFlags: 0
@@ -72,6 +72,12 @@ MonoBehaviour:
     maxAmmo: 100
   _muzzleFlash1: {fileID: 6950511228877377538}
   _muzzleFlash2: {fileID: 3109330609593553401}
+  _fireSound:
+    clip: {fileID: 8300000, guid: 5f3a69ed4ef521249b2ce3f72bc50fd9, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 1
 --- !u!1001 &138677572189582481
 PrefabInstance:
   m_ObjectHideFlags: 0

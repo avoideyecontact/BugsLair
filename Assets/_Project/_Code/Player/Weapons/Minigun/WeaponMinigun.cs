@@ -8,6 +8,7 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
     [SerializeField] private WeaponConfig _config;
     [SerializeField] private ParticleSystem _muzzleFlash1;
     [SerializeField] private ParticleSystem _muzzleFlash2;
+    [SerializeField] private SoundData _fireSound;
 
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
@@ -43,6 +44,11 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
         DealDamage();
         _muzzleFlash1?.Play();
         _muzzleFlash2?.Play();
+
+        SoundManager.Instance.CreateSoundBuilder()
+            .WithRandomPitch()
+            .WithPosition(transform.position)
+            .Play(_fireSound);
 
         _cooldownCts = new CancellationTokenSource();
         WeaponCooldownTimer(_cooldownCts.Token).Forget();

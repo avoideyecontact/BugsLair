@@ -76,7 +76,7 @@ public class SettingsUI : MonoBehaviour
     public void Hide()
     {
         _settingsCanvas.enabled = false;
-
+        SaveSettings();
         _eventBus.Publish(new SettingsUIClosed());
     }
 
@@ -96,8 +96,12 @@ public class SettingsUI : MonoBehaviour
 
     private void OnBackToMenuButtonClicked()
     {
-        _settingsManager.ApplySettings(_tempSettings);
         Hide();
+    }
+
+    private void SaveSettings()
+    {
+        _settingsManager.ApplySettings(_tempSettings);
     }
 
     private void OnMasterVolumeChanged(float value)

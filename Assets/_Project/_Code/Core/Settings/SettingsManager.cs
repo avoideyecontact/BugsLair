@@ -29,6 +29,7 @@ public class SettingsManager : IInitializable, ISettingsManager
                 FileInfo fileInfo = new FileInfo(_settingsPath);
                 if (fileInfo.Length == 0)
                 {
+                    Debug.Log("Настройки пустые. Создаем новые");
                     _currentSettings = new GameSettings();
                     SaveSettings();
                 }
@@ -41,6 +42,7 @@ public class SettingsManager : IInitializable, ISettingsManager
             }
             else
             {
+                Debug.Log("Нет настроек. Создаю новые");
                 _currentSettings = new GameSettings();
                 SaveSettings();
             }
