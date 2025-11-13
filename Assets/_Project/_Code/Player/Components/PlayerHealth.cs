@@ -32,6 +32,11 @@ public class PlayerHealth : MonoBehaviour
     public void DealDamage(float value)
     {
         SetHealth(_health - value);
+
+        _eventBus.Publish(new PlayerDamaged
+        {
+            DamageValue = value
+        });
     }
 
     public void SetHealth(float value)

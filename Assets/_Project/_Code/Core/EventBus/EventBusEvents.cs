@@ -45,6 +45,11 @@ public struct PlayerHealthChanged
     public float HealthValue;
 }
 
+public struct PlayerDamaged
+{
+    public float DamageValue;
+}
+
 public struct PlayerDeath
 { }
 
@@ -58,3 +63,6 @@ public struct CameraSensitivityChanged
 {
     public float Sensitivity;
 }
+
+public struct CockroachKilled
+{ }
