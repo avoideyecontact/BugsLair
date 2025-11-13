@@ -48,9 +48,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7890051538825399723, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: -6272272217799903809, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -4897732323685117858, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.0025
       objectReference: {fileID: 0}
     - target: {fileID: -4032771370448767178, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -60,6 +68,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: -2328003878840630365, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.025
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
       propertyPath: m_Name
       value: EcoSphere
@@ -68,6 +80,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 1722914037558175905, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722914037558175905, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.025
+      objectReference: {fileID: 0}
     - target: {fileID: 2550463727306718371, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -75,6 +95,10 @@ PrefabInstance:
     - target: {fileID: 3300913674446824185, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8247994413960396516, guid: ac378c17bb1088a4e801f1ea308604e9, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.025
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
