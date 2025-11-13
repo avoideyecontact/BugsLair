@@ -6,6 +6,8 @@ using VContainer;
 public class WeaponMinigun : MonoBehaviour, IWeapon
 {
     [SerializeField] private WeaponConfig _config;
+    [SerializeField] private ParticleSystem _muzzleFlash1;
+    [SerializeField] private ParticleSystem _muzzleFlash2;
 
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
@@ -39,6 +41,8 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
         _ammoSystem.SpendAmmo();
         OnAmmoChanged();
         DealDamage();
+        _muzzleFlash1?.Play();
+        _muzzleFlash2?.Play();
 
         _cooldownCts = new CancellationTokenSource();
         WeaponCooldownTimer(_cooldownCts.Token).Forget();
