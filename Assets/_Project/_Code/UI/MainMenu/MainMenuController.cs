@@ -9,12 +9,14 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _quitButton;
+    [SerializeField] private Toggle _skipCutsceneToggle;
 
     [Header("Settings")]
     [SerializeField] private SettingsUI _settingsUI;
     [SerializeField] private Button _backFromSettingsButton;
 
     private ISceneLoader _sceneLoader;
+    private bool _skipCutscene;
 
     private void Start()
     {
@@ -24,6 +26,8 @@ public class MainMenuController : MonoBehaviour
         _playButton.onClick.AddListener(OnPlayButtonClicked);
         _settingsButton.onClick.AddListener(OnSettingsButtonClicked);
         _quitButton.onClick.AddListener(OnQuitButtonClicked);
+
+        _skipCutsceneToggle.onValueChanged.AddListener(OnSkipCutsceneToggle);
 
         _backFromSettingsButton.onClick.AddListener(OnBackFromSettingsButtonClicked);
     }
@@ -36,8 +40,15 @@ public class MainMenuController : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        _sceneLoader.LoadSceneAsync("2_Cutscene", useFade: true);
-        //_sceneLoader.LoadSceneAsync("3_Gameplay", useFade: true);
+        if (_skipCutscene)
+            _sceneLoader.LoadSceneAsync("3_Gameplay", useFade: true);
+        else
+            _sceneLoader.LoadSceneAsync("2_Cutscene", useFade: true);
+    }
+
+    private void OnSkipCutsceneToggle(bool value)
+    {
+        _skipCutscene = value;
     }
 
     private void OnSettingsButtonClicked()
