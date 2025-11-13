@@ -12,7 +12,6 @@ public class Statistics : IStatistics, IInitializable
     {
         _eventBus = eventBus;
         SubscribeToEventBus();
-        Debug.Log(_eventBus != null);
     }
 
     public void Initialize()
@@ -47,6 +46,5 @@ public class Statistics : IStatistics, IInitializable
     ~Statistics()
     {
         UnsubscribeFromEventBus();
-        Debug.Log($"Отписка");
     }
 }
