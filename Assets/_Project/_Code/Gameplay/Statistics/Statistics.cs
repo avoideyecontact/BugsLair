@@ -40,7 +40,6 @@ public class Statistics : IStatistics, IInitializable
     private void OnPlayerDamage(PlayerDamaged evt)
     {
         _data.DamageTaken += evt.DamageValue;
-        Debug.Log(_data.DamageTaken);
     }
 
     ~Statistics()

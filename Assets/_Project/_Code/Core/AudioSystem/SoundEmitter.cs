@@ -9,12 +9,14 @@ public class SoundEmitter : MonoBehaviour
     public SoundData Data {  get; private set; }
     public LinkedListNode<SoundEmitter> Node { get; set; }
 
+    private float _initialPitch = 1;
     private AudioSource _audioSource;
     private Coroutine _playingCoroutine;
 
     private void Awake()
     {
         _audioSource = gameObject.GetOrAddComponent<AudioSource>();
+        _initialPitch = _audioSource.pitch;
     }
     public void Initialize(SoundData data)
     {
@@ -51,6 +53,7 @@ public class SoundEmitter : MonoBehaviour
         }
 
         _audioSource.Stop();
+        _audioSource.pitch = _initialPitch;
         SoundManager.Instance.ReturnToPool(this);
     }
 
