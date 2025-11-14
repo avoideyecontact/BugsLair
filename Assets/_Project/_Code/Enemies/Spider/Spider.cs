@@ -94,6 +94,7 @@ public class Spider : MonoBehaviour
     {
         _isSleeping = false;
         _agent.isStopped = false;
+        _animator.SetTrigger("Run");
     }
 
     public void Deactivate()

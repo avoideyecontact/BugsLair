@@ -51,7 +51,7 @@ public class SpiderLair : MonoBehaviour
 
         foreach (var spider in _spiders)
         {
-            spider.Activate();
+            spider?.Activate();
         }
     }
 
@@ -68,8 +68,10 @@ public class SpiderLair : MonoBehaviour
                 if (spider == null)
                     continue;
 
-                if (spider.GetComponent<HealthComponent>().IsDead)
-                    spidersAreAlive = false;
+                if (!spider.GetComponent<HealthComponent>().IsDead)
+                    break;
+
+                spidersAreAlive = false;
             }
             await UniTask.WaitForSeconds(1f, cancellationToken: ct);
         }
