@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-5431664851529642813
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 07 Deep Wind B_{-5431664851529642813}
+  m_AudioClip: {fileID: 8300000, guid: 535a42a96296e8648a57fafd4572d246, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1530391981302776300
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 08 Deep Wind C_{-1530391981302776300}
+  m_AudioClip: {fileID: 8300000, guid: c2f583431ee1a7c49a73e6a9bde4393a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1892403795530893994
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 06 Deep Wind A_{1892403795530893994}
+  m_AudioClip: {fileID: 8300000, guid: 9f968fd9cd4bbf442bf08d26fb3bdb1b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4621896101735707978
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 09 Deep Wind D_{4621896101735707978}
+  m_AudioClip: {fileID: 8300000, guid: c5ccab2aa8f4cbe469366f433e03b55f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WindRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 1892403795530893994}
+  - {fileID: -5431664851529642813}
+  - {fileID: -1530391981302776300}
+  - {fileID: 4621896101735707978}
+  - {fileID: 8180798003161118814}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 1
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &8180798003161118814
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 10 Deep Wind E_{8180798003161118814}
+  m_AudioClip: {fileID: 8300000, guid: 02623aed86c50cd48a755c2acf165f74, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

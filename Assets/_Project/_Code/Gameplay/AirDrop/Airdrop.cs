@@ -24,15 +24,16 @@ public class Airdrop : MonoBehaviour
 
     private async UniTask Land()
     {
+        var ct = this.GetCancellationTokenOnDestroy();
         RaycastHit hit;
         Physics.Raycast(transform.position, -transform.up, out hit);
 
-        await transform.DOLocalMoveY(hit.point.y, 10f).SetEase(Ease.OutQuart).ToUniTask();
+        await transform.DOLocalMoveY(hit.point.y, 10f).SetEase(Ease.OutQuart).WithCancellation(ct);
         await OpenDoors();
         SpawnDrop();
-        await UniTask.WaitForSeconds(20f);
+        await UniTask.WaitForSeconds(20f, cancellationToken: ct);
         await CloseDoors();
-        await UniTask.WaitForSeconds(1f);
+        await UniTask.WaitForSeconds(1f, cancellationToken: ct);
         await FlyAway();
         Destroy(gameObject, 1);
     }
@@ -45,24 +46,28 @@ public class Airdrop : MonoBehaviour
 
     private async UniTask OpenDoors()
     {
+        var ct = this.GetCancellationTokenOnDestroy();
+
         var open1 = _door1.DOLocalRotate(new Vector3(-120, 0, 0), 2f, RotateMode.LocalAxisAdd)
-            .SetEase(Ease.InOutSine).ToUniTask();
+            .SetEase(Ease.InOutSine).WithCancellation(ct);
         var open2 = _door2.DOLocalRotate(new Vector3(-120, 0, 0), 2f, RotateMode.LocalAxisAdd)
-            .SetEase(Ease.InOutSine).ToUniTask();
+            .SetEase(Ease.InOutSine).WithCancellation(ct);
         var open3 = _door3.DOLocalRotate(new Vector3(-120, 0, 0), 2f, RotateMode.LocalAxisAdd)
-            .SetEase(Ease.InOutSine).ToUniTask();
+            .SetEase(Ease.InOutSine).WithCancellation(ct);
 
         await UniTask.WhenAll(open1, open2, open3);
     }
 
     private async UniTask CloseDoors()
     {
+        var ct = this.GetCancellationTokenOnDestroy();
+
         var close1 = _door1.DOLocalRotate(new Vector3(120, 0, 0), 2f, RotateMode.LocalAxisAdd)
-            .SetEase(Ease.InOutSine).ToUniTask();
+            .SetEase(Ease.InOutSine).WithCancellation(ct);
         var close2 = _door2.DOLocalRotate(new Vector3(120, 0, 0), 2f, RotateMode.LocalAxisAdd)
-            .SetEase(Ease.InOutSine).ToUniTask();
+            .SetEase(Ease.InOutSine).WithCancellation(ct);
         var close3 = _door3.DOLocalRotate(new Vector3(120, 0, 0), 2f, RotateMode.LocalAxisAdd)
-            .SetEase(Ease.InOutSine).ToUniTask();
+            .SetEase(Ease.InOutSine).WithCancellation(ct);
 
         await UniTask.WhenAll(close1, close2, close3);
     }

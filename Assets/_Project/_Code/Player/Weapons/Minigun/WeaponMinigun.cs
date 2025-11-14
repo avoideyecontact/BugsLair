@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using System.Threading;
 using UnityEngine;
 using VContainer;
 
@@ -9,6 +8,7 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
     [SerializeField] private ParticleSystem _muzzleFlash1;
     [SerializeField] private ParticleSystem _muzzleFlash2;
     [SerializeField] private SoundData _fireSound;
+    [SerializeField] private SoundData _emptySound;
 
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
@@ -21,7 +21,6 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
     private IEventBus _eventBus;
     private AmmoSystem _ammoSystem;
     private bool _isCooldown;
-    private CancellationTokenSource _cooldownCts;
 
     [Inject]
     public void Construct(PlayerContext playerContext, IEventBus eventBus)
@@ -33,11 +32,19 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
 
     public void Use()
     {
-        if (!_ammoSystem.HasAmmo)
-            return;
-
         if (_isCooldown)
             return;
+
+        if (!_ammoSystem.HasAmmo)
+        {
+            SoundManager.Instance.CreateSoundBuilder()
+                .WithRandomPitch()
+                .WithPosition(transform.position)
+                .Play(_emptySound);
+
+            WeaponCooldownTimer().Forget();
+            return;
+        }
 
         _ammoSystem.SpendAmmo();
         OnAmmoChanged();
@@ -50,8 +57,7 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
             .WithPosition(transform.position)
             .Play(_fireSound);
 
-        _cooldownCts = new CancellationTokenSource();
-        WeaponCooldownTimer(_cooldownCts.Token).Forget();
+        WeaponCooldownTimer().Forget();
     }
 
     private void DealDamage()
@@ -65,10 +71,11 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
         }
     }
 
-    private async UniTask WeaponCooldownTimer(CancellationToken cts)
+    private async UniTask WeaponCooldownTimer()
     {
+        var ct = this.GetCancellationTokenOnDestroy();
         _isCooldown = true;
-        await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: cts);
+        await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: ct);
         _isCooldown = false;
     }
 
@@ -85,11 +92,5 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
             Ammo = _ammoSystem.CurrentAmmo,
             WeaponType = WeaponType
         });
-    }
-
-    private void OnDestroy()
-    {
-        _cooldownCts?.Cancel();
-        _cooldownCts?.Dispose();
     }
 }
