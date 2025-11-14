@@ -7176,18 +7176,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 945104313583018891, guid: 0f826936222495d46895533dd111d2c2, type: 3}
-      propertyPath: _defaultCapacity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 945104313583018891, guid: 0f826936222495d46895533dd111d2c2, type: 3}
-      propertyPath: _maxSoundInstances
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3813734320143860000, guid: 0f826936222495d46895533dd111d2c2, type: 3}
-      propertyPath: _sprintSpeed
-      value: 150
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

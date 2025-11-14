@@ -1,10 +1,13 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
+using VContainer;
 
 public class WeaponSaw : MonoBehaviour, IWeapon
 {
     [SerializeField] private WeaponConfig _config;
+    [SerializeField] private AudioSource _chainsawSound;
 
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
@@ -16,9 +19,40 @@ public class WeaponSaw : MonoBehaviour, IWeapon
     private BoxCollider _damageCollider;
     private bool _isCooldown;
     private CancellationTokenSource _cts;
+    private PlayerContext _playerContext;
+    private float _initialVolume;
+
+    [Inject]
+    public void Construct(PlayerContext playerContext)
+    {
+        _playerContext = playerContext;
+    }
+
+    // change in the future
+    private void FixedUpdate()
+    {
+        if (_playerContext.Input.attack > 0)
+        {
+            if (!_chainsawSound.isPlaying)
+                _chainsawSound.Play();
+            if (_chainsawSound.volume < _initialVolume)
+                _chainsawSound.volume += _initialVolume * Time.deltaTime * 5;
+        }
+        else
+        {
+            if (_chainsawSound.volume > 0)
+                _chainsawSound.volume -= _initialVolume * Time.deltaTime * 2.5f;
+        }
+    }
+
+    private void OnDisable()
+    {
+        _chainsawSound.Stop();
+    }
 
     private void Start()
     {
+        _initialVolume = _chainsawSound.volume;
         _damageCollider = GetComponent<BoxCollider>();
     }
 

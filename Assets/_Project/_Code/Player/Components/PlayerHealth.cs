@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float _health = 100;
     [SerializeField] private float _maxHealth = 100;
+    [SerializeField] private AudioSource _healSound;
 
     public float GetHealth => _health;
     public bool CanHeal => _health < _maxHealth;
@@ -27,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float value)
     {
         SetHealth(_health + value);
+        _healSound.pitch = Random.Range(0.5f, 1.5f);
+        _healSound.Play();
     }
 
     public void DealDamage(float value)
