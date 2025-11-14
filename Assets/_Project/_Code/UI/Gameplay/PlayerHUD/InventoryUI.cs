@@ -22,14 +22,11 @@ public class InventoryUI : MonoBehaviour
     private PlayerContext _playerContext;
     private IEventBus _eventBus;
 
-    private bool _isOpen;
-
     [Inject]
     public void Construct(PlayerContext playerContext, IEventBus eventBus)
     {
         _playerContext = playerContext;
         _eventBus = eventBus;
-        SubscribeToEventBus();
 
         _button1.onClick.AddListener(OnDropButton1Pressed);
         _button2.onClick.AddListener(OnDropButton2Pressed);
@@ -60,18 +57,19 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         CloseInventory();
+        SubscribeToEventBus();
     }
 
     private void OpenInventory()
     {
-        _isOpen = true;
         _canvas.enabled = true;
+        _canvas.gameObject.SetActive(true);
     }
 
     private void CloseInventory()
     {
-        _isOpen = false;
         _canvas.enabled = false;
+        _canvas.gameObject.SetActive(false);
     }
 
     private void UpdateInventory()
