@@ -9,6 +9,8 @@ public class SpiderDeath : MonoBehaviour
     [SerializeField] private Spider _ai;
     [SerializeField] private SurfaceAligner _aligner;
     [SerializeField] private RandomDrop _drop;
+    [SerializeField] private AudioSource _walkSound;
+    [SerializeField] private AudioSource _deathSound;
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class SpiderDeath : MonoBehaviour
     {
         _drop.CreateDrop();
         _ai.Deactivate();
+        _walkSound.Stop();
         _aligner.enabled = false;
         GetComponent<Collider>().enabled = false;
 
@@ -43,6 +46,9 @@ public class SpiderDeath : MonoBehaviour
         float randomRotation = Random.Range(-45, 45);
         _ = child.DOLocalRotate(new Vector3(0, randomRotation, 180), 1f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
         await child.DOLocalMoveY(1f, 0.5f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
+        _deathSound.pitch = Random.Range(0.9f, 1.1f);
+        _deathSound.volume = 0.7f;
+        _deathSound.Play();
         await child.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
 
         await UniTask.WaitForSeconds(1f, cancellationToken: ct);

@@ -17,6 +17,8 @@ public class Spider : MonoBehaviour
     private bool _isDamageCooldown;
 
     [SerializeField] private Animator _animator;
+    [SerializeField] private AudioSource _walkSound;
+    [SerializeField] private AudioSource _biteSound;
 
     private void Start()
     {
@@ -42,6 +44,9 @@ public class Spider : MonoBehaviour
         if (!_isDamageCooldown && currentDistance <= _stopDistance)
         {
             DealDamage();
+            _biteSound.volume = 0.15f;
+            _biteSound.pitch = Random.Range(0.9f, 1.1f);
+            _biteSound.Play();
         }
 
         if (_isChasing)
@@ -53,6 +58,7 @@ public class Spider : MonoBehaviour
                 _isChasing = false;
                 _agent.isStopped = true;
                 _animator.SetTrigger("Bite");
+                _walkSound.Stop();
             }
         }
         else
@@ -63,6 +69,8 @@ public class Spider : MonoBehaviour
                 _agent.isStopped = false;
                 _agent.SetDestination(_target.position);
                 _animator.SetTrigger("Run");
+                if (!_walkSound.isPlaying)
+                    _walkSound.Play();
             }
         }
     }
@@ -74,6 +82,8 @@ public class Spider : MonoBehaviour
         _agent.isStopped = false;
         _agent.SetDestination(_target.position);
         _animator.SetTrigger("Run");
+        if (!_walkSound.isPlaying)
+            _walkSound.Play();
     }
 
     private void DealDamage()
@@ -95,6 +105,8 @@ public class Spider : MonoBehaviour
         _isSleeping = false;
         _agent.isStopped = false;
         _animator.SetTrigger("Run");
+        if (!_walkSound.isPlaying)
+            _walkSound.Play();
     }
 
     public void Deactivate()
@@ -102,6 +114,7 @@ public class Spider : MonoBehaviour
         _isSleeping = true;
         _agent.isStopped = true;
         _animator.SetTrigger("Idle");
+        _walkSound.Stop();
     }
 
     private void FindPlayer()

@@ -11,6 +11,7 @@ public class CockroachAI : MonoBehaviour
     [SerializeField] private float _damageRate = 1f;
 
     [SerializeField] private Animator _animator;
+    [SerializeField] private AudioSource _sound;
 
     private NavMeshAgent _agent;
     private bool _isChasing = true;
@@ -25,6 +26,7 @@ public class CockroachAI : MonoBehaviour
             _target = GameObject.FindGameObjectWithTag("Player").transform;            
 
         SetTarget(_target);
+        _sound.Play();
     }
 
     void FixedUpdate()

@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CockroachDeath : MonoBehaviour
@@ -9,6 +10,9 @@ public class CockroachDeath : MonoBehaviour
     [SerializeField] private CockroachAI _ai;
     [SerializeField] private SurfaceAligner _aligner;
     [SerializeField] private RandomDrop _drop;
+
+    [SerializeField] private AudioSource _sound;
+    [SerializeField] private AudioSource _deathSound;
 
     private void Start()
     {
@@ -43,6 +47,8 @@ public class CockroachDeath : MonoBehaviour
         float randomRotation = Random.Range(-45, 45);
         _ = child.DOLocalRotate(new Vector3(0, randomRotation, 180), 1f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
         await child.DOLocalMoveY(1f, 0.5f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
+        _sound.Stop();
+        _deathSound.Play();
         await child.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
 
         float multiplier = 1f;

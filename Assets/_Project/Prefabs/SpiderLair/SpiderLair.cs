@@ -8,6 +8,9 @@ public class SpiderLair : MonoBehaviour
     [SerializeField] private Transform _door;
     [SerializeField] private Spider[] _spiders;
 
+    [SerializeField] private AudioSource _doorSound;
+    [SerializeField] private AudioSource _horrorSound;
+
     private bool _wasTriggered;
 
     private void OnTriggerEnter(Collider other)
@@ -24,8 +27,11 @@ public class SpiderLair : MonoBehaviour
     {
         _wasTriggered = true;
         await CloseDoor();
+        await UniTask.WaitForSeconds(1f);
+        _horrorSound.Play();
         await TriggerSpiders();
         await WaitUntilAllSpidersAreDead();
+        await UniTask.WaitForSeconds(5f);
         await OpenDoor();
     }
 
@@ -34,10 +40,13 @@ public class SpiderLair : MonoBehaviour
         var ct = this.GetCancellationTokenOnDestroy();
 
         await _door.DOLocalMoveY(-3.5f, 0.1f).SetRelative().WithCancellation(ct);
+        _doorSound.Play();
     }
 
     private async UniTask OpenDoor()
     {
+        _doorSound.Play();
+
         var ct = this.GetCancellationTokenOnDestroy();
 
         await _door.DOLocalMoveY(3.5f, 1f).SetEase(Ease.InOutSine).SetRelative().WithCancellation(ct);
@@ -47,7 +56,7 @@ public class SpiderLair : MonoBehaviour
     {
         var ct = this.GetCancellationTokenOnDestroy();
 
-        await UniTask.WaitForSeconds(3f, cancellationToken: ct);
+        await UniTask.WaitForSeconds(5f, cancellationToken: ct);
 
         foreach (var spider in _spiders)
         {
