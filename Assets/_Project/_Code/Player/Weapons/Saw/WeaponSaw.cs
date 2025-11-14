@@ -1,6 +1,4 @@
 using Cysharp.Threading.Tasks;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
 using VContainer;
 
@@ -18,7 +16,6 @@ public class WeaponSaw : MonoBehaviour, IWeapon
 
     private BoxCollider _damageCollider;
     private bool _isCooldown;
-    private CancellationTokenSource _cts;
     private PlayerContext _playerContext;
     private float _initialVolume;
 
@@ -47,7 +44,7 @@ public class WeaponSaw : MonoBehaviour, IWeapon
 
     private void OnDisable()
     {
-        _chainsawSound.Stop();
+        _chainsawSound?.Stop();
     }
 
     private void Start()
@@ -63,16 +60,15 @@ public class WeaponSaw : MonoBehaviour, IWeapon
 
         DealDamage();
 
-        _cts = new CancellationTokenSource();
-        WeaponCooldownTimer(_cts.Token).Forget();
+        WeaponCooldownTimer().Forget();
     }
 
     private void DealDamage()
     {
         var hits = Physics.OverlapBox(
-            transform.position + _damageCollider.center,
+            _damageCollider.transform.position,
             _damageCollider.size,
-            Quaternion.identity,
+            _damageCollider.transform.rotation,
             _config.enemyLayer);
 
         foreach (var hit in hits)
@@ -81,10 +77,12 @@ public class WeaponSaw : MonoBehaviour, IWeapon
         }
     }
 
-    private async UniTask WeaponCooldownTimer(CancellationToken cts)
+    private async UniTask WeaponCooldownTimer()
     {
+        var ct = this.GetCancellationTokenOnDestroy();
+
         _isCooldown = true;
-        await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: cts);
+        await UniTask.WaitForSeconds(_config.damageRate, cancellationToken: ct);
         _isCooldown = false;
     }
 
@@ -93,18 +91,13 @@ public class WeaponSaw : MonoBehaviour, IWeapon
         Debug.LogWarning("Saw doesnt use ammo");
     }
 
-    private void OnDestroy()
-    {
-        _cts?.Cancel();
-        _cts?.Dispose();
-    }
-
     void OnDrawGizmos()
     {
         var damageCollider = GetComponent<BoxCollider>();
+
         Gizmos.color = Color.red;
         Matrix4x4 originalMatrix = Gizmos.matrix;
-        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.matrix = damageCollider.transform.localToWorldMatrix;
         Gizmos.DrawWireCube(damageCollider.center, damageCollider.size);
     }
 }

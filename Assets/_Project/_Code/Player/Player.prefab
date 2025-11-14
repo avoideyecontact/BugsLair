@@ -353,6 +353,7 @@ MonoBehaviour:
   _weaponary: {fileID: 4999232235969490795}
   _abilities: {fileID: 645754586255188473}
   _movement: {fileID: 3813734320143860000}
+  _controller: {fileID: 7829796834871833858}
   _health: {fileID: 3573750605244870784}
   _interactionDistance: 4
 --- !u!114 &2498251987160517124

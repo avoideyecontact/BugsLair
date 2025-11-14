@@ -9,6 +9,7 @@ public class PlayerContext : MonoBehaviour
     [SerializeField] private PlayerWeaponary _weaponary;
     [SerializeField] private AbilityManager _abilities;
     [SerializeField] private PlayerMovement _movement;
+    [SerializeField] private CharacterController _controller;
     [SerializeField] private PlayerHealth _health;
     [SerializeField] private float _interactionDistance = 4;
 
@@ -27,6 +28,7 @@ public class PlayerContext : MonoBehaviour
     public PlayerWeaponary Weaponary => _weaponary;
     public AbilityManager AbilityManager => _abilities;
     public PlayerMovement Movement => _movement;
+    public CharacterController Controller => _controller;
     public PlayerHealth Health => _health;
     public float InteractionDistance => _interactionDistance;
 }

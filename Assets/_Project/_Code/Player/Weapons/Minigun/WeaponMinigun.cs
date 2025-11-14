@@ -49,6 +49,7 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
         _ammoSystem.SpendAmmo();
         OnAmmoChanged();
         DealDamage();
+        Recoil().Forget();
         _muzzleFlash1?.Play();
         _muzzleFlash2?.Play();
 
@@ -83,6 +84,32 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
     {
         _ammoSystem.AddAmmo(value);
         OnAmmoChanged();
+    }
+
+    private async UniTask Recoil()
+    {
+        var ct = this.GetCancellationTokenOnDestroy();
+
+        var pushForce = 3f;
+        var pushDuration = 0.1f;
+        Vector3 pushVelocity = Vector3.zero;
+
+        Vector3 pushDirection = -_playerContext.MainCamera.transform.forward;
+
+        pushDirection.y = 0;
+        pushDirection.Normalize();
+
+        pushVelocity = pushDirection * pushForce;
+        var pushTimeRemaining = pushDuration;
+
+        while (pushTimeRemaining > 0 && !ct.IsCancellationRequested)
+        {
+            _playerContext.Controller.Move(pushVelocity * Time.deltaTime);
+
+            pushTimeRemaining -= Time.deltaTime;
+            pushVelocity = Vector3.Lerp(pushVelocity, Vector3.zero, Time.deltaTime * 2f);
+            await UniTask.Yield();
+        }
     }
 
     private void OnAmmoChanged()
