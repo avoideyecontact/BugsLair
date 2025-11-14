@@ -10,4 +10,5 @@ public class SoundData
     public bool loop;
     public bool playOnAwake;
     public bool frequentSound;
+    public float volume = 1f;
 }

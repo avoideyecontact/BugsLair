@@ -78,6 +78,7 @@ MonoBehaviour:
     loop: 0
     playOnAwake: 0
     frequentSound: 1
+    volume: 0.1
 --- !u!1001 &138677572189582481
 PrefabInstance:
   m_ObjectHideFlags: 0

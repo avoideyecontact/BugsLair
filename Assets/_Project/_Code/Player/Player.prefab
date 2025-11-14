@@ -429,6 +429,31 @@ MonoBehaviour:
   _health: 100
   _maxHealth: 100
   _healSound: {fileID: 2256981707175442334}
+  _damageSounds:
+  - clip: {fileID: 8300000, guid: 64406c4d59da2884d937430e1452fd77, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 1
+    volume: 0.4
+  - clip: {fileID: 8300000, guid: 239392f2b335ad64e84041b29b7e813f, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 1
+    volume: 0.4
+  - clip: {fileID: 8300000, guid: 647d202991dc33845aa0a03261628ccc, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 1
+    volume: 0.4
+  - clip: {fileID: 8300000, guid: e6e3a48fdc9c63042afa11b16f958ba8, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 1
+    volume: 0.4
 --- !u!114 &1220296974818296825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +520,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 3ed8dbd00fd83854ba3492c7637c64f2, type: 3}
   m_Resource: {fileID: 8300000, guid: 3ed8dbd00fd83854ba3492c7637c64f2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 0.5
   Loop: 0
   Mute: 0

@@ -25,6 +25,7 @@ public class SoundEmitter : MonoBehaviour
         _audioSource.outputAudioMixerGroup = data.mixerGroup;
         _audioSource.loop = data.loop;
         _audioSource.playOnAwake = data.playOnAwake;
+        _audioSource.volume = data.volume;
     }
 
     public void Play()

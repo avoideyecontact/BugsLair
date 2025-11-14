@@ -39,8 +39,8 @@ public class Airdrop : MonoBehaviour
 
     private async UniTask FlyAway()
     {
-
-        await transform.DOLocalMoveY(1000, 15f).SetEase(Ease.InSine).ToUniTask();
+        var ct = this.GetCancellationTokenOnDestroy();
+        await transform.DOLocalMoveY(1000, 15f).SetEase(Ease.InSine).WithCancellation(ct);
     }
 
     private async UniTask OpenDoors()

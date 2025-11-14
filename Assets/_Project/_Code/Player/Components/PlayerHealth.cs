@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float _maxHealth = 100;
     [SerializeField] private AudioSource _healSound;
 
+    [SerializeField] private SoundData[] _damageSounds;
+
     public float GetHealth => _health;
     public bool CanHeal => _health < _maxHealth;
     public bool IsDead => _health <= 0;
@@ -35,6 +37,11 @@ public class PlayerHealth : MonoBehaviour
     public void DealDamage(float value)
     {
         SetHealth(_health - value);
+        
+        SoundManager.Instance.CreateSoundBuilder()
+            .WithRandomPitch()
+            .WithPosition(transform.position)
+            .Play(_damageSounds[Random.Range(0, _damageSounds.Length)]);
 
         _eventBus.Publish(new PlayerDamaged
         {
