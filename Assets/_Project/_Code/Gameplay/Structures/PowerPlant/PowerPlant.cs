@@ -93,7 +93,7 @@ public class PowerPlant : MonoBehaviour
         await UniTask.WaitForSeconds(1, cancellationToken: ct);
         await StopAnimationTask();
 
-        var rotationTask = _wheel.DOLocalRotate(new Vector3(-360, 0, 0), 6f, RotateMode.FastBeyond360)
+        var rotationTask = _wheel.DOLocalRotate(new Vector3(-360, 0, 0), 6f, RotateMode.LocalAxisAdd)
             .SetEase(Ease.OutCubic)
             .SetRelative();
 

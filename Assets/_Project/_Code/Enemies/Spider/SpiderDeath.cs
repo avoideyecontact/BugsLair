@@ -2,11 +2,11 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
-public class CockroachDeath : MonoBehaviour
+public class SpiderDeath : MonoBehaviour
 {
     [SerializeField] private HealthComponent _health;
     [SerializeField] private Animator _animator;
-    [SerializeField] private CockroachAI _ai;
+    [SerializeField] private Spider _ai;
     [SerializeField] private SurfaceAligner _aligner;
     [SerializeField] private RandomDrop _drop;
 
@@ -29,11 +29,11 @@ public class CockroachDeath : MonoBehaviour
     private async UniTaskVoid DeathTask()
     {
         _drop.CreateDrop();
-        _ai.Disable();
+        _ai.Deactivate();
         _aligner.enabled = false;
         GetComponent<Collider>().enabled = false;
 
-        _animator.SetTrigger("SwitchToRunning");
+        _animator.SetTrigger("Death");
         _animator.applyRootMotion = true;
 
         Transform child = transform.GetChild(0);
@@ -45,12 +45,7 @@ public class CockroachDeath : MonoBehaviour
         await child.DOLocalMoveY(1f, 0.5f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
         await child.DOLocalMoveY(-0.5f, 0.5f).SetEase(Ease.InOutBack).SetRelative().WithCancellation(ct);
 
-        float multiplier = 1f;
-        await DOTween.To(() => multiplier, x => multiplier = x, 0f, 2f)
-            .OnUpdate(() =>
-            {
-                _animator.SetFloat("RunMultiplier", multiplier);
-            }).WithCancellation(ct);
+        await UniTask.WaitForSeconds(1f, cancellationToken: ct);
 
         var deathTasks = new UniTask[3];
         deathTasks[0] = child.DOLocalMoveY(-0.65f, 3f).SetEase(Ease.InOutSine).SetRelative().WithCancellation(ct);
