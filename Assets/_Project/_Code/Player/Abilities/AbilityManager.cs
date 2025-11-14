@@ -10,6 +10,8 @@ public class AbilityManager : MonoBehaviour
     [SerializeField] private GameObject _jumpModuleAbilityDrop;
     [SerializeField] private GameObject _dashAbilityDrop;
 
+    [SerializeField] private SoundData _pickupSound;
+
     private IAbility[] _abilities;
     private PlayerContext _playerContext;
     private IEventBus _eventBus;
@@ -116,6 +118,11 @@ public class AbilityManager : MonoBehaviour
 
             Destroy(hit.transform.gameObject);
             ActivateAbility(abilityType);
+
+            SoundManager.Instance.CreateSoundBuilder()
+                    .WithRandomPitch()
+                    .WithPosition(transform.position)
+                    .Play(_pickupSound);
         }
     }
 

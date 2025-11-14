@@ -6,6 +6,7 @@ public class ItemDrop : MonoBehaviour
 {
     [SerializeField] ItemDropType _dropType;
     public ItemDropType DropType => _dropType;
+    [SerializeField] private SoundData _pickupSound;
 
     private void Start()
     {
@@ -21,6 +22,11 @@ public class ItemDrop : MonoBehaviour
             {
                 inventory.Add(_dropType);
                 Destroy(gameObject);
+
+                SoundManager.Instance.CreateSoundBuilder()
+                        .WithRandomPitch()
+                        .WithPosition(transform.position)
+                        .Play(_pickupSound);
             }
         }
     }

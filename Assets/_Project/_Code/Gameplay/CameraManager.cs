@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 using VContainer;
@@ -6,6 +5,7 @@ using VContainer;
 // Used in gameplay scene for CinemachineStateDrivenCamera
 public class CameraManager : MonoBehaviour
 {
+    [Header("Cameras")]
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Camera _clippingCamera;
     [SerializeField] private LayerMask _layersForFirstPerson;
@@ -13,16 +13,39 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private CinemachineCamera _playerCamera;
     [SerializeField] private CinemachineCamera _testCamera;
     [SerializeField] private CinemachineCamera _thirdPersonCamera;
-    [SerializeField] private CinemachineStateDrivenCamera _stateDrivenCamera;
+
+    [Header("Camera Shake")]
+    [SerializeField] private float _shakeForce = 1f;
+    [SerializeField] private CinemachineImpulseSource _impulseSource;
 
     private PlayerContext _playerContext;
+    private IEventBus _eventBus;
     private Animator _cameraAnimator;
     private string _currentCamera = "Player";
 
     [Inject]
-    public void Construct(PlayerContext playerContext)
+    public void Construct(PlayerContext playerContext, IEventBus eventBus)
     {
         _playerContext = playerContext;
+        _eventBus = eventBus;
+        SubscribeToEventBus();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEventBus();
+    }
+
+    private void SubscribeToEventBus()
+    {
+        _eventBus.Subscribe<PlayerDamaged>(OnPlayerDamaged);
+        _eventBus.Subscribe<PlayerIsUsingWeapon>(OnPlayerIsUsingWeapon);
+    }
+
+    private void UnsubscribeFromEventBus()
+    {
+        _eventBus.Unsubscribe<PlayerDamaged>(OnPlayerDamaged);
+        _eventBus.Unsubscribe<PlayerIsUsingWeapon>(OnPlayerIsUsingWeapon);
     }
 
     private void Start()
@@ -81,12 +104,14 @@ public class CameraManager : MonoBehaviour
         uac.renderPostProcessing = state;
     }
 
-    // change to something better
-    //private async UniTask TaskForCutscene()
-    //{
-    //    var ct = this.GetCancellationTokenOnDestroy();
-    //    EnableWeaponClipping();
-    //    await UniTask.WaitForSeconds(4f, cancellationToken: ct);
-    //    DisableWeaponClipping();
-    //}
+    private void OnPlayerDamaged(PlayerDamaged evt)
+    {
+        _impulseSource.GenerateImpulseWithForce(_shakeForce);
+    }
+
+    private void OnPlayerIsUsingWeapon(PlayerIsUsingWeapon evt)
+    {
+        if (evt.weaponType == WeaponType.Minigun)
+            _impulseSource.GenerateImpulseWithForce(_shakeForce / 5);
+    }
 }

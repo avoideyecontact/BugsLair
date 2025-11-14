@@ -7,6 +7,10 @@ public class PlayerWeaponary : MonoBehaviour
     [SerializeField] private GameObject[] _weaponsGameObjects;
     [SerializeField] private LayerMask _dropLayer;
 
+    [SerializeField] private SoundData _minigunPickupSound;
+    [SerializeField] private SoundData _lasergunPickupSound;
+    [SerializeField] private SoundData[] _ammoPickupSounds;
+
     private PlayerContext _playerContext;
     private IEventBus _eventBus;
     private IWeapon _currentWeapon;
@@ -170,6 +174,28 @@ public class PlayerWeaponary : MonoBehaviour
 
         MakeWeaponAvailable((WeaponType)weaponType);
         SelectWeapon((WeaponType)weaponType);
+
+
+        SoundData pickupSound = _ammoPickupSounds[0];
+
+        switch ((WeaponType)weaponType)
+        {
+            case WeaponType.Saw:
+                break;
+            case WeaponType.Minigun:
+                pickupSound = _minigunPickupSound;
+                break;
+            case WeaponType.Laser:
+                pickupSound = _lasergunPickupSound;
+                break;
+            default:
+                break;
+        }
+
+        SoundManager.Instance.CreateSoundBuilder()
+                .WithRandomPitch()
+                .WithPosition(transform.position)
+                .Play(pickupSound);
     }
 
     public void AddAmmo(WeaponType weaponType, int value)
@@ -182,6 +208,11 @@ public class PlayerWeaponary : MonoBehaviour
                 weapon.AddAmmo(value);
             }
         }
+
+        SoundManager.Instance.CreateSoundBuilder()
+                .WithRandomPitch()
+                .WithPosition(transform.position)
+                .Play(_ammoPickupSounds[Random.Range(0, _ammoPickupSounds.Length)]);
     }
 
     private void Update()
@@ -189,6 +220,10 @@ public class PlayerWeaponary : MonoBehaviour
         if (_playerContext.Input.attack > 0.1 && _currentWeapon != null)
         {
             _currentWeapon.Use();
+            _eventBus.Publish(new PlayerIsUsingWeapon
+            {
+                weaponType = _currentWeapon.WeaponType,
+            });
         }
     }
 }

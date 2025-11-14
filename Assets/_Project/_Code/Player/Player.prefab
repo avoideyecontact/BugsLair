@@ -794,6 +794,39 @@ MonoBehaviour:
   _dropLayer:
     serializedVersion: 2
     m_Bits: 8192
+  _minigunPickupSound:
+    clip: {fileID: 8300000, guid: 5a9c5b4c63d5d434ab29d9a3c0ccaf77, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    volume: 0.5
+  _lasergunPickupSound:
+    clip: {fileID: 8300000, guid: b6e6fa2545831f04891c8c2ac64c0779, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    volume: 0.5
+  _ammoPickupSounds:
+  - clip: {fileID: 8300000, guid: 91c7615f0bc16824487eab82a319004e, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    volume: 0.5
+  - clip: {fileID: 8300000, guid: de789e1b093421247a1248b8ecedf2d7, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    volume: 0.5
+  - clip: {fileID: 8300000, guid: 7fc7a06dbc3c589468ee2bd882de105e, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    volume: 0.5
 --- !u!1 &5177510771998059270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,6 +1392,13 @@ MonoBehaviour:
     m_Bits: 8192
   _jumpModuleAbilityDrop: {fileID: 908672780434494159, guid: d7ed3521dc7e46244b2a97f1ee111880, type: 3}
   _dashAbilityDrop: {fileID: 393556354211484536, guid: 8d6b26f55adc9fa4691545ce50eb4e8b, type: 3}
+  _pickupSound:
+    clip: {fileID: 8300000, guid: e63256d45d039e34399ee8844bda7b90, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    volume: 0.5
 --- !u!1001 &1678273721327384142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1484,7 +1524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5134888755592209167, guid: 55415e3569aecc14c87e88d5b083c841, type: 3}
       propertyPath: m_Volume
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

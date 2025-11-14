@@ -47,6 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dropType: 0
+  _pickupSound:
+    clip: {fileID: 8300000, guid: 3ed8dbd00fd83854ba3492c7637c64f2, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    volume: 0.25
 --- !u!135 &3078976113010449289
 SphereCollider:
   m_ObjectHideFlags: 0

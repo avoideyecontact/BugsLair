@@ -66,3 +66,8 @@ public struct CameraSensitivityChanged
 
 public struct CockroachKilled
 { }
+
+public struct PlayerIsUsingWeapon
+{
+    public WeaponType weaponType;
+}
