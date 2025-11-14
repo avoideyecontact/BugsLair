@@ -11,6 +11,9 @@ public class AlienVault : MonoBehaviour
     [SerializeField] private Transform _buttonTransform;
     [SerializeField] private TMP_Text _panelText;
     [SerializeField] private Transform _keyCardTransform;
+    [SerializeField] private AudioSource _audioSource1;
+    [SerializeField] private AudioSource _audioSource2;
+    [SerializeField] private AudioSource _audioSource3;
 
     private bool _isOpened;
 
@@ -33,6 +36,7 @@ public class AlienVault : MonoBehaviour
         var mat1 = _panelTransform.gameObject.GetComponent<Renderer>().material;
         var mat2 = _buttonTransform.gameObject.GetComponent<Renderer>().material;
 
+        _audioSource1.Play();
         LerpEmissionColor(Color.red, Color.green, .25f, mat1).Forget();
         LerpEmissionColor(Color.red, Color.green, .25f, mat2).Forget();
         await LerpTextColor(Color.red, Color.green, .25f, _panelText);
@@ -42,6 +46,8 @@ public class AlienVault : MonoBehaviour
         _buttonTransform.DOLocalMoveZ(-.05f, 0.25f).SetEase(Ease.InOutSine).SetRelative().WithCancellation(ct).Forget();
         _panelText.text = "Осторожно";
         LerpTextColor(Color.green, Color.red, .25f, _panelText).Forget();
+        _audioSource2.Play();
+        _audioSource3.Play();
         await _doorTransform.DOLocalMoveZ(-0.6f, 3f).SetEase(Ease.InOutSine).SetRelative().WithCancellation(ct);
         _doorRigidbody.isKinematic = false;
         var impulsePosition = _doorTransform.position + _doorTransform.up * 2;

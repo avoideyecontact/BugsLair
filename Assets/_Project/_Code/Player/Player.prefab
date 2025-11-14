@@ -387,6 +387,26 @@ MonoBehaviour:
   _controller: {fileID: 7829796834871833858}
   _speed: 7
   _sprintSpeed: 150
+  _footstepsCooldownTime: 0.25
+  _footstepsSounds:
+  - clip: {fileID: 8300000, guid: a653a876446d2f0499e2e1891765a6bd, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 1
+    volume: 0.1
+  - clip: {fileID: 8300000, guid: 10faacec5d4249f469bd0e031ed57a13, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 1
+    volume: 0.1
+  - clip: {fileID: 8300000, guid: 333345cb7c335de4db19edb7ced0303b, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 1
+    volume: 0.1
 --- !u!114 &1118863754352723265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,9 +1135,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _soundEmitterPrefab: {fileID: 3040577939179124924, guid: 60b30228c9819a94eb4bd74b6b723d20, type: 3}
   _collectionCheck: 1
-  _defaultCapacity: 5
+  _defaultCapacity: 10
   _maxPoolSize: 100
-  _maxSoundInstances: 5
+  _maxSoundInstances: 10
 --- !u!1 &6663635989753722793
 GameObject:
   m_ObjectHideFlags: 0

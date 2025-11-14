@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController _controller;
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _sprintSpeed = 10f;
+    [SerializeField] private float _footstepsCooldownTime = 0.1f;
+    [SerializeField] private SoundData[] _footstepsSounds;
 
     private PlayerContext _playerContext;
     private Vector3 _verticalVelocity;
     private bool _jumpRequested;
     private CancellationTokenSource _dashCts;
+    private bool _footstepsCooldown;
 
     [Inject]
     public void Construct(PlayerContext playerContext)
@@ -29,14 +32,41 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        if (_playerContext.Input.move == Vector2.zero)
+            return;
+
         Vector3 moveDirection = 
             transform.forward * _playerContext.Input.move.y
             + transform.right * _playerContext.Input.move.x;
 
         if (_playerContext.Input.sprint > 0)
+        {
             _controller.Move(moveDirection * _sprintSpeed * Time.deltaTime);
+
+            if (!_footstepsCooldown)
+            {
+                SoundManager.Instance.CreateSoundBuilder()
+                    .WithRandomPitch()
+                    .WithPosition(transform.position)
+                    .Play(_footstepsSounds[Random.Range(0, _footstepsSounds.Length)]);
+
+                FootstepsSoundCooldown(_footstepsCooldownTime / 2).Forget();
+            }
+        }
         else
+        {
             _controller.Move(moveDirection * _speed * Time.deltaTime);
+
+            if (!_footstepsCooldown)
+            {
+                SoundManager.Instance.CreateSoundBuilder()
+                    .WithRandomPitch()
+                    .WithPosition(transform.position)
+                    .Play(_footstepsSounds[Random.Range(0, _footstepsSounds.Length)]);
+
+                FootstepsSoundCooldown(_footstepsCooldownTime).Forget();
+            }
+        }
     }
 
     private void ApplyVerticalVelocity()
@@ -86,6 +116,14 @@ public class PlayerMovement : MonoBehaviour
             elapsed += Time.deltaTime;
             await UniTask.Yield(ct);
         }
+    }
+
+    private async UniTask FootstepsSoundCooldown(float cooldown)
+    {
+        var ct = this.GetCancellationTokenOnDestroy();
+        _footstepsCooldown = true;
+        await UniTask.WaitForSeconds(cooldown, cancellationToken: ct);
+        _footstepsCooldown = false;
     }
 
     private void OnDestroy()
