@@ -31,6 +31,7 @@ public class SpiderDeath : MonoBehaviour
 
     private async UniTaskVoid DeathTask()
     {
+        _ai.enabled = false;
         _drop1.CreateDrop();
         _drop2.CreateDrop();
         _ai.Deactivate();

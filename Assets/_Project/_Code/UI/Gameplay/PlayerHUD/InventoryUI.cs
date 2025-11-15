@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -56,8 +58,17 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        CloseInventory();
         SubscribeToEventBus();
+        CloseInventory();
+        CloseFix().Forget();
+    }
+
+    private async UniTask CloseFix()
+    {
+        var ct = this.GetCancellationTokenOnDestroy();
+
+        await UniTask.WaitForSeconds(0.25f);
+        CloseInventory();
     }
 
     private void OpenInventory()

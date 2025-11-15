@@ -23,7 +23,7 @@ public static class AbilityInfo
             case AbilityType.JumpModule:
                 return "Позволяет прыгать на клавишу Space";
             case AbilityType.Dash:
-                return "Позволяет ускоряться в направлении движения";
+                return "Позволяет ускоряться в направлении движения на Alt";
             default:
                 break;
         }

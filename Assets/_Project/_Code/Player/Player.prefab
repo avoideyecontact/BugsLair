@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: {fileID: 7829796834871833858}
   _speed: 7
-  _sprintSpeed: 150
+  _sprintSpeed: 15
   _footstepsCooldownTime: 0.25
   _footstepsSounds:
   - clip: {fileID: 8300000, guid: a653a876446d2f0499e2e1891765a6bd, type: 3}

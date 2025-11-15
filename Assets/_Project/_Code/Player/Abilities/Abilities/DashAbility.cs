@@ -20,8 +20,8 @@ public class DashAbility : AbilityBase
         SubscribeToInput();
     }
 
-    private void SubscribeToInput() => _playerContext.Input.JumpStarted += Dash;
-    private void UnsubscribeFromInput() => _playerContext.Input.JumpStarted -= Dash;
+    private void SubscribeToInput() => _playerContext.Input.DashStarted += Dash;
+    private void UnsubscribeFromInput() => _playerContext.Input.DashStarted -= Dash;
 
     private void Dash()
     {

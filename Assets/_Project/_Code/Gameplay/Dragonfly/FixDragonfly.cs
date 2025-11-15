@@ -22,7 +22,7 @@ public class FixDragonfly : MonoBehaviour
 
     public void UpdateUI()
     {
-        _text.text = $"Необходимо 5 шестерёнок для починки стрекозы\n{_gears} / 5";        
+        _text.text = $"Необходимо 5 шестерёнок для починки стрекозы\n{_gears} / 5\nнажмите Е";        
     }
 
     public void AddGears(int gears)

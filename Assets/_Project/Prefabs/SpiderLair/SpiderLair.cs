@@ -27,12 +27,21 @@ public class SpiderLair : MonoBehaviour
     {
         _wasTriggered = true;
         await CloseDoor();
+        SpawnSpiders();
         await UniTask.WaitForSeconds(1f);
         _horrorSound.Play();
         await TriggerSpiders();
         await WaitUntilAllSpidersAreDead();
         await UniTask.WaitForSeconds(1f);
         await OpenDoor();
+    }
+
+    private void SpawnSpiders()
+    {
+        foreach (var spider in _spiders)
+        {
+            spider.gameObject.SetActive(true);
+        }
     }
 
     private async UniTask CloseDoor()

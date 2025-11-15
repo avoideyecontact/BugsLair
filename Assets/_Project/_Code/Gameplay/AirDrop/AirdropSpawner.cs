@@ -17,7 +17,7 @@ public class AirdropSpawner : MonoBehaviour
 
         while (!ct.IsCancellationRequested)
         {
-            if (Statistics._cockroachesKilled == 2)
+            if (Statistics._cockroachesKilled == 15)
             {
                 SpawnAirDropWithMinigun();
                 break;

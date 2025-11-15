@@ -21,8 +21,10 @@ public class PlayerInputReader : MonoBehaviour
     private InputAction _previousAction;
     private InputAction _attackAction;
     private InputAction _cameraSwitchAction;
+    private InputAction _dashAction;
 
     public event System.Action JumpStarted;
+    public event System.Action DashStarted;
     public event System.Action InteractStarted;
     public event System.Action NextStarted;
     public event System.Action PreviousStarted;
@@ -69,6 +71,7 @@ public class PlayerInputReader : MonoBehaviour
         _lookAction = _actionsAsset.FindAction("Player/Look", true);
         _sprintAction = _actionsAsset.FindAction("Player/Sprint", true);
         _jumpAction = _actionsAsset.FindAction("Player/Jump", true);
+        _dashAction = _actionsAsset.FindAction("Player/Dash", true);
         _interactAction = _actionsAsset.FindAction("Player/Interact", true);
         _nextAction = _actionsAsset.FindAction("Player/Next", true);
         _previousAction = _actionsAsset.FindAction("Player/Previous", true);
@@ -92,6 +95,9 @@ public class PlayerInputReader : MonoBehaviour
 
         _jumpAction.Enable();
         _jumpAction.started += OnJump;
+
+        _dashAction.Enable();
+        _dashAction.started += OnDash;
 
         _interactAction.Enable();
         _interactAction.started += OnInteract;
@@ -126,6 +132,9 @@ public class PlayerInputReader : MonoBehaviour
 
         _jumpAction.started -= OnJump;
         _jumpAction.Disable();
+
+        _dashAction.started -= OnDash;
+        _dashAction.Disable();
 
         _interactAction.started -= OnInteract;
         _interactAction.Disable();
@@ -162,6 +171,11 @@ public class PlayerInputReader : MonoBehaviour
     private void OnJump(InputAction.CallbackContext context)
     {
         JumpStarted?.Invoke();
+    }
+
+    private void OnDash(InputAction.CallbackContext context)
+    {
+        DashStarted?.Invoke();
     }
 
     private void OnInteract(InputAction.CallbackContext context)

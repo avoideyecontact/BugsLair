@@ -29,8 +29,8 @@ public class PlayerWeaponary : MonoBehaviour
         SubscribeToInput();
         DeselectAllWeapons();
         MakeWeaponAvailable(WeaponType.Saw);
-        MakeWeaponAvailable(WeaponType.Minigun);
-        MakeWeaponAvailable(WeaponType.Laser);
+        //MakeWeaponAvailable(WeaponType.Minigun);
+        //MakeWeaponAvailable(WeaponType.Laser);
         SelectFirstWeapon();
     }
 
