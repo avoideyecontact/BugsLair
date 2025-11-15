@@ -27,6 +27,7 @@ public class CockroachAI : MonoBehaviour
 
         SetTarget(_target);
         _sound.Play();
+        DespawnTask().Forget();
     }
 
     void FixedUpdate()
@@ -90,5 +91,19 @@ public class CockroachAI : MonoBehaviour
         _isDamageCooldown = true;
         await UniTask.WaitForSeconds(_damageRate, cancellationToken: ct);
         _isDamageCooldown = false;
+    }
+
+    private async UniTask DespawnTask()
+    {
+        var ct = this.GetCancellationTokenOnDestroy();
+
+        while (!ct.IsCancellationRequested)
+        {
+            await UniTask.WaitForSeconds(10f, cancellationToken: ct);
+            if (Vector3.Distance(transform.position, _target.position) > 200)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

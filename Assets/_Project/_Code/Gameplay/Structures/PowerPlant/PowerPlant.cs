@@ -16,6 +16,7 @@ public class PowerPlant : MonoBehaviour
     [Header("Wires")]
     [SerializeField] private Transform _wires;
     [SerializeField] private Transform _wiresDamaged;
+    [SerializeField] private AudioSource _zapSound;
 
     private UniTask _animationTask;
     private bool _isAnimating;
@@ -29,6 +30,7 @@ public class PowerPlant : MonoBehaviour
 
     private void OnFuseBoxDestruction()
     {
+        _zapSound.Play();
         _wires.gameObject.SetActive(false);
         _wiresDamaged.gameObject.SetActive(true);
         SlowDown().Forget();

@@ -70,7 +70,8 @@ public class Ending : MonoBehaviour
 
     private void OnGameResumed(GameResumed evt)
     {
-        ShowCursor();
+        if (_triggered)
+            ShowCursor();
     }
 
     private void OnQuit()

@@ -102,6 +102,7 @@ public class Spider : MonoBehaviour
 
     public void Activate()
     {
+        _agent.enabled = true;
         _isSleeping = false;
         _agent.isStopped = false;
         _animator.SetTrigger("Run");
@@ -115,6 +116,7 @@ public class Spider : MonoBehaviour
         _agent.isStopped = true;
         _animator.SetTrigger("Idle");
         _walkSound.Stop();
+        _agent.enabled = false;
     }
 
     private void FindPlayer()
