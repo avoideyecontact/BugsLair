@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1530683061509118655}
   - component: {fileID: 7060808745166735025}
   - component: {fileID: 5808523593295627788}
+  - component: {fileID: 442790047811856383}
   m_Layer: 10
   m_Name: Cockroach
   m_TagString: Untagged
@@ -92,6 +93,7 @@ MonoBehaviour:
   _ai: {fileID: -5074371058347196063}
   _aligner: {fileID: 5090387708022897806}
   _drop: {fileID: 3382882843067068771}
+  _gearDrop: {fileID: 442790047811856383}
   _sound: {fileID: 7060808745166735025}
   _deathSound: {fileID: 5808523593295627788}
 --- !u!114 &-5074371058347196063
@@ -150,6 +152,7 @@ MonoBehaviour:
   - {fileID: 3503156504950106346, guid: a71a0a043d87c9545aebf8a35f8783d3, type: 3}
   - {fileID: 949137374690494352, guid: ec6af948349cb174997d3a9120f90545, type: 3}
   _offset: {x: 0, y: 0.75, z: 0}
+  _probability: 0.1
 --- !u!195 &1530683061509118655
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -366,6 +369,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &442790047811856383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507571258923006789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ea6483864153441a56403e6a438fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropGameObjects:
+  - {fileID: 7058297669694586146, guid: 613ff3169b82de245a38675557ae3130, type: 3}
+  _offset: {x: 0, y: 1, z: 0}
+  _probability: 0.05
 --- !u!1001 &4598406024125078271
 PrefabInstance:
   m_ObjectHideFlags: 0

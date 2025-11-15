@@ -13,11 +13,12 @@ GameObject:
   - component: {fileID: 3932821710310041495}
   - component: {fileID: 981669693735076560}
   - component: {fileID: 2247161702039690919}
-  - component: {fileID: 1958890194187320461}
   - component: {fileID: 9174064438308860945}
   - component: {fileID: 2442687922992389124}
   - component: {fileID: 3889800785364391210}
   - component: {fileID: 8198380503807128990}
+  - component: {fileID: 2345903840132947244}
+  - component: {fileID: 4845575835961658027}
   m_Layer: 10
   m_Name: Spider
   m_TagString: Untagged
@@ -53,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5a88c748735e44cbebc1ab47724be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 5
+  _health: 15
 --- !u!114 &3932821710310041495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,23 +113,10 @@ MonoBehaviour:
   _animator: {fileID: 6521571522175900234}
   _ai: {fileID: 3932821710310041495}
   _aligner: {fileID: 981669693735076560}
-  _drop: {fileID: 1958890194187320461}
   _walkSound: {fileID: 3889800785364391210}
   _deathSound: {fileID: 8198380503807128990}
---- !u!114 &1958890194187320461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2963178525607011698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ea6483864153441a56403e6a438fc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dropGameObjects: []
-  _offset: {x: 0, y: 0, z: 0}
+  _drop1: {fileID: 2345903840132947244}
+  _drop2: {fileID: 4845575835961658027}
 --- !u!195 &9174064438308860945
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -366,6 +354,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2345903840132947244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2963178525607011698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ea6483864153441a56403e6a438fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropGameObjects:
+  - {fileID: 2660902858545199877, guid: 4d30b1dc73f107e438db915a763218b7, type: 3}
+  - {fileID: 949137374690494352, guid: ec6af948349cb174997d3a9120f90545, type: 3}
+  - {fileID: 3503156504950106346, guid: a71a0a043d87c9545aebf8a35f8783d3, type: 3}
+  _offset: {x: 0, y: 0, z: 0}
+  _probability: 0.1
+--- !u!114 &4845575835961658027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2963178525607011698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ea6483864153441a56403e6a438fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropGameObjects:
+  - {fileID: 2742907472313802856, guid: a43b30603d2fee14687ed05ac0e45f86, type: 3}
+  - {fileID: 7058297669694586146, guid: 613ff3169b82de245a38675557ae3130, type: 3}
+  _offset: {x: 0, y: 0, z: 0}
+  _probability: 0.05
 --- !u!1001 &7819632766264685849
 PrefabInstance:
   m_ObjectHideFlags: 0

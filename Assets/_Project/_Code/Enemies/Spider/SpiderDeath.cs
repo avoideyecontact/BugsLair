@@ -8,9 +8,10 @@ public class SpiderDeath : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Spider _ai;
     [SerializeField] private SurfaceAligner _aligner;
-    [SerializeField] private RandomDrop _drop;
     [SerializeField] private AudioSource _walkSound;
     [SerializeField] private AudioSource _deathSound;
+    [SerializeField] private RandomDrop _drop1;
+    [SerializeField] private RandomDrop _drop2;
 
     private void Start()
     {
@@ -30,7 +31,8 @@ public class SpiderDeath : MonoBehaviour
 
     private async UniTaskVoid DeathTask()
     {
-        _drop.CreateDrop();
+        _drop1.CreateDrop();
+        _drop2.CreateDrop();
         _ai.Deactivate();
         _walkSound.Stop();
         _aligner.enabled = false;

@@ -39,10 +39,32 @@ public class PlayerInteractor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _interactionDistance, _dropLayer))
         {
-            if (_items.Has(ItemDropType.KeyCard))
+            var panel = hit.collider.transform.GetComponent<VaultPanel>();
+            var dragonfly = hit.transform.GetComponent<FixDragonfly>();
+
+            if (panel != null)
             {
-                _items.Remove(ItemDropType.KeyCard);
-                hit.collider.transform.GetComponent<VaultPanel>()?.Open();
+                if (_items.Has(ItemDropType.KeyCard))
+                {
+                    _items.Remove(ItemDropType.KeyCard);
+                    panel.Open();
+                    return;
+                }
+            }
+            
+            if (dragonfly != null)
+            {
+                Debug.Log("Нашел");
+                if (_items.Has(ItemDropType.Gear))
+                {
+                    Debug.Log("Есть");
+                    while (_items.Has(ItemDropType.Gear))
+                    {
+                        Debug.Log("Нашел");
+                        dragonfly.AddGears(1);
+                        _items.Remove(ItemDropType.Gear);
+                    }
+                }
             }
         }
     }

@@ -51,13 +51,13 @@ public class Ending : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            _triggered = true;
             ShowEndScreen().Forget();
         }
     }
 
-    private async UniTask ShowEndScreen()
+    public async UniTask ShowEndScreen()
     {
+        _triggered = true;
         _canvas.enabled = true;
 
         var ct = this.GetCancellationTokenOnDestroy();

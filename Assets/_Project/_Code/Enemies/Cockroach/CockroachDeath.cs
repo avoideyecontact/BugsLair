@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CockroachDeath : MonoBehaviour
@@ -10,6 +9,7 @@ public class CockroachDeath : MonoBehaviour
     [SerializeField] private CockroachAI _ai;
     [SerializeField] private SurfaceAligner _aligner;
     [SerializeField] private RandomDrop _drop;
+    [SerializeField] private RandomDrop _gearDrop;
 
     [SerializeField] private AudioSource _sound;
     [SerializeField] private AudioSource _deathSound;
@@ -33,6 +33,7 @@ public class CockroachDeath : MonoBehaviour
     private async UniTaskVoid DeathTask()
     {
         _drop.CreateDrop();
+        _gearDrop.CreateDrop();
         _ai.Disable();
         _aligner.enabled = false;
         GetComponent<Collider>().enabled = false;

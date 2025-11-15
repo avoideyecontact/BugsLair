@@ -20,6 +20,12 @@ public class Spider : MonoBehaviour
     [SerializeField] private AudioSource _walkSound;
     [SerializeField] private AudioSource _biteSound;
 
+    private void Awake()
+    {
+        if (_isSleeping)
+            Deactivate();
+    }
+
     private void Start()
     {
         if (_target == null)
