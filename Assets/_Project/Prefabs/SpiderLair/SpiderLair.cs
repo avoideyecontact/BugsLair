@@ -56,12 +56,12 @@ public class SpiderLair : MonoBehaviour
     {
         var ct = this.GetCancellationTokenOnDestroy();
 
-        await UniTask.WaitForSeconds(5f, cancellationToken: ct);
+        await UniTask.WaitForSeconds(1f, cancellationToken: ct);
 
         foreach (var spider in _spiders)
         {
-            spider?.Activate();
-            
+            spider.GetComponent<Spider>().enabled = true;
+            spider?.Activate();            
         }
     }
 

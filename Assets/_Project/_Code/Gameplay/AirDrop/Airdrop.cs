@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Airdrop : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public class Airdrop : MonoBehaviour
     [SerializeField] private GameObject _lasergunAmmoDrop;
     [SerializeField] private GameObject _healthDrop;
 
-    [SerializeField] private Transform[] _spawnPoints; 
+    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private AudioSource _sound;
+    [SerializeField] private AudioSource _rocketSound;
+    [SerializeField] private ParticleSystem _flame;
 
     private void Start()
     {
@@ -29,6 +33,8 @@ public class Airdrop : MonoBehaviour
         Physics.Raycast(transform.position, -transform.up, out hit);
         Debug.Log(hit.point);
         await transform.DOMoveY(hit.point.y, 10f).SetEase(Ease.OutQuart).WithCancellation(ct);
+        _rocketSound.Stop();
+        _flame.Stop();
         await OpenDoors();
         SpawnDrop();
         await UniTask.WaitForSeconds(20f, cancellationToken: ct);
@@ -40,6 +46,9 @@ public class Airdrop : MonoBehaviour
 
     private async UniTask FlyAway()
     {
+        _flame.Play();
+        _rocketSound.Play();
+        _sound.Play();
         var ct = this.GetCancellationTokenOnDestroy();
         await transform.DOLocalMoveY(1000, 15f).SetEase(Ease.InSine).WithCancellation(ct);
     }

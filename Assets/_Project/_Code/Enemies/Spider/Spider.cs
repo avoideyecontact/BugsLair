@@ -6,7 +6,6 @@ public class Spider : MonoBehaviour
 {
     [Header("AI")]
     [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private bool _isSleeping;
     [SerializeField] private Transform _target;
     [SerializeField] private float _stopDistance = 4f;
     private bool _isChasing = true;
@@ -31,19 +30,18 @@ public class Spider : MonoBehaviour
         if (_target == null)
             FindPlayer();
 
-        SetTarget(_target);
+        //SetTarget(_target);
 
-
-        if (_isSleeping)
-            Deactivate();
-        else
-            Activate();
+        Activate();
     }
 
     void FixedUpdate()
     {
         if (_target == null) return;
-        if (_isSleeping) return;
+
+        if (Vector3.Distance(transform.position, _target.position) < 100)
+            Activate();
+        else Deactivate();
 
         float currentDistance = Vector3.Distance(transform.position, _target.position);
 
@@ -111,7 +109,6 @@ public class Spider : MonoBehaviour
         //_agent.enabled = true;
         FindPlayer();
         SetTarget(_target);
-        _isSleeping = false;
         _agent.isStopped = false;
         _animator.SetTrigger("Run");
         if (!_walkSound.isPlaying)
@@ -120,7 +117,7 @@ public class Spider : MonoBehaviour
 
     public void Deactivate()
     {
-        _isSleeping = true;
+        //_isSleeping = true;
         _agent.isStopped = true;
         _animator.SetTrigger("Idle");
         _walkSound.Stop();
