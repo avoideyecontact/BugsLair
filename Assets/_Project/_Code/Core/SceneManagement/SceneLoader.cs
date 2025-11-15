@@ -18,12 +18,16 @@ public class SceneLoader : ISceneLoader
     {
         _eventBus.Publish(new SceneLoadStartedEvent(sceneName));
 
+        var asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+
+        asyncOperation.allowSceneActivation = false;
+
         if (useFade)
         {
             await _screenFade.FadeInAsync();
         }
 
-        var asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        asyncOperation.allowSceneActivation = true;
 
         while (!asyncOperation.isDone)
         {
@@ -36,6 +40,7 @@ public class SceneLoader : ISceneLoader
 
         if (useFade)
         {
+            await UniTask.WaitForSeconds(0.25f);
             await _screenFade.FadeOutAsync();
         }
     }
