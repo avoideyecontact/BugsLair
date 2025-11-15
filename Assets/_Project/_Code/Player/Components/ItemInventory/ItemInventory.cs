@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VContainer;
 
@@ -36,5 +37,10 @@ public class ItemInventory : MonoBehaviour
         {
             items = drop
         });
+    }
+
+    public bool Has(ItemDropType item)
+    {
+        return drop.Where(i => i == item).Count() > 0;
     }
 }

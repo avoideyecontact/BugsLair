@@ -27,6 +27,7 @@ public class AlienVault : MonoBehaviour
 
     private async UniTask OpenDoorTask()
     {
+        _audioSource1.Play();
         var ct = this.GetCancellationTokenOnDestroy();
 
         _keyCardTransform.gameObject.SetActive(true);
@@ -36,7 +37,6 @@ public class AlienVault : MonoBehaviour
         var mat1 = _panelTransform.gameObject.GetComponent<Renderer>().material;
         var mat2 = _buttonTransform.gameObject.GetComponent<Renderer>().material;
 
-        _audioSource1.Play();
         LerpEmissionColor(Color.red, Color.green, .25f, mat1).Forget();
         LerpEmissionColor(Color.red, Color.green, .25f, mat2).Forget();
         await LerpTextColor(Color.red, Color.green, .25f, _panelText);

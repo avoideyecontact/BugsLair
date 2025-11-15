@@ -5,6 +5,7 @@ public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] LayerMask _dropLayer;
     [SerializeField] float _interactionDistance;
+    [SerializeField] private ItemInventory _items;
 
     private PlayerContext _playerContext;
 
@@ -38,7 +39,11 @@ public class PlayerInteractor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _interactionDistance, _dropLayer))
         {
-            hit.collider.transform.GetComponent<VaultPanel>()?.Open();
+            if (_items.Has(ItemDropType.KeyCard))
+            {
+                _items.Remove(ItemDropType.KeyCard);
+                hit.collider.transform.GetComponent<VaultPanel>()?.Open();
+            }
         }
     }
 }
