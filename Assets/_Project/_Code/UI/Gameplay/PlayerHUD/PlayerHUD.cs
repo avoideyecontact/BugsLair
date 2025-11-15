@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,10 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private TMP_Text _ammoText;
     [SerializeField] private TMP_Text _weaponText;
     [SerializeField] private RawImage _healthBar;
+
+    [Header("Inventory")]
+    [SerializeField] private TMP_Text _keyCardsCount;
+    [SerializeField] private TMP_Text _gearsCount;
 
     private PlayerContext _playerContext;
     private IEventBus _eventBus;
@@ -31,6 +36,7 @@ public class PlayerHUD : MonoBehaviour
         _eventBus.Subscribe<AmmoChanged>(OnAmmoChanged);
         _eventBus.Subscribe<WeaponChanged>(OnWeaponChanged);
         _eventBus.Subscribe<PlayerHealthChanged>(OnPlayerHealthChanged);
+        _eventBus.Subscribe<ItemInventoryChanged>(OnItemInventoryChanged);
     }
 
     private void UnsubscribeFromEventBus()
@@ -38,6 +44,7 @@ public class PlayerHUD : MonoBehaviour
         _eventBus.Unsubscribe<AmmoChanged>(OnAmmoChanged);
         _eventBus.Unsubscribe<WeaponChanged>(OnWeaponChanged);
         _eventBus.Unsubscribe<PlayerHealthChanged>(OnPlayerHealthChanged);
+        _eventBus.Unsubscribe<ItemInventoryChanged>(OnItemInventoryChanged);
     }
 
     private void OnAmmoChanged(AmmoChanged evt)
@@ -61,6 +68,15 @@ public class PlayerHUD : MonoBehaviour
     private void OnPlayerHealthChanged(PlayerHealthChanged evt)
     {
         UpdateHealthBar(evt.HealthValue);
+    }
+
+    private void OnItemInventoryChanged(ItemInventoryChanged evt)
+    {
+        int keyCards = evt.items.Where(i => i == ItemDropType.KeyCard).Count();
+        int gears = evt.items.Where(i => i == ItemDropType.Gear).Count();
+
+        _keyCardsCount.text = "\u00D7" + $"{keyCards}";
+        _gearsCount.text = "\u00D7" + $"{gears}";
     }
 
     private void UpdateHealthBar(float healthValue)

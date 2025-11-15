@@ -1,9 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 
 public class ItemInventory : MonoBehaviour
 {
     private List<ItemDropType> drop;
+    private IEventBus _eventBus;
+
+    [Inject]
+    public void Construct(PlayerContext playerContext, IEventBus eventBus)
+    {
+        _eventBus = eventBus;
+    }
 
     private void Start()
     {
@@ -13,10 +21,20 @@ public class ItemInventory : MonoBehaviour
     public void Add(ItemDropType type)
     {
         drop.Add(type);
+
+        _eventBus.Publish(new ItemInventoryChanged
+        {
+            items = drop
+        });
     }
 
     public void Remove(ItemDropType type)
     {
         drop.Remove(type);
+
+        _eventBus.Publish(new ItemInventoryChanged
+        {
+            items = drop
+        });
     }
 }

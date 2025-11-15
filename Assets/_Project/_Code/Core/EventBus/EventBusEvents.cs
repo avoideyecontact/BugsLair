@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+
 public struct SceneLoadStartedEvent
 {
     public string SceneName;
@@ -70,4 +72,9 @@ public struct CockroachKilled
 public struct PlayerIsUsingWeapon
 {
     public WeaponType weaponType;
+}
+
+public struct ItemInventoryChanged
+{
+    public List<ItemDropType> items;
 }
