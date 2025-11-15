@@ -1,5 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UFO : MonoBehaviour
@@ -15,6 +17,9 @@ public class UFO : MonoBehaviour
     [SerializeField] private Transform _door1;
     [SerializeField] private Transform _door2;
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private AudioSource _sound;
+    [SerializeField] private AudioSource _attackSound;
+    [SerializeField] private UFODeath _death;
 
     [Header("Damage")]
     [SerializeField] private float _damage = 25;
@@ -31,6 +36,7 @@ public class UFO : MonoBehaviour
     private Vector3 _initialPosition;
     private bool _isAttacking;
     private bool _isPulling;
+    private bool _isDead;
 
     private void Start()
     {
@@ -53,9 +59,9 @@ public class UFO : MonoBehaviour
     private async UniTask MovementBehaviour()
     {
         var ct = this.GetCancellationTokenOnDestroy();
-        var spinTask = Spinning();
+        var spinTask = Spinning(ct);
 
-        while (!ct.IsCancellationRequested)
+        while (!ct.IsCancellationRequested && !_isDead)
         {
             if (!_isAttacking)
             {
@@ -104,7 +110,9 @@ public class UFO : MonoBehaviour
         await FlyTowardsPlayer();
         await OpenDoors();
         _isPulling = true;
-        await UniTask.WaitForSeconds(3f, cancellationToken: ct);
+        await UniTask.WaitForSeconds(1.5f, cancellationToken: ct);
+        _attackSound.Play();
+        await UniTask.WaitForSeconds(1.5f, cancellationToken: ct);
         if (HorizontalDistanceToPlayer() <= _damageRadius)
             DealDamage();
         _isPulling = false;
@@ -146,17 +154,16 @@ public class UFO : MonoBehaviour
         return Vector3.Distance( a, b );
     }
 
-    private async UniTask Spinning()
+    private async UniTask Spinning(CancellationToken ct)
     {
-        var ct = this.GetCancellationTokenOnDestroy();
-
-        var spinTask = transform.DOLocalRotate(new Vector3(0, 360, 0), 4f, RotateMode.FastBeyond360)
+        while (!_isDead && !ct.IsCancellationRequested)
+        {
+            var spinTask = transform.DOLocalRotate(new Vector3(0, 360, 0), 4f, RotateMode.FastBeyond360)
                 .SetRelative()
                 .SetEase(Ease.Linear)
-                .SetLoops(-1, LoopType.Restart)
                 .WithCancellation(ct);
-
-        await UniTask.WaitUntilCanceled(ct);
+            await spinTask;
+        }
     }
 
     private async UniTask OpenDoors()
@@ -184,11 +191,14 @@ public class UFO : MonoBehaviour
         await CloseDoors();
         Boom();
         Fall();
+        _death.Disappear().Forget();
         Destroy(this);
     }
 
     private void OnDeath()
     {
+        _isDead = true;
+        _sound.Stop();
         DeathTask().Forget();
     }
 
