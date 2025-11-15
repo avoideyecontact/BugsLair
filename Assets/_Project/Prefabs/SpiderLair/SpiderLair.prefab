@@ -380,7 +380,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 22c8d43a993e463498dbe881491ecbf2, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: c26914f093ce12f4cb03516036109bef, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &3445908697677713684
 GameObject:
@@ -500,7 +500,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -508,7 +508,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e21be1417b8cc044faefb97fa57f1530, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 2e72444d57f244945b0b71e5afbd3b9c, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &4001540576890715871
 GameObject:
@@ -814,7 +814,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -822,7 +822,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e889c0250308da440ade9da9bde1f6fd, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a0c98a0fc60bd514081db4c6707ced8b, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &5582648742897785306
 GameObject:
@@ -879,7 +879,7 @@ MonoBehaviour:
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &5816254863546686832
 GameObject:
@@ -935,7 +935,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
-  m_GenerateLinks: 0
+  m_GenerateLinks: 1
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -943,7 +943,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 67aeec94f53349f4295b4fa48a5b0251, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: d5187d78be5296d46b13ceb6648c4bfe, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &6008274130240214175
 GameObject:
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &6261968239277296378
 GameObject:
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &6455014113171072508
 GameObject:
@@ -1114,7 +1114,7 @@ MonoBehaviour:
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &6651116173738797022
 GameObject:
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_CostModifier: 1
   m_IsOverridingCost: 0
   m_Bidirectional: 1
-  m_AutoUpdatePosition: 0
+  m_AutoUpdatePosition: 1
   m_Area: 0
 --- !u!1 &6811320592428773346
 GameObject:
@@ -2278,17 +2278,33 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: -1965925400473437864, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: -1281008254966965639, guid: 8448852ced3073642842cb410c4aee21, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -355915839799867757, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -305091885687274788, guid: 8448852ced3073642842cb410c4aee21, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 9d1fcb9b48c5909439b767f31d7b0adc, type: 2}
+    - target: {fileID: -115655434338654688, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 411696045565734687, guid: 8448852ced3073642842cb410c4aee21, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 451073451779226413, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8448852ced3073642842cb410c4aee21, type: 3}
       propertyPath: m_Name
@@ -2301,6 +2317,30 @@ PrefabInstance:
     - target: {fileID: 1828471694881314644, guid: 8448852ced3073642842cb410c4aee21, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465682935655078050, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3635841188025145822, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3974400149628006261, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770187863657769672, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5390097663929113636, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515114334009184632, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6324240423935976452, guid: 8448852ced3073642842cb410c4aee21, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2321,6 +2361,10 @@ PrefabInstance:
     - target: {fileID: 8785911042369133113, guid: 8448852ced3073642842cb410c4aee21, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842189628427470928, guid: 8448852ced3073642842cb410c4aee21, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
