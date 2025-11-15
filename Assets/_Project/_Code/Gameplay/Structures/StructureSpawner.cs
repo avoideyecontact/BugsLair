@@ -3,6 +3,7 @@ using UnityEngine;
 public class StructureSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _structures;
+    [SerializeField] private bool _randomRotation;
 
     private void Start()
     {
@@ -20,6 +21,14 @@ public class StructureSpawner : MonoBehaviour
     private void SpawnRandomStructure(Transform spawnPoint)
     {
         int randomIndex = Random.Range(0, _structures.Length);
-        Instantiate(_structures[randomIndex], spawnPoint);
+        var structure = Instantiate(_structures[randomIndex], spawnPoint);
+        if (_randomRotation)
+        {
+            var rotation = Random.rotation.eulerAngles;
+            rotation.x = 0;
+            rotation.z = 0;
+
+            structure.transform.rotation = Quaternion.Euler(rotation);
+        }
     }
 }
