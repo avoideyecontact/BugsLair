@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private int _howMuchCanSpawn = 20;
+    //[SerializeField] private int _howMuchCanSpawn = 30;
     [SerializeField] private GameObject _cockroach;
     [SerializeField] private GameObject _spider;
-    [SerializeField] private float _triggerRadius;
+    [SerializeField] private float _triggerRadius = 150;
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private Transform[] _spawnPoints;
 
@@ -45,23 +45,23 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
 
-            await UniTask.WaitForSeconds(3f, cancellationToken: ct);
+            await UniTask.WaitForSeconds(2f, cancellationToken: ct);
         }
     }
 
     private void SpawnCockroaches()
     {
-        if (_howMuchCanSpawn <= 0)
-        {
-            Destroy(this);
-            return;
-        }
+        //if (_howMuchCanSpawn <= 0)
+        //{
+        //    Destroy(this);
+        //    return;
+        //}
 
         foreach (var point in _spawnPoints)
         {
-            Debug.Log(_howMuchCanSpawn);
             Instantiate(_cockroach, point.position, Quaternion.identity);
-            _howMuchCanSpawn -= 1;
+            Instantiate(_cockroach, point.position, Quaternion.identity);
+            //_howMuchCanSpawn -= 1;
         }
     }
 }

@@ -2170,10 +2170,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lasergun
       objectReference: {fileID: 0}
-    - target: {fileID: 8786201608342122828, guid: afc970623c44d454f9f10dd4c0efa66b, type: 3}
-      propertyPath: _hitParticles
-      value: 
-      objectReference: {fileID: 3077343761403282166, guid: 51098b88b7e88a64d8e794bdc2b46ce0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2240,18 +2236,6 @@ PrefabInstance:
     - target: {fileID: 2664909973518685419, guid: 55415e3569aecc14c87e88d5b083c841, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2787978939112956413, guid: 55415e3569aecc14c87e88d5b083c841, type: 3}
-      propertyPath: _hitParticles
-      value: 
-      objectReference: {fileID: 3077343761403282166, guid: 51098b88b7e88a64d8e794bdc2b46ce0, type: 3}
-    - target: {fileID: 4959860582448415342, guid: 55415e3569aecc14c87e88d5b083c841, type: 3}
-      propertyPath: m_Volume
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 5134888755592209167, guid: 55415e3569aecc14c87e88d5b083c841, type: 3}
-      propertyPath: m_Volume
-      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

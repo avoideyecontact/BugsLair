@@ -4,7 +4,10 @@ using VContainer.Unity;
 public class Statistics : IStatistics, IInitializable
 {
     private IEventBus _eventBus;
-    private StatisticsData _data;
+    public static StatisticsData _data;
+
+    public static int _cockroachesKilled;
+    public static int _spidersKilled;
 
     public StatisticsData Data => _data;
 
@@ -17,6 +20,8 @@ public class Statistics : IStatistics, IInitializable
     public void Initialize()
     {
         _data = new StatisticsData();
+        _cockroachesKilled = 0;
+        _spidersKilled = 0;
     }
 
     private void SubscribeToEventBus()

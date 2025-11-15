@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _config:
     weaponType: 0
-    damage: 1
+    damage: 0.5
     damageRate: 0.1
     hitDistance: 100
     enemyLayer:
@@ -76,6 +76,7 @@ MonoBehaviour:
       m_Bits: 1024
     maxAmmo: 50
   _chainsawSound: {fileID: 5134888755592209167}
+  _hitParticles: {fileID: 3077343761403282166, guid: 51098b88b7e88a64d8e794bdc2b46ce0, type: 3}
 --- !u!65 &8835555368670363244
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -110,7 +111,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 1a97e9a73edf3e349abd42a7ea187da2, type: 3}
   m_Resource: {fileID: 8300000, guid: 1a97e9a73edf3e349abd42a7ea187da2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.025
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -207,7 +208,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: b3cbb951a521b864dbb2a0d6966e6561, type: 3}
   m_Resource: {fileID: 8300000, guid: b3cbb951a521b864dbb2a0d6966e6561, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0

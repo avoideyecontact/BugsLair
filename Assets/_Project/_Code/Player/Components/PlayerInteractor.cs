@@ -54,13 +54,10 @@ public class PlayerInteractor : MonoBehaviour
             
             if (dragonfly != null)
             {
-                Debug.Log("Нашел");
                 if (_items.Has(ItemDropType.Gear))
                 {
-                    Debug.Log("Есть");
                     while (_items.Has(ItemDropType.Gear))
                     {
-                        Debug.Log("Нашел");
                         dragonfly.AddGears(1);
                         _items.Remove(ItemDropType.Gear);
                     }

@@ -110,8 +110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _stopDistance: 4
-  _damage: 2
-  _damageRate: 1
+  _damage: 1
+  _damageRate: 0.3
   _animator: {fileID: 1020586894314119504}
   _sound: {fileID: 7060808745166735025}
 --- !u!114 &5090387708022897806
@@ -152,7 +152,7 @@ MonoBehaviour:
   - {fileID: 3503156504950106346, guid: a71a0a043d87c9545aebf8a35f8783d3, type: 3}
   - {fileID: 949137374690494352, guid: ec6af948349cb174997d3a9120f90545, type: 3}
   _offset: {x: 0, y: 0.75, z: 0}
-  _probability: 0.1
+  _probability: 0.15
 --- !u!195 &1530683061509118655
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 1.5
-  m_Speed: 7
+  m_Speed: 10
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 360

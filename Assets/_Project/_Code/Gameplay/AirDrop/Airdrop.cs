@@ -27,8 +27,8 @@ public class Airdrop : MonoBehaviour
         var ct = this.GetCancellationTokenOnDestroy();
         RaycastHit hit;
         Physics.Raycast(transform.position, -transform.up, out hit);
-
-        await transform.DOLocalMoveY(hit.point.y, 10f).SetEase(Ease.OutQuart).WithCancellation(ct);
+        Debug.Log(hit.point);
+        await transform.DOMoveY(hit.point.y, 10f).SetEase(Ease.OutQuart).WithCancellation(ct);
         await OpenDoors();
         SpawnDrop();
         await UniTask.WaitForSeconds(20f, cancellationToken: ct);

@@ -31,7 +31,7 @@ public class SpiderLair : MonoBehaviour
         _horrorSound.Play();
         await TriggerSpiders();
         await WaitUntilAllSpidersAreDead();
-        await UniTask.WaitForSeconds(5f);
+        await UniTask.WaitForSeconds(1f);
         await OpenDoor();
     }
 
@@ -61,6 +61,7 @@ public class SpiderLair : MonoBehaviour
         foreach (var spider in _spiders)
         {
             spider?.Activate();
+            
         }
     }
 

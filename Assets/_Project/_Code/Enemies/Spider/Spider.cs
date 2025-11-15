@@ -20,11 +20,11 @@ public class Spider : MonoBehaviour
     [SerializeField] private AudioSource _walkSound;
     [SerializeField] private AudioSource _biteSound;
 
-    private void Awake()
-    {
-        if (_isSleeping)
-            Deactivate();
-    }
+    //private void Awake()
+    //{
+    //    if (_isSleeping)
+    //        Deactivate();
+    //}
 
     private void Start()
     {
@@ -108,7 +108,9 @@ public class Spider : MonoBehaviour
 
     public void Activate()
     {
-        _agent.enabled = true;
+        //_agent.enabled = true;
+        FindPlayer();
+        SetTarget(_target);
         _isSleeping = false;
         _agent.isStopped = false;
         _animator.SetTrigger("Run");
@@ -122,7 +124,7 @@ public class Spider : MonoBehaviour
         _agent.isStopped = true;
         _animator.SetTrigger("Idle");
         _walkSound.Stop();
-        _agent.enabled = false;
+        //_agent.enabled = false;
     }
 
     private void FindPlayer()

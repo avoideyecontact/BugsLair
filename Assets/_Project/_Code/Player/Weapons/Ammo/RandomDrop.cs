@@ -17,7 +17,6 @@ public class RandomDrop : MonoBehaviour
         {
             int randomId = Random.Range(0, _dropGameObjects.Length);
             Instantiate(_dropGameObjects[randomId], transform.position + _offset, Quaternion.identity);
-            Debug.Log("Успех");
         }
         else
         {
