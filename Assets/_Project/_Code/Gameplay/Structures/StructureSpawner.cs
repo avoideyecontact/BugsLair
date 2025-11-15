@@ -1,20 +1,39 @@
+using System.Linq;
 using UnityEngine;
 
 public class StructureSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] _structures;
     [SerializeField] private bool _randomRotation;
+    [SerializeField] private int _randomQuantity;
 
     private void Start()
     {
         var spawnPoints = GetComponentsInChildren<Transform>();
 
-        foreach (Transform spawnPoint in spawnPoints)
+        if (_randomQuantity == 0)
         {
-            if (spawnPoint == transform)
-                continue;
+            foreach (Transform spawnPoint in spawnPoints)
+            {
+                if (spawnPoint == transform)
+                    continue;
 
-            SpawnRandomStructure(spawnPoint);
+                SpawnRandomStructure(spawnPoint);
+            }
+        }
+        else
+        {
+            int quantity = Mathf.Min(spawnPoints.Length, _randomQuantity);
+
+            var structures = GetRandomElements(spawnPoints, quantity);
+
+            foreach (Transform structure in structures)
+            {
+                if (structure == transform)
+                    continue;
+
+                SpawnRandomStructure(structure);
+            }
         }
     }
 
@@ -30,5 +49,24 @@ public class StructureSpawner : MonoBehaviour
 
             structure.transform.rotation = Quaternion.Euler(rotation);
         }
+    }
+
+    public static T[] GetRandomElements<T>(T[] array, int count)
+    {
+        if (count <= 0)
+        {
+            Debug.LogError("Should be more than 0");
+            return null;
+        }
+
+        if (count > array.Length)
+        {
+            Debug.LogError("Cant be more than array length");
+            return null;
+        }
+
+        System.Random random = new System.Random();
+
+        return array.OrderBy(x => random.Next()).Take(count).ToArray();
     }
 }
