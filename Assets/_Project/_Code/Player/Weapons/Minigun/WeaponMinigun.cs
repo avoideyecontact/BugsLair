@@ -9,6 +9,7 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
     [SerializeField] private ParticleSystem _muzzleFlash2;
     [SerializeField] private SoundData _fireSound;
     [SerializeField] private SoundData _emptySound;
+    [SerializeField] private GameObject _hitParticles;
 
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
@@ -68,7 +69,14 @@ public class WeaponMinigun : MonoBehaviour, IWeapon
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, _config.hitDistance, _config.enemyLayer))
         {
-            hit.transform.GetComponent<HealthComponent>()?.DealDamage(_config.damage);
+            var health = hit.transform.GetComponent<HealthComponent>();
+
+            if (health != null)
+            {
+                health.DealDamage(_config.damage);
+                var particles = Instantiate(_hitParticles, hit.point, Quaternion.identity);
+                Destroy(particles, 1);
+            }
         }
     }
 

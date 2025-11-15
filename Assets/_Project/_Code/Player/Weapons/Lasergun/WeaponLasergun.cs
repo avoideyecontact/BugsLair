@@ -11,6 +11,7 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
     [SerializeField] private LaserBeam _laserBeam2;
 
     [SerializeField] private AudioSource _laserSound;
+    [SerializeField] private GameObject _hitParticles;
 
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
@@ -67,8 +68,14 @@ public class WeaponLasergun : MonoBehaviour, IWeapon
         var hits = Physics.RaycastAll(start, transform.forward, _config.hitDistance, _config.enemyLayer);
         foreach (var hit in hits)
         {
-            var damage = _config.damage * (hit.distance / _config.hitDistance);
-            hit.transform.GetComponent<HealthComponent>()?.DealDamage(_config.damage);
+            var health = hit.transform.GetComponent<HealthComponent>();
+
+            if (health != null)
+            {
+                health.DealDamage(_config.damage);
+                var particles = Instantiate(_hitParticles, hit.point, Quaternion.identity);
+                Destroy(particles, 1);
+            }
         }
     }
 

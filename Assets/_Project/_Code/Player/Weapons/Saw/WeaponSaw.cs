@@ -6,6 +6,7 @@ public class WeaponSaw : MonoBehaviour, IWeapon
 {
     [SerializeField] private WeaponConfig _config;
     [SerializeField] private AudioSource _chainsawSound;
+    [SerializeField] private GameObject _hitParticles;
 
     public WeaponType WeaponType => _config.weaponType;
     public float Damage => _config.damage;
@@ -73,7 +74,14 @@ public class WeaponSaw : MonoBehaviour, IWeapon
 
         foreach (var hit in hits)
         {
-            hit.GetComponent<HealthComponent>()?.DealDamage(_config.damage);
+            var health = hit.transform.GetComponent<HealthComponent>();
+
+            if (health != null)
+            {
+                health.DealDamage(_config.damage);
+                var particles = Instantiate(_hitParticles, hit.transform);
+                Destroy(particles, 1);
+            }
         }
     }
 

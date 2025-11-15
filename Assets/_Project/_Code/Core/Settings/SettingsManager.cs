@@ -70,6 +70,6 @@ public class SettingsManager : IInitializable, ISettingsManager
     {
         _currentSettings = newSettings;
         SaveSettings();
-        Debug.Log("Настройки сохранены");
+        //Debug.Log("Настройки сохранены");
     }
 }

@@ -80,12 +80,13 @@ MonoBehaviour:
     frequentSound: 1
     volume: 0.1
   _emptySound:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
+    clip: {fileID: 8300000, guid: c8128159dd06baf48874c6e7d58ad042, type: 3}
+    mixerGroup: {fileID: -1985258082582399612, guid: 082581a3fe72d99449d94ab17fbb6393, type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 1
     volume: 0.25
+  _hitParticles: {fileID: 3077343761403282166, guid: 51098b88b7e88a64d8e794bdc2b46ce0, type: 3}
 --- !u!1001 &138677572189582481
 PrefabInstance:
   m_ObjectHideFlags: 0
