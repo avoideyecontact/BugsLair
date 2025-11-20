@@ -2,11 +2,15 @@ using Unity.Cinemachine;
 using UnityEngine;
 using VContainer;
 
-public class CameraManager : MonoBehaviour
+public class PlayerCameraManager : MonoBehaviour
 {
+    [SerializeField] private Animator _cameraAnimator;
+
     [Header("Cameras")]
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Camera _clippingCamera;
+
+    [Header("Virtual Cameras")]
     [SerializeField] private CinemachineCamera _playerCamera;
     [SerializeField] private CinemachineCamera _thirdPersonCamera;
 
@@ -16,7 +20,6 @@ public class CameraManager : MonoBehaviour
 
     private PlayerContext _playerContext;
     private IEventBus _eventBus;
-    private Animator _cameraAnimator;
     private string _currentCamera = "Player";
     private LayerMask _layersForFirstPerson;
     private LayerMask _layersForThirdPerson;
@@ -51,8 +54,6 @@ public class CameraManager : MonoBehaviour
         _layersForFirstPerson = ~0 - LayerMask.GetMask("Player");
         _layersForThirdPerson = ~0;
 
-        _cameraAnimator = GetComponent<Animator>();
-
         _playerContext.Input.CameraSwitchStarted += OnCameraSwitch;
 
         _playerCamera.Follow = _playerContext.PlayerCameraTransform;
@@ -61,6 +62,7 @@ public class CameraManager : MonoBehaviour
 
     private void OnCameraSwitch()
     {
+        // add state machine
         if (_currentCamera == "Player")
         {
             _currentCamera = "ThirdPerson";

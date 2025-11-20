@@ -79,6 +79,12 @@ public class PlayerInputReader : MonoBehaviour
         _cameraSwitchAction = _actionsAsset.FindAction("Player/CameraSwitch", true);
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void OnEnable()
     {
         _moveAction.Enable();

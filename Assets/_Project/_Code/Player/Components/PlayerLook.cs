@@ -1,7 +1,7 @@
 using UnityEngine;
 using VContainer;
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerLook : MonoBehaviour
 {
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private PlayerInputReader _input;
@@ -11,8 +11,6 @@ public class PlayerCamera : MonoBehaviour
     private float _yRotation;
 
     private IEventBus _eventBus;
-
-    public Transform CameraTransform => _cameraTransform;
 
     [Inject]
     public void Construct(IEventBus eventBus, ISettingsManager settingsManager)
