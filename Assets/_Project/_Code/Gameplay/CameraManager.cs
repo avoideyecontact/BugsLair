@@ -2,16 +2,12 @@ using Unity.Cinemachine;
 using UnityEngine;
 using VContainer;
 
-// Used in gameplay scene for CinemachineStateDrivenCamera
 public class CameraManager : MonoBehaviour
 {
     [Header("Cameras")]
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Camera _clippingCamera;
-    [SerializeField] private LayerMask _layersForFirstPerson;
-    [SerializeField] private LayerMask _layersForThirdPerson;
     [SerializeField] private CinemachineCamera _playerCamera;
-    [SerializeField] private CinemachineCamera _testCamera;
     [SerializeField] private CinemachineCamera _thirdPersonCamera;
 
     [Header("Camera Shake")]
@@ -22,6 +18,8 @@ public class CameraManager : MonoBehaviour
     private IEventBus _eventBus;
     private Animator _cameraAnimator;
     private string _currentCamera = "Player";
+    private LayerMask _layersForFirstPerson;
+    private LayerMask _layersForThirdPerson;
 
     [Inject]
     public void Construct(PlayerContext playerContext, IEventBus eventBus)
@@ -50,15 +48,15 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
+        _layersForFirstPerson = ~0 - LayerMask.GetMask("Player");
+        _layersForThirdPerson = ~0;
+
         _cameraAnimator = GetComponent<Animator>();
 
         _playerContext.Input.CameraSwitchStarted += OnCameraSwitch;
 
         _playerCamera.Follow = _playerContext.PlayerCameraTransform;
         _thirdPersonCamera.Follow = _playerContext.PlayerCameraTransform;
-
-        // change to something better
-        //TaskForCutscene().Forget();
     }
 
     private void OnCameraSwitch()
