@@ -1,51 +1,45 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
-using VContainer.Unity;
 
-public class GlobalInputService : MonoBehaviour, IStartable
+public class GlobalInputService : MonoBehaviour
 {
     [SerializeField] private InputActionAsset _actionsAsset;
 
-    private InputAction _pauseAction;
-    private GameStateManager _gameStateManager;
     private ISceneLoader _sceneLoader;
 
+    private InputAction _pauseAction;
+    public event System.Action PauseStarted;
+
     [Inject]
-    public void Construct(GameStateManager gameStateManager, ISceneLoader sceneLoader)
+    public void Construct(ISceneLoader sceneLoader)
     {
-        _gameStateManager = gameStateManager;
         _sceneLoader = sceneLoader;
     }
 
-    void IStartable.Start()
-    {
-        InitializeInput();
-    }
-
-    private void InitializeInput()
+    private void Awake()
     {
         if (_actionsAsset == null)
-        {
             Debug.LogError("InputActionAsset is missing", this);
-            return;
-        }
 
         _pauseAction = _actionsAsset.FindAction("Global/Pause", true);
+    }
 
+    private void OnEnable()
+    {
         _pauseAction.Enable();
         _pauseAction.started += OnPause;
     }
 
+    private void OnDisable()
+    {
+        _pauseAction.started -= OnPause;
+        _pauseAction.Disable();
+    }
+
     private void OnPause(InputAction.CallbackContext context)
     {
-        if (_sceneLoader.CurrentScene != "1_Menu")
-        {
-            if (_gameStateManager.GameIsPaused)
-                _gameStateManager.ResumeGame();
-            else
-                _gameStateManager.PauseGame();
-        }
+        PauseStarted?.Invoke();
     }
 
     private void OnDestroy()

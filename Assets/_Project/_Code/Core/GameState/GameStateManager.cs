@@ -6,18 +6,26 @@ public class GameStateManager
     private bool _gameIsPaused;
 
     private IEventBus _eventBus;
+    private GlobalInputService _globalInputService;
 
     public bool GameIsPaused => _gameIsPaused;
-
-    public GameStateManager(IEventBus eventBus)
+    
+    public GameStateManager(IEventBus eventBus, GlobalInputService globalInputService)
     {
         _eventBus = eventBus;
+        _globalInputService = globalInputService;
+
         SubscribeToEventBus();
+        SubscribeToInput();
+
+        if (SceneLoader.CurrentScene != "1_Menu")
+            HideCursor();
     }
 
     ~GameStateManager()
     {
         UnsubscribeFromEventBus();
+        UnsubscribeFromInput();
     }
 
     private void SubscribeToEventBus()
@@ -28,6 +36,16 @@ public class GameStateManager
     private void UnsubscribeFromEventBus()
     {
         _eventBus.Unsubscribe<SceneLoadedEvent>(OnSceneLoaded);
+    }
+
+    private void SubscribeToInput()
+    {
+        _globalInputService.PauseStarted += TogglePause;
+    }
+
+    private void UnsubscribeFromInput()
+    {
+        _globalInputService.PauseStarted -= TogglePause;
     }
 
     private void UpdateGameState()
@@ -60,6 +78,15 @@ public class GameStateManager
         UpdateGameState();
     }
 
+    private void TogglePause()
+    {
+        if (SceneLoader.CurrentScene == "1_Menu")
+            return;
+
+        if (_gameIsPaused) ResumeGame();
+        else PauseGame();
+    }
+
     public void OpenInventory()
     {
         _inventoryIsOpened = true;
@@ -85,14 +112,15 @@ public class GameStateManager
 
     private void ShowCursor()
     {
-        Cursor.visible = true;
+        // order of this two lines is important
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     private void HideCursor()
     {
-        Debug.Log("Hided");
-        Cursor.visible = false;
+        // order of this two lines is important
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

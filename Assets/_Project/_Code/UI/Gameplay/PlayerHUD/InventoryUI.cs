@@ -21,21 +21,17 @@ public class InventoryUI : MonoBehaviour
 
     private PlayerContext _playerContext;
     private GameStateManager _gameStateManager;
-    private IEventBus _eventBus;
     private bool _isOpen;
 
     [Inject]
-    public void Construct(PlayerContext playerContext, GameStateManager gameStateManager, IEventBus eventBus)
+    public void Construct(PlayerContext playerContext, GameStateManager gameStateManager)
     {
         _playerContext = playerContext;
         _gameStateManager = gameStateManager;
-        _eventBus = eventBus;
 
         _button1.onClick.AddListener(OnDropButton1Pressed);
         _button2.onClick.AddListener(OnDropButton2Pressed);
         _button3.onClick.AddListener(OnDropButton3Pressed);
-
-        SubscribeToEventBus();
     }
 
     private void Start()
@@ -46,16 +42,7 @@ public class InventoryUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        UnsubscribeFromEventBus();
         _playerContext.Input.InventoryStarted -= ToggleInventory;
-    }
-
-    private void SubscribeToEventBus()
-    {
-    }
-
-    private void UnsubscribeFromEventBus()
-    {
     }
 
     public void OpenInventory()

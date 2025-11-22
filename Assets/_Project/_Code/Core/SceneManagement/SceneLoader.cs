@@ -6,7 +6,7 @@ public class SceneLoader : ISceneLoader
     private readonly IEventBus _eventBus;
     private readonly ScreenFade _screenFade;
 
-    public string CurrentScene => SceneManager.GetActiveScene().name.ToString();
+    public static string CurrentScene => SceneManager.GetActiveScene().name.ToString();
 
     public SceneLoader(IEventBus eventBus, ScreenFade screenFade)
     {

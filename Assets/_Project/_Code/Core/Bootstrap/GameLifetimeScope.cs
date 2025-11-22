@@ -10,7 +10,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
         builder.Register<ISettingsManager, SettingsManager>(Lifetime.Singleton).As<IInitializable>();
 
-        builder.RegisterComponentInHierarchy<GlobalInputService>().As<IStartable>();
+        builder.RegisterComponentInHierarchy<GlobalInputService>();
         builder.RegisterComponentInHierarchy<SoundMixerManager>();
         builder.RegisterComponentInHierarchy<ScreenFade>();
 
