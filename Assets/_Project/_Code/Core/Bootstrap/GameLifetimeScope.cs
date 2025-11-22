@@ -8,7 +8,6 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<GameStateManager>(Lifetime.Singleton);
         builder.Register<IEventBus, EventBus>(Lifetime.Singleton);
         builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
-        //builder.Register<IPauseService, PauseService>(Lifetime.Singleton);
         builder.Register<ISettingsManager, SettingsManager>(Lifetime.Singleton).As<IInitializable>();
 
         builder.RegisterComponentInHierarchy<GlobalInputService>().As<IStartable>();

@@ -93,6 +93,6 @@ public class GameStateManager
     {
         Debug.Log("Hided");
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

@@ -36,41 +36,6 @@ public class PlayerInputReader : MonoBehaviour
     public void Construct(IEventBus eventBus)
     {
         _eventBus = eventBus;
-        _eventBus.Subscribe<GamePaused>(OnGamePaused);
-        _eventBus.Subscribe<GameResumed>(OnGameResumed);
-        _eventBus.Subscribe<InventoryOpened>(OnInventoryOpened);
-        _eventBus.Subscribe<InventoryClosed>(OnInventoryClosed);
-    }
-
-    private void OnDestroy()
-    {
-        _eventBus.Unsubscribe<GamePaused>(OnGamePaused);
-        _eventBus.Unsubscribe<GameResumed>(OnGameResumed);
-        _eventBus.Unsubscribe<InventoryOpened>(OnInventoryOpened);
-        _eventBus.Unsubscribe<InventoryClosed>(OnInventoryClosed);
-    }
-
-    private void OnGamePaused(GamePaused evt)
-    {
-        enabled = false;
-        ResetInputValues();
-    }
-    private void OnGameResumed(GameResumed evt)
-    {
-        enabled = true;
-    }
-
-    private void OnInventoryOpened(InventoryOpened evt)
-    {
-        enabled = false;
-        //_lookAction.Disable();
-        ResetInputValues();
-    }
-
-    private void OnInventoryClosed(InventoryClosed evt)
-    {
-        //_lookAction.Enable();
-        enabled = true;
     }
 
     private void ResetInputValues()

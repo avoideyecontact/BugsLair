@@ -40,8 +40,8 @@ public class PlayerLook : MonoBehaviour
 
     private void Look()
     {
-        _yRotation += _input.look.x * _mouseSens;
-        _xRotation -= _input.look.y * _mouseSens;
+        _yRotation += _input.look.x * _mouseSens * Time.deltaTime;
+        _xRotation -= _input.look.y * _mouseSens * Time.deltaTime;
         _xRotation = Mathf.Clamp(_xRotation, -70f, 30f);
         transform.rotation = Quaternion.Euler(0, _yRotation, 0);
         _cameraTransform.transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
