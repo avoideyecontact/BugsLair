@@ -13,19 +13,23 @@ public class ScreenFade : MonoBehaviour
 
     public async UniTask FadeInAsync(float duration = 1f)
     {
+        var ct = this.GetCancellationTokenOnDestroy();
+
         _canvasGroup.alpha = 0f;
         await _canvasGroup.DOFade(1f, duration)
             .SetEase(Ease.InOutSine)
             .SetUpdate(true) // to play even with timeScale = 0
-            .ToUniTask();
+            .WithCancellation(ct);
     }
 
     public async UniTask FadeOutAsync(float duration = 1f)
     {
+        var ct = this.GetCancellationTokenOnDestroy();
+
         _canvasGroup.alpha = 1f;
         await _canvasGroup.DOFade(0f, duration)
             .SetEase(Ease.InOutSine)
             .SetUpdate(true) // to play even with timeScale = 0
-            .ToUniTask();
+            .WithCancellation(ct);
     }
 }

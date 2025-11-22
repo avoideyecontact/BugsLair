@@ -51,6 +51,7 @@ public class InventoryUI : MonoBehaviour
         _canvas.enabled = true;
         _canvas.gameObject.SetActive(true);
         _gameStateManager.OpenInventory();
+        UpdateInventory();
     }
 
     public void CloseInventory()

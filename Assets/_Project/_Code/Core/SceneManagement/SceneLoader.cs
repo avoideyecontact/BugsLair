@@ -1,45 +1,47 @@
 using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : ISceneLoader
+public class SceneLoader : ISceneLoader, IDisposable
 {
+    private readonly CancellationTokenSource _cts;
     private readonly IEventBus _eventBus;
     private readonly ScreenFade _screenFade;
 
-    public static string CurrentScene => SceneManager.GetActiveScene().name.ToString();
+    public static string CurrentScene => SceneManager.GetActiveScene().name;
 
     public SceneLoader(IEventBus eventBus, ScreenFade screenFade)
     {
         _eventBus = eventBus;
         _screenFade = screenFade;
+        _cts = new CancellationTokenSource();
     }
 
     public async UniTask LoadSceneAsync(string sceneName, bool useFade = false)
     {
+        _cts.Token.ThrowIfCancellationRequested();
         _eventBus.Publish(new SceneLoadStartedEvent(sceneName));
-
-        var asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-
-        asyncOperation.allowSceneActivation = false;
 
         if (useFade)
         {
-            await _screenFade.FadeInAsync();
+            await _screenFade.FadeInAsync().AttachExternalCancellation(_cts.Token);
         }
 
-        asyncOperation.allowSceneActivation = true;
-
-        while (!asyncOperation.isDone)
-        {
-            await UniTask.Yield();
-        }
-
+        var asyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        await asyncOperation.ToUniTask(cancellationToken: _cts.Token);
         _eventBus.Publish(new SceneLoadedEvent(sceneName));
 
         if (useFade)
         {
-            await UniTask.WaitForSeconds(0.25f); // ignore timescale? =)
-            await _screenFade.FadeOutAsync();
+            await UniTask.WaitForSeconds(0.25f, cancellationToken: _cts.Token);
+            await _screenFade.FadeOutAsync().AttachExternalCancellation(_cts.Token);
         }
+    }
+
+    public void Dispose()
+    {
+        _cts?.Cancel();
+        _cts?.Dispose();
     }
 }
