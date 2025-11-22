@@ -1,6 +1,4 @@
-using Cysharp.Threading.Tasks;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -22,65 +20,64 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Button _button3;
 
     private PlayerContext _playerContext;
+    private GameStateManager _gameStateManager;
     private IEventBus _eventBus;
+    private bool _isOpen;
 
     [Inject]
-    public void Construct(PlayerContext playerContext, IEventBus eventBus)
+    public void Construct(PlayerContext playerContext, GameStateManager gameStateManager, IEventBus eventBus)
     {
         _playerContext = playerContext;
+        _gameStateManager = gameStateManager;
         _eventBus = eventBus;
 
         _button1.onClick.AddListener(OnDropButton1Pressed);
         _button2.onClick.AddListener(OnDropButton2Pressed);
         _button3.onClick.AddListener(OnDropButton3Pressed);
+
+        SubscribeToEventBus();
+    }
+
+    private void Start()
+    {
+        CloseInventory();
+        _playerContext.Input.InventoryStarted += ToggleInventory;
     }
 
     private void OnDestroy()
     {
         UnsubscribeFromEventBus();
+        _playerContext.Input.InventoryStarted -= ToggleInventory;
     }
 
     private void SubscribeToEventBus()
     {
-        _eventBus.Subscribe<GamePaused>(OnGamePaused);
-        _eventBus.Subscribe<GameResumed>(OnGameResumed);
-        _eventBus.Subscribe<SettingsUIOpened>(OnSettingsUIOpened);
-        _eventBus.Subscribe<SettingsUIClosed>(OnSettingsUIClosed);
     }
 
     private void UnsubscribeFromEventBus()
     {
-        _eventBus.Unsubscribe<GamePaused>(OnGamePaused);
-        _eventBus.Unsubscribe<GameResumed>(OnGameResumed);
-        _eventBus.Unsubscribe<SettingsUIOpened>(OnSettingsUIOpened);
-        _eventBus.Unsubscribe<SettingsUIClosed>(OnSettingsUIClosed);
     }
 
-    private void Start()
+    public void OpenInventory()
     {
-        SubscribeToEventBus();
-        CloseInventory();
-        CloseFix().Forget();
-    }
-
-    private async UniTask CloseFix()
-    {
-        var ct = this.GetCancellationTokenOnDestroy();
-
-        await UniTask.WaitForSeconds(0.25f);
-        CloseInventory();
-    }
-
-    private void OpenInventory()
-    {
+        _isOpen = true;
         _canvas.enabled = true;
         _canvas.gameObject.SetActive(true);
+        _gameStateManager.OpenInventory();
     }
 
-    private void CloseInventory()
+    public void CloseInventory()
     {
+        _isOpen = false;
         _canvas.enabled = false;
         _canvas.gameObject.SetActive(false);
+        _gameStateManager.CloseInventory();
+    }
+
+    public void ToggleInventory()
+    {
+        if (_isOpen) CloseInventory();
+        else OpenInventory();
     }
 
     private void UpdateInventory()
@@ -134,26 +131,5 @@ public class InventoryUI : MonoBehaviour
         _playerContext.AbilityManager.DeactivateAbility(abilities[2].AbilityType);
 
         UpdateInventory();
-    }
-
-    private void OnGamePaused(GamePaused gamePaused)
-    {
-        OpenInventory();
-        UpdateInventory();
-    }
-
-    private void OnGameResumed(GameResumed gameResumed)
-    {
-        CloseInventory();
-    }
-
-    private void OnSettingsUIOpened(SettingsUIOpened evt)
-    {
-        CloseInventory();
-    }
-
-    private void OnSettingsUIClosed(SettingsUIClosed evt)
-    {
-        OpenInventory();
     }
 }

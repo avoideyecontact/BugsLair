@@ -22,6 +22,7 @@ public class PlayerInputReader : MonoBehaviour
     private InputAction _attackAction;
     private InputAction _cameraSwitchAction;
     private InputAction _dashAction;
+    private InputAction _inventoryAction;
 
     public event System.Action JumpStarted;
     public event System.Action DashStarted;
@@ -29,6 +30,7 @@ public class PlayerInputReader : MonoBehaviour
     public event System.Action NextStarted;
     public event System.Action PreviousStarted;
     public event System.Action CameraSwitchStarted;
+    public event System.Action InventoryStarted;
 
     [Inject]
     public void Construct(IEventBus eventBus)
@@ -36,6 +38,16 @@ public class PlayerInputReader : MonoBehaviour
         _eventBus = eventBus;
         _eventBus.Subscribe<GamePaused>(OnGamePaused);
         _eventBus.Subscribe<GameResumed>(OnGameResumed);
+        _eventBus.Subscribe<InventoryOpened>(OnInventoryOpened);
+        _eventBus.Subscribe<InventoryClosed>(OnInventoryClosed);
+    }
+
+    private void OnDestroy()
+    {
+        _eventBus.Unsubscribe<GamePaused>(OnGamePaused);
+        _eventBus.Unsubscribe<GameResumed>(OnGameResumed);
+        _eventBus.Unsubscribe<InventoryOpened>(OnInventoryOpened);
+        _eventBus.Unsubscribe<InventoryClosed>(OnInventoryClosed);
     }
 
     private void OnGamePaused(GamePaused evt)
@@ -48,10 +60,17 @@ public class PlayerInputReader : MonoBehaviour
         enabled = true;
     }
 
-    private void OnDestroy()
+    private void OnInventoryOpened(InventoryOpened evt)
     {
-        _eventBus.Unsubscribe<GamePaused>(OnGamePaused);
-        _eventBus.Unsubscribe<GameResumed>(OnGameResumed);
+        enabled = false;
+        //_lookAction.Disable();
+        ResetInputValues();
+    }
+
+    private void OnInventoryClosed(InventoryClosed evt)
+    {
+        //_lookAction.Enable();
+        enabled = true;
     }
 
     private void ResetInputValues()
@@ -77,12 +96,7 @@ public class PlayerInputReader : MonoBehaviour
         _previousAction = _actionsAsset.FindAction("Player/Previous", true);
         _attackAction = _actionsAsset.FindAction("Player/Attack", true);
         _cameraSwitchAction = _actionsAsset.FindAction("Player/CameraSwitch", true);
-    }
-
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        _inventoryAction = _actionsAsset.FindAction("Player/Inventory", true);
     }
 
     private void OnEnable()
@@ -120,6 +134,10 @@ public class PlayerInputReader : MonoBehaviour
 
         _cameraSwitchAction.Enable();
         _cameraSwitchAction.started += OnCameraSwitch;
+
+        _inventoryAction.Enable();
+        _inventoryAction.started += OnInventory;
+
     }
 
     private void OnDisable()
@@ -157,6 +175,9 @@ public class PlayerInputReader : MonoBehaviour
 
         _cameraSwitchAction.started -= OnCameraSwitch;
         _cameraSwitchAction.Disable();
+
+        _inventoryAction.started -= OnInventory;
+        _inventoryAction.Disable();
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -207,5 +228,10 @@ public class PlayerInputReader : MonoBehaviour
     private void OnCameraSwitch(InputAction.CallbackContext context)
     {
         CameraSwitchStarted?.Invoke();
+    }
+
+    private void OnInventory(InputAction.CallbackContext context)
+    {
+        InventoryStarted?.Invoke();
     }
 }

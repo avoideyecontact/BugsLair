@@ -78,3 +78,9 @@ public struct ItemInventoryChanged
 {
     public List<ItemDropType> items;
 }
+
+public struct InventoryOpened
+{ }
+
+public struct InventoryClosed
+{ }

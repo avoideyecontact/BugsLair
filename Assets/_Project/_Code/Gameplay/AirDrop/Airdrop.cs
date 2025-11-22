@@ -31,7 +31,6 @@ public class Airdrop : MonoBehaviour
         var ct = this.GetCancellationTokenOnDestroy();
         RaycastHit hit;
         Physics.Raycast(transform.position, -transform.up, out hit);
-        Debug.Log(hit.point);
         await transform.DOMoveY(hit.point.y, 10f).SetEase(Ease.OutQuart).WithCancellation(ct);
         _rocketSound.Stop();
         _flame.Stop();

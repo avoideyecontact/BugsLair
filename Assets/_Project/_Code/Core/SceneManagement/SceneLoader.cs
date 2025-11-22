@@ -34,13 +34,11 @@ public class SceneLoader : ISceneLoader
             await UniTask.Yield();
         }
 
-        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
-
         _eventBus.Publish(new SceneLoadedEvent(sceneName));
 
         if (useFade)
         {
-            await UniTask.WaitForSeconds(0.25f);
+            await UniTask.WaitForSeconds(0.25f); // ignore timescale? =)
             await _screenFade.FadeOutAsync();
         }
     }

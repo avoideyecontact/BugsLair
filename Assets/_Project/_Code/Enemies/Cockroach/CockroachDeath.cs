@@ -33,7 +33,6 @@ public class CockroachDeath : MonoBehaviour
     private async UniTaskVoid DeathTask()
     {
         Statistics._cockroachesKilled += 1;
-        Debug.Log(Statistics._cockroachesKilled);
         _drop.CreateDrop();
         _gearDrop.CreateDrop();
         _ai.Disable();

@@ -17,14 +17,14 @@ public class PauseUI : MonoBehaviour
     [SerializeField] private Button _backFromSettingsButton;
 
     private IEventBus _eventBus;
-    private IPauseService _pause;
+    private GameStateManager _gameStateManager;
     private ISceneLoader _sceneLoader;
 
     [Inject]
-    public void Construct(IEventBus eventBus, IPauseService pauseService, ISceneLoader sceneLoader)
+    public void Construct(IEventBus eventBus, GameStateManager gameStateManager, ISceneLoader sceneLoader)
     {
         _eventBus = eventBus;
-        _pause = pauseService;
+        _gameStateManager = gameStateManager;
         _sceneLoader = sceneLoader;
         _eventBus.Subscribe<GamePaused>(OnGamePaused);
         _eventBus.Subscribe<GameResumed>(OnGameResumed);
@@ -32,10 +32,7 @@ public class PauseUI : MonoBehaviour
 
     private void Start()
     {
-        if (_pause.isPaused) Show();
-        else Hide();
-
-        _settingsUI.Hide();
+        Hide();
         _continueButton.onClick.AddListener(OnContinueButtonPressed);
         _settingsButton.onClick.AddListener(OnSettingsButtonPressed);
         _quitButton.onClick.AddListener(OnQuitButtonPressed);
@@ -49,7 +46,7 @@ public class PauseUI : MonoBehaviour
         _eventBus?.Unsubscribe<GameResumed>(OnGameResumed);
     }
 
-    private void OnContinueButtonPressed() => _pause.ResumeGame();
+    private void OnContinueButtonPressed() => _gameStateManager.ResumeGame();
 
     private void OnSettingsButtonPressed()
     {
@@ -71,29 +68,16 @@ public class PauseUI : MonoBehaviour
         Hide();
     }
 
-    private void Show()
+    public void Show()
     {
         _pauseCanvas.enabled = true;
-        ShowCursor();
     }
 
-    private void Hide()
+    public void Hide()
     {
         _pauseCanvas.enabled = false;
-        HideCursor();
+        _settingsUI.Hide();
         EventSystem.current.SetSelectedGameObject(null);
-    }
-
-    private void ShowCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-    private void HideCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void OnBackFromSettingsButtonClicked()

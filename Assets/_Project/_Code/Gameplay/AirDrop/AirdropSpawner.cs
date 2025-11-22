@@ -28,7 +28,7 @@ public class AirdropSpawner : MonoBehaviour
 
     private void SpawnAirDropWithMinigun()
     {
-        Debug.Log("good");
+        Debug.Log("SpawnAirDropWithMinigun");
         var airdrop = Instantiate(_airdrop, _firstAirdrop);
         airdrop.GetComponent<Airdrop>()._airdropType = AirDropType.Minigun;
     }

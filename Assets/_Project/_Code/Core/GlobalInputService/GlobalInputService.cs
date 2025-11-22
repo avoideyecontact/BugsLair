@@ -8,13 +8,13 @@ public class GlobalInputService : MonoBehaviour, IStartable
     [SerializeField] private InputActionAsset _actionsAsset;
 
     private InputAction _pauseAction;
-    private IPauseService _pauseService;
+    private GameStateManager _gameStateManager;
     private ISceneLoader _sceneLoader;
 
     [Inject]
-    public void Construct(IPauseService pauseService, ISceneLoader sceneLoader)
+    public void Construct(GameStateManager gameStateManager, ISceneLoader sceneLoader)
     {
-        _pauseService = pauseService;
+        _gameStateManager = gameStateManager;
         _sceneLoader = sceneLoader;
     }
 
@@ -33,21 +33,19 @@ public class GlobalInputService : MonoBehaviour, IStartable
 
         _pauseAction = _actionsAsset.FindAction("Global/Pause", true);
 
-        if (_pauseAction != null)
-        {
-            _pauseAction.Enable();
-            _pauseAction.started += OnPause;
-        }
-        else
-        {
-            Debug.LogError("Pause action is missing", this);
-        }
+        _pauseAction.Enable();
+        _pauseAction.started += OnPause;
     }
 
     private void OnPause(InputAction.CallbackContext context)
     {
         if (_sceneLoader.CurrentScene != "1_Menu")
-            _pauseService?.TogglePause();
+        {
+            if (_gameStateManager.GameIsPaused)
+                _gameStateManager.ResumeGame();
+            else
+                _gameStateManager.PauseGame();
+        }
     }
 
     private void OnDestroy()

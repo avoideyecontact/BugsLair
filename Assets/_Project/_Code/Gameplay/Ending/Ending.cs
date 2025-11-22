@@ -65,23 +65,17 @@ public class Ending : MonoBehaviour
         await _group.DOFade(1f, 2f).SetEase(Ease.Flash).WithCancellation(ct);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().enabled = false;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputReader>().enabled = false;
-        ShowCursor();
+        //ShowCursor();
     }
 
     private void OnGameResumed(GameResumed evt)
     {
-        if (_triggered)
-            ShowCursor();
+        //if (_triggered)
+        //    ShowCursor();
     }
 
     private void OnQuit()
     {
         _sceneLoader.LoadSceneAsync("1_Menu", useFade: true);
-    }
-
-    private void ShowCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 }
