@@ -25,7 +25,8 @@ public class SoundManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (transform.root == transform) // DontDestroyOnLoad only works for root GameObjects
+                DontDestroyOnLoad(gameObject);
         }
     }
 
