@@ -110,14 +110,14 @@ public class GameStateManager
             ShowCursor();
     }
 
-    private void ShowCursor()
+    public void ShowCursor()
     {
         // order of this two lines is important
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    private void HideCursor()
+    public void HideCursor()
     {
         // order of this two lines is important
         Cursor.lockState = CursorLockMode.Locked;

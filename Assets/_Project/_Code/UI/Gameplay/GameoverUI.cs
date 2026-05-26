@@ -10,12 +10,14 @@ public class GameoverUI : MonoBehaviour
 
     private IEventBus _eventBus;
     private ISceneLoader _sceneLoader;
+    private GameStateManager _gameStateManager;
 
     [Inject]
-    public void Construct(IEventBus eventBus, ISceneLoader sceneLoader)
+    public void Construct(IEventBus eventBus, ISceneLoader sceneLoader, GameStateManager gameStateManager)
     {
         _eventBus = eventBus;
         _sceneLoader = sceneLoader;
+        _gameStateManager = gameStateManager;
         _eventBus.Subscribe<PlayerDeath>(OnPlayerDeath);
 
         _retryButton.onClick.AddListener(OnRetryButtonPressed);
@@ -30,13 +32,14 @@ public class GameoverUI : MonoBehaviour
     private void Start()
     {
         _gameoverCanvas.enabled = false;
+        Debug.Log(_gameStateManager != null);
     }
 
     private void OnPlayerDeath(PlayerDeath evt)
     {
         _gameoverCanvas.enabled = true;
-        //_pauseService.PauseGame();
-        //ShowCursor();
+        _gameStateManager.PauseGame();
+        _gameStateManager.ShowCursor();
     }
 
     private void OnRetryButtonPressed()
