@@ -12,6 +12,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _footstepsCooldownTime = 0.1f;
     [SerializeField] private SoundData[] _footstepsSounds;
 
+    [Header("SphereMode")]
+    [SerializeField] private float _force = 100;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private Collider _sphereCollider;
+    [SerializeField] private Transform _cameraTransform;
+    [SerializeField] private PlayerCameraManager _playerCameraManager;
+    [SerializeField] private PlayerLook _playerLook;
+    [SerializeField] private PlayerWeaponary _playerWeaponary;
+    [SerializeField] private GameObject _legs;
+    [SerializeField] private Transform _bugslayerTransform;
+    private bool _sphereModeON = false;
+
     private PlayerContext _playerContext;
     private Vector3 _verticalVelocity;
     private bool _jumpRequested;
@@ -26,14 +38,56 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ToggleSphereMode();
+        }
+
         Move();
         ApplyVerticalVelocity();
     }
 
+    public void ToggleSphereMode()
+    {
+        _sphereModeON = !_sphereModeON;
+
+        if (_sphereModeON)
+        {
+            _playerCameraManager.EnableFreeLook();
+        }
+        else
+        {
+            _playerCameraManager.EnablePlayer();
+        }
+
+        _sphereCollider.enabled = _sphereModeON;
+        _playerWeaponary.gameObject.SetActive(!_sphereModeON);
+        _legs.SetActive(!_sphereModeON);
+        _controller.enabled = !_sphereModeON;
+        _rb.isKinematic = !_sphereModeON;
+        _playerLook.enabled = !_sphereModeON;
+    }
+
     private void Move()
     {
-        if (_playerContext.Input.move == Vector2.zero)
+        //if (_playerContext.Input.move == Vector2.zero)
+        //    return;
+
+        if (_sphereModeON)
+        {
+            _bugslayerTransform.rotation = _cameraTransform.rotation;
+
+            Vector3 force =
+                _cameraTransform.right * _playerContext.Input.move.y
+                + -_cameraTransform.forward * _playerContext.Input.move.x;
+
+            force *= _force * _rb.mass;
+
+            _rb.AddTorque(force);
+            _rb.AddForce(Physics.gravity * 1 * _rb.mass);
+
             return;
+        }
 
         Vector3 moveDirection = 
             transform.forward * _playerContext.Input.move.y
@@ -71,6 +125,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyVerticalVelocity()
     {
+        if (_sphereModeON) return;
+
         _verticalVelocity += Physics.gravity * Time.deltaTime;
 
         if (_controller.isGrounded && !_jumpRequested)

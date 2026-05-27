@@ -13,6 +13,7 @@ public class PlayerCameraManager : MonoBehaviour
     [Header("Virtual Cameras")]
     [SerializeField] private CinemachineCamera _playerCamera;
     [SerializeField] private CinemachineCamera _thirdPersonCamera;
+    [SerializeField] private CinemachineCamera _freeLookCamera;
 
     [Header("Camera Shake")]
     [SerializeField] private float _shakeForce = 1f;
@@ -58,26 +59,45 @@ public class PlayerCameraManager : MonoBehaviour
 
         _playerCamera.Follow = _playerContext.PlayerCameraTransform;
         _thirdPersonCamera.Follow = _playerContext.PlayerCameraTransform;
+        _freeLookCamera.Follow = _playerContext.PlayerCameraTransform;
     }
 
     private void OnCameraSwitch()
     {
-        // add state machine
+        if (_currentCamera == "FreeLook") return;
+
         if (_currentCamera == "Player")
         {
-            _currentCamera = "ThirdPerson";
-            _cameraAnimator.Play("ThirdPerson");
-            EnableWeaponClipping();
+            EnableThirdPerson();
             return;
         }
         
         if (_currentCamera == "ThirdPerson")
         {
-            _currentCamera = "Player";
-            _cameraAnimator.Play("Player");
-            DisableWeaponClipping();
+            EnablePlayer();
             return;
         }
+    }
+
+    public void EnableFreeLook()
+    {
+        _currentCamera = "FreeLook";
+        _cameraAnimator.Play("FreeLook");
+        EnableWeaponClipping();
+    }
+
+    public void EnablePlayer()
+    {
+        _currentCamera = "Player";
+        _cameraAnimator.Play("Player");
+        DisableWeaponClipping();
+    }
+
+    public void EnableThirdPerson()
+    {
+        _currentCamera = "ThirdPerson";
+        _cameraAnimator.Play("ThirdPerson");
+        EnableWeaponClipping();
     }
 
     // for third person
