@@ -9,7 +9,7 @@ public class Ending : MonoBehaviour
     [SerializeField] private Canvas _canvas;
     [SerializeField] private CanvasGroup _group;
     [SerializeField] private Button _exitButton;
-
+    
     private bool _triggered;
     private ISceneLoader _sceneLoader;
     private IEventBus _eventBus;
@@ -59,6 +59,9 @@ public class Ending : MonoBehaviour
     {
         _triggered = true;
         _canvas.enabled = true;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         var ct = this.GetCancellationTokenOnDestroy();
 
