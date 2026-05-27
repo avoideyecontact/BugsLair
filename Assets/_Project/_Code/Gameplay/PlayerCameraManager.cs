@@ -59,7 +59,6 @@ public class PlayerCameraManager : MonoBehaviour
 
         _playerCamera.Follow = _playerContext.PlayerCameraTransform;
         _thirdPersonCamera.Follow = _playerContext.PlayerCameraTransform;
-        _freeLookCamera.Follow = _playerContext.PlayerCameraTransform;
     }
 
     private void OnCameraSwitch()

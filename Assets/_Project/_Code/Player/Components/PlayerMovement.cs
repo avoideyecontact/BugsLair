@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerWeaponary _playerWeaponary;
     [SerializeField] private GameObject _legs;
     [SerializeField] private Transform _bugslayerTransform;
+    [SerializeField] private GameObject _shell;
     private bool _sphereModeON = false;
 
     private PlayerContext _playerContext;
@@ -60,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
             _playerCameraManager.EnablePlayer();
         }
 
+        _shell.SetActive(_sphereModeON);
         _sphereCollider.enabled = _sphereModeON;
         _playerWeaponary.gameObject.SetActive(!_sphereModeON);
         _legs.SetActive(!_sphereModeON);
@@ -75,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_sphereModeON)
         {
-            _bugslayerTransform.rotation = _cameraTransform.rotation;
+            //_bugslayerTransform.rotation = _cameraTransform.rotation;
 
             Vector3 force =
                 _cameraTransform.right * _playerContext.Input.move.y
