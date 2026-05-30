@@ -10371,6 +10371,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2138692928093003382, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138692928093003382, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138692928093003382, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138692928093003382, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138692928093003382, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138692928093003382, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 3813734320143860000, guid: 0f826936222495d46895533dd111d2c2, type: 3}
       propertyPath: _force
       value: 25
@@ -10383,10 +10407,18 @@ PrefabInstance:
       propertyPath: _playerCameraManager
       value: 
       objectReference: {fileID: 457032882}
+    - target: {fileID: 6445252800282284576, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6600118740994368499, guid: 0f826936222495d46895533dd111d2c2, type: 3}
       propertyPath: m_Mass
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 8403459642810260174, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2faf40b6006736444b6bf9887800ef81, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
