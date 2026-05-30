@@ -10372,6 +10372,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3813734320143860000, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: _force
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813734320143860000, guid: 0f826936222495d46895533dd111d2c2, type: 3}
       propertyPath: _cameraTransform
       value: 
       objectReference: {fileID: 1757015508}
@@ -10379,6 +10383,10 @@ PrefabInstance:
       propertyPath: _playerCameraManager
       value: 
       objectReference: {fileID: 457032882}
+    - target: {fileID: 6600118740994368499, guid: 0f826936222495d46895533dd111d2c2, type: 3}
+      propertyPath: m_Mass
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
